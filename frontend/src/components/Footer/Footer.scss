@@ -9,19 +9,10 @@
             background-position-x: 0px;
         }
     }
-@keyframes animate-wave-2
- {
-     0% {
-         background-position-x: 0px;
-        }
-        100% {
-            background-position-x: 1000px;
-        }
-    }
-    
+
     footer {
         position: relative;
-        width: 100vw;
+        width: 100%;
         background-color: rgba(19, 19, 19, 100);
         min-height: 150px;
         display: flex;
@@ -46,23 +37,7 @@
                 opacity: 0.8;
                 bottom: 0;
                 animation: animate-wave 7s linear infinite;
-            }
-            
-      
-            // #wave2 {
-            //     z-index: 998;
-            //     opacity: 0.85;
-            //     bottom: 0;
-            //     animation: animate-wave 5s linear infinite;
-            // }
-        
-            // #wave4 {
-            //     z-index: 997;
-            //     opacity: 0.6;
-            //     bottom: 0;
-            //     animation: animate-wave 3.5s linear infinite;
-            // }
-        
+            }  
         
         
     .social-icons {
@@ -73,6 +48,7 @@
         justify-content: center;
         margin: 10px 0;
         flex-wrap: wrap;
+        padding: 0px;
         
         li {
             list-style: none;
@@ -96,6 +72,7 @@
         justify-content: center;
         margin: 10px 0;
         flex-wrap: wrap;
+        padding: 0px;
         
         li {
             list-style: none;
