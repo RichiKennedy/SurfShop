@@ -11,7 +11,7 @@ import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 const Navbar = () => {
   return (
     <nav className='navbar'>
-        <div className='wrapper'>
+        <div className='nav-wrapper'>
           <section className='left'>
             <div className='item'>
                 <LanguageIcon />
