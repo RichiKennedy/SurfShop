@@ -1,7 +1,9 @@
 @import '~normalize.css';
 
 .app {
-    overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
     .link {
         color: inherit;
         text-decoration: none;    
