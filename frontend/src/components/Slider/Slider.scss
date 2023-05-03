@@ -1,0 +1,186 @@
+@import '~normalize.css';
+.slider {
+    height: calc(100vh - 120px);
+    width: 100%;
+    position: relative;
+
+    .container {
+        width: 300vw;
+        height: 100%;
+        display: flex;
+
+        .image1 {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            transition: 0.25s ease-in-out;
+
+            .women-men {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                
+                img {
+                    width: 50vw;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                
+                .overlay-info {
+                    position: absolute;
+                    text-align: center;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    transition: 0.5s;
+                    cursor: pointer;
+
+                    .info {
+                        text-align: center;
+                        margin-bottom: 40px;
+
+                        h2 {
+                            color: #FFF;
+                            font-size: 37px;
+                        }
+
+                        button {
+                            border-style: none;
+                            min-width: 200px;
+                            min-height: 55px;
+                            padding: 0 20px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: 0.25s ease-in-out;
+                        }
+                        button:hover {
+                            background-color: black;
+                            color: #FFF;
+                        }
+   
+                    }
+
+
+                }
+            }
+        }
+        .image2 {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            
+            
+            img {
+                width: 100vw;
+                height: 100%;
+                object-fit: cover;
+                position: relative;
+                
+            }
+
+            .btn-wrapper {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-direction: column;
+                
+
+                h2 {
+                    color: #FFF;
+                    font-size: 37px;
+                }
+
+                button {
+                    border-style: none;
+                    min-width: 200px;
+                    min-height: 55px;
+                    padding: 0 20px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: 0.25s ease-in-out;
+                    margin-bottom: 40px;
+                }
+                button:hover {
+                    background-color: black;
+                    color: #FFF;
+                }
+            }
+        }
+
+        .icon-left {
+          width: fit-content;
+           position: absolute;
+           display: flex;          
+           bottom: 50%;
+           margin: auto;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           margin-left: 10px;
+           z-index: 999;
+           background-color: pink;
+           
+           
+
+            .icon {
+                cursor: pointer;
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0);
+                color: #FFF;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: solid 1px rgba(250, 250, 250, 0.5);
+                transition: 0.25s ease-in-out;
+
+            }
+            .icon:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+        .icon-right {
+           width: fit-content;
+           position: absolute;
+           display: flex;
+           right: 0;
+           bottom: 50%;
+           margin: auto;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           margin-right: 10px;
+           z-index: 999;
+           background-color: red;
+           
+           
+
+            .icon {
+                cursor: pointer;
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0);
+                color: #FFF;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: solid 1px rgba(250, 250, 250, 0.5);
+                transition: 0.25s ease-in-out;
+
+            }
+            .icon:hover {
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+        }
+     
+    }
+}
