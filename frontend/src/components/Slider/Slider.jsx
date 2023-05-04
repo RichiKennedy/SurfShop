@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import './Slider.scss'
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 
 const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0)
+  
 
     const data = [
         "https://images.unsplash.com/photo-1609870025624-98b62826e80a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
@@ -23,49 +25,75 @@ const Slider = () => {
 
     const renderSliderContent = () => {
         if (currentSlide === 0) {
-         return (<div className="image1">
-            <div className="women-men">
-              <img src={data[0]} alt="" />
-              <div className="overlay-info">
-                <div className="info">
-                  <h2> Womens </h2>
-                  <button> Shop Now </button>
-                </div>
-              </div>
-            </div>
-            <div className="women-men">
-              <img src={data[1]} alt="" />
-              <div className="overlay-info">
-                <div className="info">
-                <h2> Mens </h2>
-                <button> Shop Now </button>
-                </div>
-              </div>
-             </div>
-            </div>)
+          return (
+             <AnimatePresence>
+                <motion.div
+                key="image1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1,  }}
+                transition={{ duration: 0.9 }}
+                  className="image1">
+                    <div className="women-men">
+                      <img src={data[0]} alt="" />
+                      <div className="overlay-info">
+                        <div className="info">
+                          <h2> Womens </h2>
+                          <button> Shop Now </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="women-men">
+                      <img src={data[1]} alt="" />
+                      <div className="overlay-info">
+                        <div className="info">
+                        <h2> Mens </h2>
+                        <button> Shop Now </button>
+                        </div>
+                      </div>
+                     </div>
+                </motion.div>
+             </AnimatePresence>
+            )
         } 
         if (currentSlide === 1 ) {
-        return (   <div className="image2">
-            <img src={data[2]} alt="" />
-            <div className="btn-wrapper">
-            <h2> Surfboards </h2>
-            <button> Shop Now </button>
-            </div>
-          </div>)
-        } if (currentSlide === 2) {
-   return (         <div className="image2">
-            <img src={data[3]} alt="" />
-            <div className="btn-wrapper">
-            <h2> Dunno yet </h2>
-            <button> Shop Now </button>
-            </div>
-          </div>)
+          return (    
+             <AnimatePresence>
+               <motion.div
+                 key="image2"
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1,  }}
+                 transition={{ duration: 0.9 }}         
+                 className="image2">
+                   <img src={data[2]} alt="" />
+                   <div className="btn-wrapper">
+                     <h2> Surfboards </h2>
+                     <button> Shop Now </button>
+                   </div>
+               </motion.div>
+             </ AnimatePresence>
+          )
+        } 
+        if (currentSlide === 2) {
+          return (                
+             <AnimatePresence>
+               <motion.div
+                 key="image3"
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1,  }}
+                 transition={{ duration: 0.9 }}   
+                 className="image2">
+                   <img src={data[3]} alt="" />
+                   <div className="btn-wrapper">
+                     <h2> Dunno yet </h2>
+                     <button> Shop Now </button>
+                   </div>
+                </motion.div>
+              </AnimatePresence>
+          )
         } else {
             setCurrentSlide(0)
         }
     }
-
-    console.log(currentSlide)
    
   return (
     <div className='slider'>
