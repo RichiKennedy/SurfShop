@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Navbar.scss'
 import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -9,8 +9,32 @@ import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 
 const Navbar = () => {
+  const [cssStyles, setCSSStyles] = useState({
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    color: 'white',
+  })
+  
+  useEffect(() => {
+    const changeColor = () => {
+      if (window.scrollY >= 1) {
+        setCSSStyles({
+          backgroundColor: 'white',
+          color: 'black',
+        })
+      } else {
+        setCSSStyles({
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          color: 'white',
+        })
+      }
+    }
+    window.addEventListener('scroll', changeColor)
+  }, [])
   return (
-    <nav className='navbar'>
+    <nav className='navbar'     
+    style={{backgroundColor: cssStyles.backgroundColor,
+            color: cssStyles.color,
+            }}>
         <div className='nav-wrapper'>
           <section className='left'>
             <div className='item'>
