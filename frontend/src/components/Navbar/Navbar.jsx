@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.scss'
-import SearchIcon from '@mui/icons-material/Search';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LanguageIcon from '@mui/icons-material/Language'; 
 import EuroIcon from '@mui/icons-material/Euro';
 import { Link } from 'react-router-dom';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+import Dropdown from './NewNav/Dropdown';
 
 const Navbar = () => {
   const [cssStyles, setCSSStyles] = useState({
@@ -57,24 +54,7 @@ const Navbar = () => {
             <Link className='link' to="/"> Surfboard Store</Link>
           </section>
           <section className='right'>
-            <div className='item'>
-                <Link className='link' to="/"> About </Link>
-            </div>
-            <div className='item'>
-                <Link className='link' to="/"> Contact </Link>
-            </div>
-            <div className='item'>
-                <Link className='link' to="/"> Stores </Link>
-            </div>
-            <div className='icons'>
-                <FavoriteIcon />
-                <SearchIcon />
-                <div className='cartIcon'>
-                <ShoppingBagOutlinedIcon />
-                <span>7</span>
-                </div>
-                <PersonOutlineOutlinedIcon />
-            </div>
+              <Dropdown />
           </section>
         </div>
     </nav>

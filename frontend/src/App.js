@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import './app.scss'
+import Dropdown from "./components/Navbar/NewNav/Dropdown";
 
 
 const Layout = () => {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <SingleProduct />
       },
     ]
+  },
+  {
+    path: "/about",
+    element: <Dropdown />
   }
 ])
 
@@ -46,6 +51,7 @@ function App() {
   return (
     <div className="app">
      <RouterProvider router={router} />
+
     </div>
   );
 }
