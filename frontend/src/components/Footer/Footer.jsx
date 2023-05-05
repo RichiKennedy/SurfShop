@@ -42,18 +42,10 @@ const Footer = () => {
 
       <div className='container-right'>
       <ul className='social-icons'>
-        <div>
-        <li><a className='link' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
-        </div>
-        <div>
-        <li><a className='link' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
-        </div>
-        <div>
-        <li><a className='link' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
-        </div>
-        <div>
-        <li><a className='link' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
-        </div>
+        <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
+        <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
+        <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
+        <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li> 
       </ul>
       </div>
     </footer>
