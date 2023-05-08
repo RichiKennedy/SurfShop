@@ -30,17 +30,17 @@ const Dropdown = () => {
            <li className='menu-item'> <span className='icon-button'> <LanguageIcon /> </span> Choose Language</li>    
            </ul>
             </div>
-           <ul className='menu-item-login'>
-
-           {signedIn ? (
-             <li className='menu-item'> Sign Out </li>
-             ) : (
-               <><li className='menu-item'> Sign In </li><li className='menu-item'> Register </li></>
-               )} 
-           </ul>
            <ul>
            <li className='menu-item'> <span className='icon-button'> <SurfingIcon /> </span> About </li>
            <li className='menu-item'> <span className='icon-button'> <LiveHelpIcon /> </span> Get In Touch </li>  
+           </ul>
+           <ul className='menu-item-login'>
+
+           {signedIn ? (
+             <li className='menu-item' onClick={() => setSignedIn(false)}> Sign Out </li>
+             ) : (
+               <><li className='menu-item' onClick={() => setSignedIn(true)}> Sign In </li><li className='menu-item'> Register </li></>
+               )} 
            </ul>
             </div>
            }
