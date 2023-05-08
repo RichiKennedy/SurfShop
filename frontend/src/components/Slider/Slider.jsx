@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import './Slider.scss'
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 
 const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -14,14 +12,14 @@ const Slider = () => {
         "https://images.unsplash.com/photo-1621433213916-fde39d28e016?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
         "https://images.unsplash.com/photo-1527731149372-fae504a1185f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2661&q=80"
     ]
-    const prevSlide = () => {
-        console.log(currentSlide)
-        setCurrentSlide(currentSlide === 0 ? 2 : currentSlide -1)
-    }
-    const nextSlide = () => {
-        console.log(currentSlide)
-        setCurrentSlide(currentSlide === 0 ? 1 : currentSlide +1)
-    }
+
+    setTimeout(() => {
+      if (currentSlide > 2 ) {
+        setCurrentSlide(0)
+      } else {
+        setCurrentSlide(currentSlide + 1)
+      }
+    }, 7000)
 
     const renderSliderContent = () => {
         if (currentSlide === 0) {
@@ -31,7 +29,7 @@ const Slider = () => {
                 key="image1"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1,  }}
-                transition={{ duration: 0.9 }}
+                transition={{ duration: 2 }}
                   className="image1">
                     <div className="women-men">
                       <img src={data[0]} alt="" />
@@ -62,7 +60,7 @@ const Slider = () => {
                  key="image2"
                  initial={{ opacity: 0 }}
                  animate={{ opacity: 1,  }}
-                 transition={{ duration: 0.9 }}         
+                 transition={{ duration: 2 }}         
                  className="image2">
                    <img src={data[2]} alt="" />
                    <div className="btn-wrapper">
@@ -80,7 +78,7 @@ const Slider = () => {
                  key="image3"
                  initial={{ opacity: 0 }}
                  animate={{ opacity: 1,  }}
-                 transition={{ duration: 0.9 }}   
+                 transition={{ duration: 2 }}   
                  className="image2">
                    <img src={data[3]} alt="" />
                    <div className="btn-wrapper">
@@ -99,16 +97,6 @@ const Slider = () => {
     <div className='slider'>
         <div className="container">
             {renderSliderContent()}
-            <div className="icon-left" onClick={prevSlide}>
-              <div className="icon" > 
-                < ArrowBackIosOutlinedIcon /> 
-              </div>
-            </div>
-            <div className="icon-right" onClick={nextSlide}>
-              <div className="icon"> 
-                <ArrowForwardIosOutlinedIcon />   
-              </div>
-            </div>
         </div>
     </div>
   )
