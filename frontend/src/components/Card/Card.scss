@@ -26,6 +26,15 @@
                 position: absolute; 
                 transition: 0.2s ease;
             }
+            span {
+                position: absolute;
+                z-index: 4;
+                top: 10px;
+                left: 5px;
+                color: darkgreen;
+                font-size: 12px;
+                padding: 5px 10px;
+            }
         }
         .image-container:hover {
             .secondImg {

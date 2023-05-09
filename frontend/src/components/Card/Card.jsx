@@ -7,6 +7,7 @@ const Card = ({item}) => {
     <Link className='image-card' to={`/product/${item.id}`}>
     <div className="image-card">
     <div className="image-container">
+      {item.isOrganic && <span>Organic</span>}
     <img src={item.img1} className='mainImg' key={item.id} alt=''/>
     <img src={item.img2} className='secondImg' key={item.id} alt=''/>
     </div>
