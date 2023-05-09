@@ -12,7 +12,7 @@ const Footer = () => {
       </div>
 
       <div className='container-left'>
-        <h1 className='logo'> Surfboard Shop </h1>
+        <h1 className='logo'> The Shop </h1>
 
       </div>
 

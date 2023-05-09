@@ -51,7 +51,7 @@ const Navbar = () => {
             </div>
           </section>
           <section className='center'>
-            <Link className='link' to="/"> Surfboard Store</Link>
+            <Link className='link' to="/"> The Shop </Link>
           </section>
           <section className='right'>
               <Dropdown />
