@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './FeaturedProducts.scss'
+import Card from '../Card/Card'
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({type}) => {
     const [imageData, setImageData] = useState([])
     const [mens, setMens] = useState(true)
 
@@ -144,7 +145,7 @@ const FeaturedProducts = () => {
   return (
     <section className='featured-products'>
         <div className="title-wrapper">
-            <h2 className='title'> Shop new arrivals </h2>
+            <h2 className='title'> Shop new {type} </h2>
             <ul>
                 <li className='Mens' onClick={() => setMens(true)} style={{
                     textDecoration: mens ? 'line-through' : 'none'
@@ -157,20 +158,7 @@ const FeaturedProducts = () => {
             <div className="image-grid-container"> 
             {imageData.map((item) => {
                 return (
-                <div className="image-card">
-                    <div className="image-container">
-                    <img src={item.img1} key={item.id} alt='yep' />
-                    </div>
-                    <div className="image-info">
-                        <div className="info-top">
-                            <h3>{item.title}</h3>
-                            <span>{item.newPrice} SEK </span>
-                        </div>
-                        <div className="info-bottom">
-                            <p>{item.info}</p>
-                        </div>
-                    </div>
-                </div>
+                <Card item={item} key={item.id}/>
                 )
             })}
             </div>

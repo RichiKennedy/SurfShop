@@ -9,8 +9,8 @@ const Home = () => {
     <div className='home'>
       {/* <Slider /> */}
       <CategoryHero />
-      <FeaturedProducts type='clothing' />
-      {/* <FeaturedProducts type='boards'/> */}
+      <FeaturedProducts type='clothes' />
+      <FeaturedProducts type='boards'/>
     </div>
   )
 }
