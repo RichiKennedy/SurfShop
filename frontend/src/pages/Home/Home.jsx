@@ -1,13 +1,16 @@
 import React from 'react'
 import './Home.scss'
-import Slider from '../../components/Slider/Slider'
+// import Slider from '../../components/Slider/Slider'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
+import CategoryHero from '../../components/CategoryHero/CategoryHero'
 
 const Home = () => {
   return (
     <div className='home'>
-      <Slider />
-      <FeaturedProducts />
+      {/* <Slider /> */}
+      <CategoryHero />
+      <FeaturedProducts type='clothing' />
+      {/* <FeaturedProducts type='boards'/> */}
     </div>
   )
 }
