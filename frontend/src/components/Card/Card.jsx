@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 const Card = ({item}) => {
   return (
     <Link className='image-card' to={`/product/${item.id}`}>
-    <div className="image-card">
     <div className="image-container">
       {item.isOrganic && <span>Organic</span>}
     <img src={item.img1} className='mainImg' key={item.id} alt=''/>
@@ -20,7 +19,6 @@ const Card = ({item}) => {
             <p>{item.info}</p>
         </div>
     </div>
-</div>
     </Link>
   )
 }
