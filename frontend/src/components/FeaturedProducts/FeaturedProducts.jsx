@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './FeaturedProducts.scss'
 import Card from '../Card/Card'
+import { Link } from 'react-router-dom'
 
 const FeaturedProducts = ({type}) => {
     const [imageData, setImageData] = useState([])
@@ -60,6 +61,66 @@ const FeaturedProducts = ({type}) => {
         },
         {
             id: 6,
+            img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
+            img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T093925.652_900x.png?v=1681799012',
+            title: 'WATERFALL',
+            info: 'Long sleeve shirt',
+            isOrganic: true,
+            oldPrice: 837,
+            newPrice: 700,
+        },
+        {
+            id: 7,
+            img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
+            img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-White_0234_900x.png?v=1681349319',
+            title: 'WATERFALL',
+            info: 'Boxy graphic T-shirt',
+            isOrganic: true,
+            oldPrice: 489,
+            newPrice: 350,
+        },
+        {
+            id: 8,
+            img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
+            img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-Arctic_0217_900x.png?v=1681349254',
+            title: 'WATERFALL',
+            info: 'Boxy graphic T-shirt',
+            isOrganic: true,
+            oldPrice: 489,
+            newPrice: 350,
+        },
+        {
+            id: 9,
+            img1: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-257_900x.jpg?v=1680658375',
+            img2: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-260_900x.jpg?v=1680658375',
+            title: 'CLASSIC',
+            info: 'Hemp retro T-shirt',
+            isOrganic: true,
+            oldPrice: 419,
+            newPrice: 330,
+        },
+        {
+            id: 10,
+            img1: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
+            img2: 'https://afends.com/cdn/shop/products/M220000-BLK_0436_900x.jpg?v=1680658191',
+            title: 'CLASSIC',
+            info: 'Hemp retro T-shirt',
+            isOrganic: true,
+            oldPrice: 419,
+            newPrice: 330,
+        },
+        {
+            id: 11,
+            img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-CubanShortSleeveShirt-White_0265_900x.png?v=1681799006',
+            img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T092837.834_900x.png?v=1681799006',
+            title: 'WATERFALL',
+            info: 'Cuban short sleeve shirt',
+            isOrganic: true,
+            oldPrice: 767,
+            newPrice: 600,
+        },
+        {
+            id: 12,
             img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
             img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T093925.652_900x.png?v=1681799012',
             title: 'WATERFALL',
@@ -138,9 +199,9 @@ const FeaturedProducts = ({type}) => {
         } else {
             setImageData(menData)
         }
+
     }, [mens])
 
- 
 
   return (
     <section className='featured-products'>
@@ -158,9 +219,14 @@ const FeaturedProducts = ({type}) => {
             <div className="image-grid-container"> 
             {imageData.map((item) => {
                 return (
-                <Card item={item} key={item.id}/>
+                    <>
+                    <Card item={item} key={item.id}/>
+                    </>
                 )
             })}
+            <Link to={'/products/new-collection'} className="view-all-wrapper">
+            <span> view all </span>
+            </Link>
             </div>
     </section>
   )
