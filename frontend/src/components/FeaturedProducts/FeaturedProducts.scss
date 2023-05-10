@@ -1,8 +1,12 @@
 .featured-products {
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
 
     .title-wrapper {
-        width: 100%;
+        max-width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,16 +29,26 @@
                 font-size: 1.2em;
                 cursor: pointer;
                 text-decoration: line-through;
-
+                
             }
         }
     }
     .image-grid-container {
-        width: 100%;
+        width: 93vw;
         height: 500px;
         display: flex;
         align-items: center;
-        margin-bottom: 50px;
+        margin-bottom: 150px;
         gap: 10px;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+
+        .view-all-wrapper {
+            width: 500px;
+            border: solid 1px rgba(19, 19, 19, 1);
+        }
+    }
+    .image-grid-container::-webkit-scrollbar {
+        display: none;
     }
 }
