@@ -2,6 +2,7 @@ import React from 'react'
 import './Footer.scss'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Link } from 'react-router-dom';
+import Contact from '../Contact/Contact';
 
 const Footer = () => {
   return (
@@ -47,6 +48,9 @@ const Footer = () => {
         <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li>
         <li><a className='icon-button' href='google.com' target='_blank'> <FacebookOutlinedIcon /> </a></li> 
       </ul>
+        <div className="contact">
+        <Contact />
+        </div>
       </div>
     </footer>
   )
