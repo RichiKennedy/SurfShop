@@ -219,13 +219,11 @@ const FeaturedProducts = ({type}) => {
             <div className="image-grid-container"> 
             {imageData.map((item) => {
                 return (
-                    <>
                     <Card item={item} key={item.id}/>
-                    </>
                 )
             })}
-            <Link to={'/products/new-collection'} className="view-all-wrapper">
-            <span> view all </span>
+            <Link to={ mens ? '/products/mens' : '/products/womens' } className="view-all">
+            <h1> view all </h1>
             </Link>
             </div>
     </section>
