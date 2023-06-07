@@ -1,10 +1,6 @@
 .products {
     min-height: 100vh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    flex-direction: column;
     margin-top: 49.5px;
     
     .header {
@@ -26,9 +22,9 @@
         height: 31px;
         border: 2px solid #F2F2F2;
         padding: 0px 10px;
+        top: 50px;
         
         .product-count {
-            text-transform: capitalize;
             font-size: 14px;
             
             span {
@@ -40,23 +36,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            cursor: pointer;
             height: 100%;
-
+            
             
             h6 {
-                text-transform: uppercase;
-                font-size: 14px;
-                font-weight: 400;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-transform: uppercase;
+                font-size: 14px;
+                gap: 5px;
+                font-weight: 400;
+                height: 100%;
+                cursor: pointer;
                 color: black;
-        
-                .filter-icon {
-                    font-size: 16px;
-                }
+                transition: 0.2s ease-in-out;
+            }
+            h6:hover {
+                opacity: 0.6;
             }
         }
     }
