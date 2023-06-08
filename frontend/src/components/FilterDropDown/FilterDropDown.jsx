@@ -52,39 +52,39 @@ const FilterDropDown = ({setOpen, open}) => {
             <label for='jeans'> jeans</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='outerwear'/>
+              <input type='radio' name='outerwear' id='outerwear'/>
             <label for='outerwear'> outerwear</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='knitwear'/>
+              <input type='radio' name='knitwear' id='knitwear'/>
             <label for='knitwear'> knitwear</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='sweatshirts'/>
+              <input type='radio' name='sweatshirts' id='sweatshirts'/>
             <label for='sweatshirts'> sweatshirts</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='shirts'/>
+              <input type='radio' name='shirts' id='shirts'/>
             <label for='shirts'> shirts</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='t-shirts'/>
+              <input type='radio' name='t-shirts' id='t-shirts'/>
             <label for='t-shirts'> t-shirts</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='trousers'/>
+              <input type='radio' name='trousers' id='trousers'/>
             <label for='trousers'> trousers</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='shorts'/>
+              <input type='radio' name='shorts' id='shorts'/>
             <label for='shorts'> shorts</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='bags'/>
+              <input type='radio' name='bags' id='bags'/>
             <label for='bags'> bags</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='jewellery'/>
+              <input type='radio' name='jewellery' id='jewellery'/>
             <label for='jewellery'> jewellery</label>
           </li>
         </ul>
