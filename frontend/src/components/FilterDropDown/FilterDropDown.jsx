@@ -40,15 +40,15 @@ const FilterDropDown = ({setOpen, open}) => {
         <ul className="form-control-container">
           <h6>type of product</h6>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='shoes'/>
+              <input type='radio' name='shoes' id='shoes'/>
             <label for='shoes'> shoes </label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='hats'/>
+              <input type='radio' name='hats' id='hats'/>
             <label for='hats'> hats </label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='type-of-product' id='jeans'/>
+              <input type='radio' name='jeans' id='jeans'/>
             <label for='jeans'> jeans</label>
           </li>
           <li className='form-control'>
