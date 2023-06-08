@@ -12,6 +12,7 @@ const FilterDropDown = ({setOpen, open}) => {
     exit={{ opacity: 0 }}
     transition={{ duration: 0.3 }}
     >
+      <div onClick={() => setOpen(!open)} className="filter-overlay"></div>
     <div className='filter-menu'>
       <div className="filter-header">
         <h6>filter & sorting</h6>
@@ -83,7 +84,7 @@ const FilterDropDown = ({setOpen, open}) => {
             <label for='bags'> bags</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='jewellery' id='jewellery'/>
+              <input type='radio' name='type-of-product' id='jewellery'/>
             <label for='jewellery'> jewellery</label>
           </li>
         </ul>
