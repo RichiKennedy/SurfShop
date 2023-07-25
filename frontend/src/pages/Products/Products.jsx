@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Products.scss'
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilterDropDown from '../../components/FilterDropDown/FilterDropDown';
 import { AnimatePresence } from 'framer-motion';
 
@@ -12,6 +12,8 @@ const Products = () => {
     position: 'relative',
   })
 
+  const catId = useParams().id
+console.log(catId)
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {
@@ -26,6 +28,7 @@ useEffect(() => {
   }
   window.addEventListener('scroll', changePosition)
 })
+
 
 useEffect(() => {
   if (open) {

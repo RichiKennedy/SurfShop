@@ -132,7 +132,7 @@ const FeaturedProducts = ({type}) => {
     ]
     const womenData = [
         {
-            id: 1,
+            id: 13,
             img1: 'https://afends.com/cdn/shop/products/AfendsWomensSunDancer-DenimJacket-FadedCandy_0344_900x.png?v=1680755124',
             img2: 'https://afends.com/cdn/shop/products/AfendsWomensSunDancer-DenimJacket-FadedCandy_0348_900x.png?v=1680755124',
             title: 'SUN DANCER',
@@ -142,7 +142,7 @@ const FeaturedProducts = ({type}) => {
             newPrice: 1350,
         },
         {
-            id: 2,
+            id: 14,
             img1: 'https://afends.com/cdn/shop/products/AfendsWomensBella-DenimBaggyJeans-FadedCandy_0580_900x.jpg?v=1680754965',
             img2: 'https://afends.com/cdn/shop/products/AfendsWomensBella-DenimBaggyJeans-FadedCandy_0599_900x.jpg?v=1680754979',
             title: 'BELLA',
@@ -152,7 +152,7 @@ const FeaturedProducts = ({type}) => {
             newPrice: 900,
         },
         {
-            id: 3,
+            id: 15,
             img1: 'https://afends.com/cdn/shop/products/AfendsWomensChichi-DenimMidiSkirt-FadedCandy_900x.png?v=1680756986',
             img2: 'https://afends.com/cdn/shop/products/AfendsWomensChichi-DenimMidiSkirt-FadedCandy_0366_900x.png?v=1680756986',
             title: 'CHICHI',
@@ -162,7 +162,7 @@ const FeaturedProducts = ({type}) => {
             newPrice: 920,
         },
         {
-            id: 4,
+            id: 16,
             img1: 'https://afends.com/cdn/shop/products/AfendsWomensEmilie-DenimCarpenterShorts-FadedCandy_0383_900x.png?v=1680757283',
             img2: 'https://afends.com/cdn/shop/products/AfendsWomensEmilie-DenimCarpenterShorts-FadedCandy_0387_900x.png?v=1680757283',
             title: 'EMILIE',
@@ -172,7 +172,7 @@ const FeaturedProducts = ({type}) => {
             newPrice: 600,
         },
         {
-            id: 5,
+            id: 17,
             img1: 'https://afends.com/cdn/shop/files/NewProject-2023-05-02T103600.339_900x.png?v=1682988127',
             img2: 'https://afends.com/cdn/shop/files/NewProject-2023-05-02T103644.246_900x.png?v=1682988127',
             title: 'EMILIE',
@@ -182,7 +182,7 @@ const FeaturedProducts = ({type}) => {
             newPrice: 700,
         },
         {
-            id: 6,
+            id: 18,
             img1: 'https://afends.com/cdn/shop/products/AfendsWomensMoss-OrganicDenimCarpenterJeans-WashedBlack_1267_900x.png?v=1681264083',
             img2: 'https://afends.com/cdn/shop/products/AfendsWomensMoss-OrganicDenimCarpenterJeans-WashedBlack_1270_900x.png?v=1681264083',
             title: 'MOSS',
