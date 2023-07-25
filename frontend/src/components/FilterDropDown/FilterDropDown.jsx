@@ -25,15 +25,15 @@ const FilterDropDown = ({setOpen, open}) => {
           <h6>sort by</h6>
           <li className='form-control'>
               <input type='radio' name='sort-by' id='Newest'/>
-            <label for='Newest'> Newest</label>
+            <label htmlFor='Newest'> Newest</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='sort-by' id='highToLow'/>
-            <label for='highToLow'> Price (High to Low)</label>
+            <label htmlFor='highToLow'> Price (High to Low)</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='sort-by' id='lowToHigh'/>
-            <label for='lowToHigh'> Price (Low to High)</label>
+            <label htmlFor='lowToHigh'> Price (Low to High)</label>
           </li>
         </ul>
         
@@ -41,51 +41,51 @@ const FilterDropDown = ({setOpen, open}) => {
           <h6>type of product</h6>
           <li className='form-control'>
               <input type='radio' name='shoes' id='shoes'/>
-            <label for='shoes'> shoes </label>
+            <label htmlFor='shoes'> shoes </label>
           </li>
           <li className='form-control'>
               <input type='radio' name='hats' id='hats'/>
-            <label for='hats'> hats </label>
+            <label htmlFor='hats'> hats </label>
           </li>
           <li className='form-control'>
               <input type='radio' name='jeans' id='jeans'/>
-            <label for='jeans'> jeans</label>
+            <label htmlFor='jeans'> jeans</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='outerwear' id='outerwear'/>
-            <label for='outerwear'> outerwear</label>
+            <label htmlFor='outerwear'> outerwear</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='knitwear' id='knitwear'/>
-            <label for='knitwear'> knitwear</label>
+            <label htmlFor='knitwear'> knitwear</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='sweatshirts' id='sweatshirts'/>
-            <label for='sweatshirts'> sweatshirts</label>
+            <label htmlFor='sweatshirts'> sweatshirts</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='shirts' id='shirts'/>
-            <label for='shirts'> shirts</label>
+            <label htmlFor='shirts'> shirts</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='t-shirts' id='t-shirts'/>
-            <label for='t-shirts'> t-shirts</label>
+            <label htmlFor='t-shirts'> t-shirts</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='trousers' id='trousers'/>
-            <label for='trousers'> trousers</label>
+            <label htmlFor='trousers'> trousers</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='shorts' id='shorts'/>
-            <label for='shorts'> shorts</label>
+            <label htmlFor='shorts'> shorts</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='bags' id='bags'/>
-            <label for='bags'> bags</label>
+            <label htmlFor='bags'> bags</label>
           </li>
           <li className='form-control'>
               <input type='radio' name='jewellery' id='jewellery'/>
-            <label for='jewellery'> jewellery</label>
+            <label htmlFor='jewellery'> jewellery</label>
           </li>
         </ul>
       </div>
