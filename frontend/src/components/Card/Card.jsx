@@ -2,9 +2,9 @@ import React from 'react'
 import './Card.scss'
 import {Link} from 'react-router-dom'
 
-const Card = ({item}) => {
+const Card = ({item, pageType}) => {
   return (
-    <Link className='image-card' to={`/product/${item.id}`}>
+    <Link className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}  to={`/product/${item.id}`}>
     <div className="image-container">
       {item.isOrganic && <span>Organic</span>}
     <img src={item.img1} className='mainImg' key={item.id} alt=''/>
