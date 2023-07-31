@@ -1,0 +1,16 @@
+.gallery-wrapper {
+    margin: 42px 0px 100px 0px;
+    columns: 4;
+
+    .image-card {
+        width: 25vw;
+        height: 78vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border 0.5s ease-in-out;
+    }
+    .image-card:hover {
+        border: 1px solid black;
+    }
+}

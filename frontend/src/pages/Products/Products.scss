@@ -15,6 +15,7 @@
     }
 
     .filter-wrapper {
+        background-color: #FFF;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -24,6 +25,7 @@
         border-bottom: 1px solid #adabab;
         padding: 0px 10px;
         top: 49px;
+        z-index: 5;
         
         
         .product-count {

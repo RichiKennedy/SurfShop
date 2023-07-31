@@ -1,5 +1,6 @@
 import React from 'react'
 import './CategoryHero.scss'
+import { Link } from 'react-router-dom'
 
 
 const CategoryHero = () => {
@@ -10,18 +11,22 @@ const CategoryHero = () => {
     ] 
   return (
     <section className='hero-wrapper'>
+        <Link className='link' to="/products/men">
         <div className="image-container">
             <img src={data[0]} alt='Category-Mens'  />
             <div className="overlay">
                 <h4>Shop Mens</h4>
             </div>
         </div>
+        </Link>
+        <Link className='link' to="/products/women">
         <div className="image-container">
         <img src={data[1]} alt='Category-Womens'  />
             <div className="overlay">
                 <h4>Shop Womens</h4>
             </div>
         </div>
+        </Link>
     </section>
   )
 }

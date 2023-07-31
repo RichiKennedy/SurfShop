@@ -4,6 +4,7 @@ import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { Link, useParams } from 'react-router-dom';
 import FilterDropDown from '../../components/FilterDropDown/FilterDropDown';
 import { AnimatePresence } from 'framer-motion';
+import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 const Products = () => {
   const [open, setOpen] = useState(false)
@@ -13,7 +14,6 @@ const Products = () => {
   })
 
   const catId = useParams().id
-console.log(catId)
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {
@@ -28,8 +28,6 @@ useEffect(() => {
   }
   window.addEventListener('scroll', changePosition)
 })
-
-
 useEffect(() => {
   if (open) {
     const { scrollY } = window
@@ -60,6 +58,7 @@ useEffect(() => {
           </div>
           </Link> 
       </div>
+      <ItemGallery catId={catId} />
     </div>
     <AnimatePresence>
           {open && (
