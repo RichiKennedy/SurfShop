@@ -13,7 +13,7 @@ const CategoryGrid = () => {
                         </div>
                     </Link>
                 <Link className="row" to="/products/1">
-                    <img src='https://afends.com/cdn/shop/products/AfendsWomensSlayCropped-HempOversizedT-Shirt-VividBlue_0945_900x.png?v=1681366083' alt='accessories' />
+                    <img src='https://afends.com/cdn/shop/products/AfendsWomensSlayCropped-HempOversizedT-Shirt-VividBlue_0945_900x.png?v=1681366083' alt='womens' />
                     <div className="overlay">
                       <h3>Women</h3>
                     </div>
@@ -21,7 +21,7 @@ const CategoryGrid = () => {
             </div>
             <div className="col">
                 <Link className="row" to="/products/1" >
-                    <img src='https://afends.com/cdn/shop/products/AfendsUnisexOracle-TrenchCoat-Olive-5682_900x.png?v=1681273730' alt='accessories' />
+                    <img src='https://afends.com/cdn/shop/products/AfendsUnisexOracle-TrenchCoat-Olive-5682_900x.png?v=1681273730' alt='new season' />
                     <div className="overlay">
                       <h3>New Season</h3>
                     </div>
@@ -31,7 +31,7 @@ const CategoryGrid = () => {
             <div className="row">
             <div className="col">
                 <Link className="row" to="/products/1" >
-                    <img src='https://afends.com/cdn/shop/products/AfendsMensLiquid-CrewNeckJumper-Arctic_01262_900x.jpg?v=1680655062' alt='accessories' />
+                    <img src='https://afends.com/cdn/shop/files/W233901-PTC_1476_900x.png?v=1689637209' alt='mens wear' />
                     <div className="overlay">
                     <h3>Men</h3>
                     </div>
@@ -39,7 +39,7 @@ const CategoryGrid = () => {
             </div>
             <div className="col">
             <Link className='row' to="/products/1" >
-                <img src='https://afends.com/cdn/shop/files/ezgif.com-gif-maker_11_450x.gif?v=1672273929' alt='accessories' />
+                <img src='https://afends.com/cdn/shop/files/ezgif.com-gif-maker_11_450x.gif?v=1672273929' alt='surfboards' />
             </Link>
             </div>
             </div>

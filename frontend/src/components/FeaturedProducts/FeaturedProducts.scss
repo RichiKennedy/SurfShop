@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    background-color: #FFF;
+    z-index: 1;
 
     .title-wrapper {
         max-width: 100%;
