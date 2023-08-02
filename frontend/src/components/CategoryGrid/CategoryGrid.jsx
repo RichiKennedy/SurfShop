@@ -12,7 +12,7 @@ const CategoryGrid = () => {
                           <h3>Accessories</h3>
                         </div>
                     </Link>
-                <Link className="row" to="/products/1">
+                <Link className="row" to="/products/women">
                     <img src='https://afends.com/cdn/shop/products/AfendsWomensSlayCropped-HempOversizedT-Shirt-VividBlue_0945_900x.png?v=1681366083' alt='womens' />
                     <div className="overlay">
                       <h3>Women</h3>
@@ -30,7 +30,7 @@ const CategoryGrid = () => {
             <div className="col col-large">
             <div className="row">
             <div className="col">
-                <Link className="row" to="/products/1" >
+                <Link className="row" to="/products/men" >
                     <img src='https://afends.com/cdn/shop/files/W233901-PTC_1476_900x.png?v=1689637209' alt='mens wear' />
                     <div className="overlay">
                     <h3>Men</h3>

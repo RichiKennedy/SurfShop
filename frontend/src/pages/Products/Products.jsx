@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion';
 import './Products.scss'
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { Link, useParams } from 'react-router-dom';
@@ -41,8 +42,15 @@ useEffect(() => {
   }
 }, [open])
 
+useEffect(() => {
+  window.scrollTo(0, 0)
+},[catId])
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
     <div className='products'>
       <div className="header">
         <h3> New Arrivals</h3>
@@ -65,7 +73,7 @@ useEffect(() => {
             <FilterDropDown setOpen={setOpen} open={open} />
           )}
     </AnimatePresence>
-    </>
+    </motion.div>
   )
 }
 

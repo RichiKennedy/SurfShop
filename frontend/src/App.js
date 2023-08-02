@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import './app.scss'
 import Dropdown from "./components/Navbar/NewNav/Dropdown";
+import { AnimatePresence } from "framer-motion";
 
 
 
@@ -51,8 +52,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="app">
+      <AnimatePresence>
      <RouterProvider router={router} />
-
+      </AnimatePresence>
     </div>
   );
 }

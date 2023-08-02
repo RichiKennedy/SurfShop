@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion';
 import './ItemGallery.scss'
 import Card from '../Card/Card'
 
@@ -214,14 +215,21 @@ console.log(catId)
         if (catId.catId === 'men') {
           setImageData(menData);
         } else if (catId.catId === 'women') {
-          setImageData(womenData);
+            setImageData(womenData);
         }
+
       }, [catId]);
 
   return (
-    <div className='gallery-wrapper'> {imageData.map(item => (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className='gallery-wrapper'> 
+      {imageData.map(item => (
         <Card item={item} key={item.id}/>
-    ))} </div>
+    ))} 
+    </motion.div>
   )
 }
 
