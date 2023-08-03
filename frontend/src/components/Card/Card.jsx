@@ -7,8 +7,8 @@ const Card = ({item, pageType}) => {
     <Link className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}  to={`/product/${item.id}`}>
     <div className="image-container">
       {item.isOrganic && <span>Organic</span>}
-    <img src={item.img1} className='mainImg' key={item.id} alt=''/>
-    <img src={item.img2} className='secondImg' key={item.id} alt=''/>
+    <img src={item.img1} className='mainImg' key={`mainImg_${item.id}`} alt=''/>
+    <img src={item.img2} className='secondImg' key={`secondImg_${item.id}`} alt=''/>
     </div>
     <div className="image-info">
         <div className="info-top">

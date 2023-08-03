@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './FilterDropDown.scss'
 import {motion} from 'framer-motion'
 
-const FilterDropDown = ({setOpen, open}) => {
+const FilterDropDown = ({setOpen, open, catId}) => {
+  const [sort, setSort] = useState(null)
   return (
     <>
   <motion.div
@@ -28,11 +29,11 @@ const FilterDropDown = ({setOpen, open}) => {
             <label htmlFor='Newest'> Newest</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='sort-by' id='highToLow'/>
+              <input type='radio' value='highToLow' name='sort-by' id='highToLow' onChange={e => setSort('highToLow') }/>
             <label htmlFor='highToLow'> Price (High to Low)</label>
           </li>
           <li className='form-control'>
-              <input type='radio' name='sort-by' id='lowToHigh'/>
+              <input type='radio' value='lowToHigh' name='sort-by' id='lowToHigh'onChange={e => setSort('lowToHigh') } />
             <label htmlFor='lowToHigh'> Price (Low to High)</label>
           </li>
         </ul>

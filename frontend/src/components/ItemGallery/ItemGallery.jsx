@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import './ItemGallery.scss'
 import Card from '../Card/Card'
 
-const ItemGallery = (catId) => {
+const ItemGallery = (props) => {
 const [imageData, setImageData] = useState([])
     
     const menData = [
         {
-            id: 1,
+            id: 'mhgfkö100',
             img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-White_0234_900x.png?v=1681349319',
             title: 'WATERFALL',
@@ -18,7 +18,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 350,
         },
         {
-            id: 2,
+            id: 'kuyfkuytdftiyri76567344567376u7',
             img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-Arctic_0217_900x.png?v=1681349254',
             title: 'WATERFALL',
@@ -28,7 +28,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 350,
         },
         {
-            id: 3,
+            id: 'jyr653542356756ilouylihj.bhmb',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-257_900x.jpg?v=1680658375',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-260_900x.jpg?v=1680658375',
             title: 'CLASSIC',
@@ -38,7 +38,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 330,
         },
         {
-            id: 4,
+            id: 'jyfuywsye3rw54u6yrli8oiulkhbn',
             img1: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
             img2: 'https://afends.com/cdn/shop/products/M220000-BLK_0436_900x.jpg?v=1680658191',
             title: 'CLASSIC',
@@ -48,7 +48,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 330,
         },
         {
-            id: 5,
+            id: ',nhgvcjdu65ey6uyt,ukgjhfvljk',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-CubanShortSleeveShirt-White_0265_900x.png?v=1681799006',
             img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T092837.834_900x.png?v=1681799006',
             title: 'WATERFALL',
@@ -58,7 +58,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 600,
         },
         {
-            id: 6,
+            id: 'njyfytedy4ey6u76tp8ioykufkytd',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
             img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T093925.652_900x.png?v=1681799012',
             title: 'WATERFALL',
@@ -68,7 +68,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 700,
         },
         {
-            id: 7,
+            id: 'jhffdsgstry6uytiukjgfhgdrstr',
             img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-White_0234_900x.png?v=1681349319',
             title: 'WATERFALL',
@@ -78,7 +78,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 350,
         },
         {
-            id: 8,
+            id: 'kjgtdses5r67iugjdrsrtsiilhkufhtds',
             img1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-BoxyGraphicT-Shirt-Arctic_0217_900x.png?v=1681349254',
             title: 'WATERFALL',
@@ -88,7 +88,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 350,
         },
         {
-            id: 9,
+            id: 'jhffgshtreyj7yyhfchxretstyjf',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-257_900x.jpg?v=1680658375',
             img2: 'https://afends.com/cdn/shop/products/AfendsMensClassic-HempRetroT-Shirt-White-260_900x.jpg?v=1680658375',
             title: 'CLASSIC',
@@ -98,7 +98,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 330,
         },
         {
-            id: 10,
+            id: 'hgdtrsrdybhcfgzstgdxfstygb',
             img1: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
             img2: 'https://afends.com/cdn/shop/products/M220000-BLK_0436_900x.jpg?v=1680658191',
             title: 'CLASSIC',
@@ -108,7 +108,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 330,
         },
         {
-            id: 11,
+            id: 'htfrt5e4e5ryhbhjvctrs67tolhoufgvch ',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-CubanShortSleeveShirt-White_0265_900x.png?v=1681799006',
             img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T092837.834_900x.png?v=1681799006',
             title: 'WATERFALL',
@@ -118,7 +118,7 @@ const [imageData, setImageData] = useState([])
             newPrice: 600,
         },
         {
-            id: 12,
+            id: 'mhgcgfsteswt5yytufvcghxdfgxg',
             img1: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
             img2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-11T093925.652_900x.png?v=1681799012',
             title: 'WATERFALL',
@@ -210,15 +210,14 @@ const [imageData, setImageData] = useState([])
             newPrice: 900,
         },
     ]
-console.log(catId)
-    useEffect(() => {
-        if (catId.catId === 'men') {
-          setImageData(menData);
-        } else if (catId.catId === 'women') {
-            setImageData(womenData);
-        }
 
-      }, [catId]);
+      
+      useEffect(() => {
+        setImageData(props.catId === 'men' ? menData : womenData);
+      }, [props.catId]);
+      useEffect(() => {
+        console.log(imageData); // Log imageData whenever it changes
+      }, [imageData]);
 
   return (
     <motion.div 
