@@ -16,7 +16,7 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Boxy graphic T-shirt',
             isOrganic: true,
-            oldPrice: 489,
+            oldPrice: 500,
             newPrice: 350,
         },
         {
@@ -26,8 +26,8 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Boxy graphic T-shirt',
             isOrganic: true,
-            oldPrice: 489,
-            newPrice: 350,
+            oldPrice: 289,
+            newPrice: 150,
         },
         {
             id: 3,
@@ -36,8 +36,8 @@ const FeaturedProducts = ({type}) => {
             title: 'CLASSIC',
             info: 'Hemp retro T-shirt',
             isOrganic: true,
-            oldPrice: 419,
-            newPrice: 330,
+            oldPrice: 719,
+            newPrice: 630,
         },
         {
             id: 4,
@@ -46,8 +46,8 @@ const FeaturedProducts = ({type}) => {
             title: 'CLASSIC',
             info: 'Hemp retro T-shirt',
             isOrganic: true,
-            oldPrice: 419,
-            newPrice: 330,
+            oldPrice: 429,
+            newPrice: 230,
         },
         {
             id: 5,
@@ -56,8 +56,8 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Cuban short sleeve shirt',
             isOrganic: true,
-            oldPrice: 767,
-            newPrice: 600,
+            oldPrice: 7367,
+            newPrice: 6000,
         },
         {
             id: 6,
@@ -66,8 +66,8 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Long sleeve shirt',
             isOrganic: true,
-            oldPrice: 837,
-            newPrice: 700,
+            oldPrice: 637,
+            newPrice: 600,
         },
         {
             id: 7,
@@ -76,8 +76,8 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Boxy graphic T-shirt',
             isOrganic: true,
-            oldPrice: 489,
-            newPrice: 350,
+            oldPrice: 819,
+            newPrice: 550,
         },
         {
             id: 8,
@@ -86,7 +86,7 @@ const FeaturedProducts = ({type}) => {
             title: 'WATERFALL',
             info: 'Boxy graphic T-shirt',
             isOrganic: true,
-            oldPrice: 489,
+            oldPrice: 589,
             newPrice: 350,
         },
         {
@@ -96,8 +96,8 @@ const FeaturedProducts = ({type}) => {
             title: 'CLASSIC',
             info: 'Hemp retro T-shirt',
             isOrganic: true,
-            oldPrice: 419,
-            newPrice: 330,
+            oldPrice: 222,
+            newPrice: 30,
         },
         {
             id: 10,
@@ -106,7 +106,7 @@ const FeaturedProducts = ({type}) => {
             title: 'CLASSIC',
             info: 'Hemp retro T-shirt',
             isOrganic: true,
-            oldPrice: 419,
+            oldPrice: 499,
             newPrice: 330,
         },
         {
@@ -159,7 +159,7 @@ const FeaturedProducts = ({type}) => {
             info: 'Denim midi skirt',
             isOrganic: true,
             oldPrice: 1100,
-            newPrice: 920,
+            newPrice: 720,
         },
         {
             id: 16,

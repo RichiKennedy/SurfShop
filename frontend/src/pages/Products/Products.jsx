@@ -70,7 +70,7 @@ useEffect(() => {
     </div>
     <AnimatePresence>
           {open && (
-            <FilterDropDown setOpen={setOpen} open={open} />
+            <FilterDropDown setOpen={setOpen} open={open} catId={catId} />
           )}
     </AnimatePresence>
     </motion.div>
