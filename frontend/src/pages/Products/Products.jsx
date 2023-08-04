@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import './Products.scss'
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { Link, useParams } from 'react-router-dom';
-import FilterDropDown from '../../components/FilterDropDown/FilterDropDown';
+import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
 import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
@@ -70,7 +70,7 @@ useEffect(() => {
     </div>
     <AnimatePresence>
           {open && (
-            <FilterDropDown setOpen={setOpen} open={open} catId={catId} />
+            <DropDownMenu setOpen={setOpen} open={open} catId={catId} />
           )}
     </AnimatePresence>
     </motion.div>

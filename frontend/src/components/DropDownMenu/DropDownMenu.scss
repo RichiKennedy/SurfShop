@@ -1,0 +1,88 @@
+:root {
+  --form-control-color: black;
+}
+
+.DropDownMenu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+    
+    .filter-overlay {
+        background-color: rgba(0, 0, 0, 0.4);
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+    .filter-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+
+      }
+
+      .filter-menu {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          top: 0;
+          right: 0;
+          width: 400px;
+          z-index: 9999;
+          position: absolute;
+          height: 100%;
+          background-color: #FFF;
+          
+
+          .filter-header {
+              padding: 25px 10px;
+              height: 3%;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-bottom: 1px solid black;
+              top: 0;
+              background-color: #FFF;
+              
+              h6 {
+                font-size: 12px;
+                font-weight: 300;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+              }
+      
+              button {
+                  border: none;
+                  background: none;
+                  text-transform: uppercase;
+                  font-size: 12px;
+                  font-weight: 300;
+                  letter-spacing: 2px;
+                  cursor: pointer;
+              }
+          }
+
+          .filter-footer {
+              background-color: aqua;
+              height: 10%;
+              width: 100%;
+              padding: 10px;
+
+              button {
+                border: 1px solid black;
+                background: none;
+                text-transform: uppercase;
+                font-weight: 300;
+                letter-spacing: 2px;
+                cursor: pointer;
+                width: 100%;
+                height: 100%;
+              }
+          }
+      }
+}

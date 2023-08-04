@@ -1,27 +1,10 @@
 import React, { useState } from 'react'
-import './FilterDropDown.scss'
-import {motion} from 'framer-motion'
+import './Filter.scss'
 
-const FilterDropDown = ({setOpen, open, catId}) => {
-  const [sort, setSort] = useState(null)
+const Filter = () => {
+    const [sort, setSort] = useState(null)
   return (
-    <>
-  <motion.div
-    className="filterDropdown"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.3 }}
-    >
-      <div onClick={() => setOpen(!open)} className="filter-overlay"></div>
-    <div className='filter-menu'>
-      <div className="filter-header">
-        <h6>filter & sorting</h6>
-        <button onClick={() => setOpen(!open)} className="close-container">
-          X Close
-        </button>
-      </div>
-      <div className="content">
+     <div className="filter">
         <ul className="form-control-container">
           <h6>sort by</h6>
           <li className='form-control'>
@@ -89,14 +72,8 @@ const FilterDropDown = ({setOpen, open, catId}) => {
             <label htmlFor='jewellery'> jewellery</label>
           </li>
         </ul>
-      </div>
-      <div className="filter-footer"> 
-        <button onClick={() => setOpen(!open)}> view items  </button>
-      </div>
-    </div>
-  </motion.div>
-    </>
+      </div> 
   )
 }
 
-export default FilterDropDown
+export default Filter
