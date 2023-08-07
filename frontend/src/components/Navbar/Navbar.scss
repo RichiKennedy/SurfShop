@@ -44,7 +44,41 @@
             align-items: center;
             justify-content: flex-end;
             width: 33.3%;
+            gap: 10px;
+        }
 
+        .icon-button {
+            --button-size: calc(var((--nav-size) * 0.5 ));
+            width: var(--button-size);
+            height: var(--button-size);
+            background-color:  rgb(72, 74, 77);
+            border-radius: 50%;
+            padding: 5px;
+            margin: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: filter 300ms;
+            color: #FFF;
+            cursor: pointer;
+            position: relative;
+
+            span {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                font-size: 12px;
+                background-color: red;
+                right: -8px;
+                top: -5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .icon-button:hover {
+            filter: brightness(1.3);
         }
     }
 }

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.scss'
+import './NewNav/Dropdown.scss'
 import { Link } from 'react-router-dom';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import Dropdown from './NewNav/Dropdown';
+import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import { AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
+  const [openCart, setOpenCart] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     backgroundColor: '#FFF',
     color: 'rgba(19, 19, 19, 100)',
@@ -46,9 +51,22 @@ const Navbar = () => {
             <Link className='link' to="/"> The Shop </Link>
           </section>
           <section className='right'>
-              <Dropdown />
-          </section>
-        </div>
+          <Link className="icon-button" onClick={() => setOpenCart(true)}>
+            <ShoppingBagOutlinedIcon />
+            <span>2</span>
+          </Link>
+          <Dropdown />
+        </section>
+      </div>
+      <AnimatePresence>
+        {openCart && (
+          <DropDownMenu
+            setOpen={() => setOpenCart(false)} // Set openCart to false when the cart dropdown is closed
+            isOpen={openCart} // Use openCart state as the isOpen prop
+            isCart={true}
+          />
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

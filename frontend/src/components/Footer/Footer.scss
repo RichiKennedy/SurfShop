@@ -128,14 +128,14 @@
                 
             }
             #wave1 {
-                z-index: 1000;
+                z-index: 10;
                 opacity: 1;
                 bottom: 0;
                 animation: animate-wave 22s linear infinite;
             }  
      
             #wave2 {
-                z-index: 999;
+                z-index: 9;
                 opacity: 0.9;
                 bottom: 0;
                 animation: animate-wave 12s linear infinite;
