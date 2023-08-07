@@ -53,7 +53,7 @@ const Navbar = () => {
           <section className='right'>
           <Link className="icon-button" onClick={() => setOpenCart(true)}>
             <ShoppingBagOutlinedIcon />
-            <span>0</span>
+            <span>2</span>
           </Link>
           <Dropdown />
         </section>

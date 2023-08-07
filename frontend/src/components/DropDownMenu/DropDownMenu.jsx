@@ -57,7 +57,7 @@ const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId}) => {
         < Cart />
       )}
       <div className="filter-footer"> 
-        <button onClick={() => setOpen(!isOpen)}> view items  </button>
+        <button onClick={() => setOpen(!isOpen)}> {isCart ? 'checkout' : 'view items'} </button>
       </div>
     </div>
   </motion.div>
