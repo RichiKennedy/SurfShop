@@ -8,8 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 const Products = () => {
-  const [open, setOpen] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState(0)
+  const [openFilter, setOpenFilter] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   })
@@ -29,18 +28,6 @@ useEffect(() => {
   }
   window.addEventListener('scroll', changePosition)
 })
-useEffect(() => {
-  if (open) {
-    const { scrollY } = window
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.position = 'fixed'
-    setScrollPosition(scrollY)
-  } else {
-    document.body.style.top = ''
-    document.body.style.position = ''
-    window.scrollTo(0, scrollPosition)
-  }
-}, [open])
 
 useEffect(() => {
   window.scrollTo(0, 0)
@@ -60,7 +47,7 @@ useEffect(() => {
       style={{position: cssStyles.position}}
       >
         <div className="product-count"> <span>116</span> <span>items</span> </div>
-        <Link onClick={ () => setOpen(!open)}> 
+        <Link onClick={() => setOpenFilter(!openFilter)}> 
          <div className="filter">
           <h6> <FilterListOutlinedIcon className='filter-icon' /> filter </h6>
           </div>
@@ -69,10 +56,15 @@ useEffect(() => {
       <ItemGallery catId={catId} />
     </div>
     <AnimatePresence>
-          {open && (
-            <DropDownMenu setOpen={setOpen} open={open} catId={catId} />
-          )}
-    </AnimatePresence>
+        {openFilter && (
+          <DropDownMenu
+            setOpen={() => setOpenFilter(false)} // Set openFilter to false when the filter dropdown is closed
+            isOpen={openFilter} // Use openFilter state as the isOpen prop
+            isFilter={true}
+            catId={catId}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
