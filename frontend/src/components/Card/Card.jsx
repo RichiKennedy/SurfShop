@@ -13,11 +13,14 @@ const Card = ({item, pageType}) => {
     <div className="image-info">
         <div className="info-top">
             <h3>{item.title}</h3>
-            <span>{item.newPrice} SEK </span>
-        </div>
-        <div className="info-bottom">
             <p>{item.info}</p>
         </div>
+        <div className="info-middle">
+            <span>{item.newPrice} sek </span>
+        </div>
+        <div className="info-bottom">
+            <p>add to bag +</p>
+        </div> 
     </div>
     </Link>
   )

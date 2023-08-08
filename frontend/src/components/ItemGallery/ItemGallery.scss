@@ -1,49 +1,53 @@
 .gallery-wrapper {
-    margin: 42px 0px 100px 0px;
-    columns: 4;
+    margin: 42px 0px 150px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+   
 
     .image-card {
-        width: 25vw;
-        height: 78vh;
+        width: 25%;
+        min-height: 80vh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: border 0.5s ease-in-out;
-
-        .image-container {
-            width: 100%;
-            height: 92%;
-            overflow: hidden;
-            position: relative;
-        }
+        border-left: 1px solid #555; 
+        border-top: none;
+        position: relative;
 
         .image-info {
-            width: 100%;
-            height: 8%;
-            color: rgb(19, 19, 19);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
 
             .info-top {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-evenly;
-                flex: none;
+                gap: 25px;
+                padding-left: 10px;
+              
+                h3 {
+                    font-size: 16px;
+                }
+                p {
+                    font-size: 16px;
+                }
+            }
+            .info-middle {
+                padding-left: 10px;
+              
+                span {
+                    font-size: 16px;
+                }
             }
             .info-bottom {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex: none;
+                padding-left: 10px;
+              
+                p {
+                    font-size: 16px;
+                }
             }
         }
     }
-    .image-card:hover {
-        border: 1px solid black;
+
+    
+    .image-card:hover .info-bottom {
+        color: #000;
     }
 }
