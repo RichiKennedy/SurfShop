@@ -14,6 +14,7 @@ const Products = () => {
   })
 
   const catId = useParams().id
+
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {

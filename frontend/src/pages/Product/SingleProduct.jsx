@@ -1,13 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import './SingleProduct.scss'
+import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
+
 
 const SingleProduct = () => {
 const [featuredImage, setFeaturedImage] = useState(0);
-const [quantity, setQuantity] = useState(1);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
+const [cssStyles, setCssStyles] = useState({
+  position: 'fixed',
+  bottom: 'unset',
+})
+
+useEffect(() => {
+  window.scrollTo(0, 0)
+}, [])
+
+useEffect(() => {
+  const changePosition = () => {
+    if (window.scrollY >= 4576) {
+      setCssStyles({
+        position: 'absolute',
+        bottom: 0,
+      });
+    } else {
+      setCssStyles({
+        position: 'fixed',
+        bottom: 'unset',
+      });
+    }
+  };
+
+  window.addEventListener('scroll', changePosition);
+
+  // Return the cleanup function to remove the event listener when the component unmounts
+  return () => {
+    window.removeEventListener('scroll', changePosition);
+  };
+});
+
 
 const images = [
     'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
@@ -17,39 +47,44 @@ const images = [
 ];
   
   return (
-    <motion.div
+    <motion.div>
+      <div
       className='singleProduct'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-    <div className="left">
-      <div className="images">
-        <img src={images[0]} alt='' onClick={e => setFeaturedImage(0)}/>
-        <img src={images[1]} alt='' onClick={e => setFeaturedImage(1)}/>
-        <img src={images[2]} alt='' onClick={e => setFeaturedImage(2)}/>
-        <img src={images[3]} alt='' onClick={e => setFeaturedImage(3)}/>
-      </div>
-      <div className="mainImage">
-        <img src={images[featuredImage]} alt="" />
-      </div>
-    </div>
-    <div className="right">
+    <div className="left" style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
+      <div className="title-wrapper">
       <h1>Title</h1>
-      <span className='price'> $200 </span>
+      </div>
+      <div className="price-wrapper">
+      <p className='price'> $200 </p>
+      </div>
+      <div className="desc-wrapper">
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum beatae aliquam nulla ipsa illum quod ducimus impedit, omnis in, iusto ex incidunt dignissimos, atque commodi laudantium aliquid magnam quidem repellat.</p>
-      <div className="quantity">
+      </div>
+      <div className="shipping-wrapper">
+        shipping 
+      </div>
+      {/* <div className="quantity">
         <button onClick={() => setQuantity(prev => prev === 1 ? 1 : prev - 1)}>-</button>
         {quantity}
         <button onClick={() => setQuantity(prev => prev + 1)}>+</button>
-      </div>
+      </div> */}
       <button className='add'>
         Add to cart
         </button>
-        <div className="links">
-          <div className="item">add to wish list</div>
-          <div className="item">add to wish list</div>
-        </div>
+    </div>
+    <div className="right">
+        <img src={images[featuredImage]} alt="" />
+        <img src={images[featuredImage]} alt="" />
+        <img src={images[featuredImage]} alt="" />
+        <img src={images[featuredImage]} alt="" />
+    </div>
+    </div>
+    <div className="category-grid"  >
+    <CategoryGrid  />
     </div>
     </motion.div>
   )
