@@ -5,39 +5,58 @@ import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 
 
 const SingleProduct = () => {
-const [featuredImage, setFeaturedImage] = useState(0);
-const [cssStyles, setCssStyles] = useState({
-  position: 'fixed',
-  bottom: 'unset',
-})
+  const [featuredImage, setFeaturedImage] = useState(0);
+  const [collisionPosition, setCollisionPosition] = useState(null); // To store the collision position
+  const [hasCapturedCollision, setHasCapturedCollision] = useState(false); // Flag to indicate collision capture
+  const [cssStyles, setCssStyles] = useState({
+    position: 'fixed',
+    bottom: 'unset',
+  });
 
-useEffect(() => {
-  window.scrollTo(0, 0)
-}, [])
+  const leftElementRef = useRef(null);
+  const categoryGridRef = useRef(null);
 
-useEffect(() => {
-  const changePosition = () => {
-    if (window.scrollY >= 4576) {
-      setCssStyles({
-        position: 'absolute',
-        bottom: 0,
-      });
-    } else {
-      setCssStyles({
-        position: 'fixed',
-        bottom: 'unset',
-      });
-    }
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-  window.addEventListener('scroll', changePosition);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (leftElementRef.current && categoryGridRef.current) {
+        const leftBottom = leftElementRef.current.getBoundingClientRect().bottom;
+        const categoryGridTop = categoryGridRef.current.getBoundingClientRect().top;
+console.log(leftBottom)        
+console.log(categoryGridTop)
 
-  // Return the cleanup function to remove the event listener when the component unmounts
-  return () => {
-    window.removeEventListener('scroll', changePosition);
-  };
-});
 
+        if (leftBottom >= categoryGridTop && !hasCapturedCollision) {
+          setCollisionPosition(window.scrollY);
+          setHasCapturedCollision(true);
+          
+          setCssStyles({
+            position: 'absolute',
+            bottom: 0,
+          });
+        } else if (collisionPosition !== null && window.scrollY <= collisionPosition) {
+          setCssStyles({
+            position: 'fixed',
+            bottom: 'unset',
+          });
+          setHasCapturedCollision(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [collisionPosition, hasCapturedCollision]);
+
+  
 
 const images = [
     'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
@@ -47,14 +66,15 @@ const images = [
 ];
   
   return (
-    <motion.div>
-      <div
-      className='singleProduct'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-    <div className="left" style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
+<motion.div
+  className='single-product-wrapper'
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  >
+  <div className='singleProduct'>
+    <div className="left" ref={leftElementRef}
+          style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
       <div className="title-wrapper">
       <h1>Title</h1>
       </div>
@@ -67,11 +87,6 @@ const images = [
       <div className="shipping-wrapper">
         shipping 
       </div>
-      {/* <div className="quantity">
-        <button onClick={() => setQuantity(prev => prev === 1 ? 1 : prev - 1)}>-</button>
-        {quantity}
-        <button onClick={() => setQuantity(prev => prev + 1)}>+</button>
-      </div> */}
       <button className='add'>
         Add to cart
         </button>
@@ -82,11 +97,11 @@ const images = [
         <img src={images[featuredImage]} alt="" />
         <img src={images[featuredImage]} alt="" />
     </div>
+  </div>
+    <div className="category-grid" ref={categoryGridRef}>
+    some other cool content
     </div>
-    <div className="category-grid"  >
-    <CategoryGrid  />
-    </div>
-    </motion.div>
+ </motion.div>
   )
 }
 

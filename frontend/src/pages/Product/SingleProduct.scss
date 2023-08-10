@@ -2,13 +2,14 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 49.5px;
-    min-width: 100vw;
     position: relative;
-
+    
     .left {
+        background-color: plum;
         position: fixed;
         left: 0;
         width: 50%;
+        transition: 0.7s ease-in-out;
 
         div {
             border-bottom: 1px solid #555;
@@ -38,8 +39,21 @@
     
     .right {
         width: 50%;
+        border: 1px solid #555;
+        border-bottom: none;
         img {
             width: 100%;
+            border-bottom: 1px solid #555;
         }
+        img:last-child {
+            border-bottom: none;
+        }
+        
     }
+
+}
+.category-grid {
+    height: 100vw;
+    width: 100%;
+    border: 1px solid #555;
 }
