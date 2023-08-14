@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import './SingleProduct.scss'
-import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 
 
 const SingleProduct = () => {
-  const [featuredImage, setFeaturedImage] = useState(0);
+  const [infoOption, setInfoOption] = useState(null);
   const [collisionPosition, setCollisionPosition] = useState(null); // To store the collision position
   const [hasCapturedCollision, setHasCapturedCollision] = useState(false); // Flag to indicate collision capture
   const [cssStyles, setCssStyles] = useState({
@@ -20,19 +19,16 @@ const SingleProduct = () => {
     window.scrollTo(0, 0)
   }, [])
 
+
   useEffect(() => {
     const handleScroll = () => {
       if (leftElementRef.current && categoryGridRef.current) {
         const leftBottom = leftElementRef.current.getBoundingClientRect().bottom;
         const categoryGridTop = categoryGridRef.current.getBoundingClientRect().top;
-console.log(leftBottom)        
-console.log(categoryGridTop)
-
 
         if (leftBottom >= categoryGridTop && !hasCapturedCollision) {
           setCollisionPosition(window.scrollY);
           setHasCapturedCollision(true);
-          
           setCssStyles({
             position: 'absolute',
             bottom: 0,
@@ -59,10 +55,24 @@ console.log(categoryGridTop)
   
 
 const images = [
-    'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
-    'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
-    'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
-    'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
+  {
+    title: 'waterfall',
+    shortDesc: 'boxy graphic t-shirt',
+    price: 200,
+    longDesc: 'A hot off the press logo t-shirt. Melt into a premium-feel eco-friendly blend of recycled cotton and organic cotton jersey, featuring a melting style logo graphic. Cut in our boxy fit block, this t-shirt provides a relaxed fit and slightly shorter drop - size up for an oversized look. Pair back with some hemp denim for an easy-go-to fit.',
+    itemDetails: [
+      'Mens Boxy LogoT-Shirt',
+      'boxy fit',
+      'wide ribbed crew neck',
+      'Our model wears a size M and is 193cm tall.',
+      '50% Recycled Cotton 50% Organic Cotton Jersey Jersey Midweight, 200gsm',
+    ],
+    image1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
+    image2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
+    image3: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
+    image4: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
+  }
+   
 ];
   
   return (
@@ -76,26 +86,53 @@ const images = [
     <div className="left" ref={leftElementRef}
           style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
       <div className="title-wrapper">
-      <h1>Title</h1>
+      <h1>{images[0].title}</h1>
+      </div>
+      <div className="sub-title-wrapper">
+      <h2>{images[0].shortDesc}</h2>
       </div>
       <div className="price-wrapper">
-      <p className='price'> $200 </p>
-      </div>
-      <div className="desc-wrapper">
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum beatae aliquam nulla ipsa illum quod ducimus impedit, omnis in, iusto ex incidunt dignissimos, atque commodi laudantium aliquid magnam quidem repellat.</p>
-      </div>
-      <div className="shipping-wrapper">
-        shipping 
+      <h5 className='price'> {images[0].price} SEK </h5>
       </div>
       <button className='add'>
-        Add to cart
+        Add to bag +
         </button>
+      <div className="extra-info-wrapper">
+        <button onClick={() => setInfoOption(infoOption === 'description' ? null : 'description')}>description {infoOption === 'description' ? '-' : '+'}</button>
+      </div>
+      { infoOption ==='description' && <div className="description-wrapper">
+      <p>{images[0].longDesc}</p>
+      </div>}
+      <div className="extra-info-wrapper">
+        <button onClick={() => setInfoOption(infoOption === 'details' ? null : 'details')}>details {infoOption === 'details' ? '-' : '+'}</button>
+      </div>
+      { infoOption === 'details' && <div className="shipping-wrapper-info">
+        <ul>
+        <li> {images[0].itemDetails[0]} </li>
+        <li> {images[0].itemDetails[1]} </li>
+        <li> {images[0].itemDetails[2]} </li>
+        <li> {images[0].itemDetails[3]} </li>
+        <li> {images[0].itemDetails[4]} </li>
+        </ul>
+      </div>}
+      <div className="extra-info-wrapper">
+        <button onClick={() => setInfoOption(infoOption === 'shipping' ? null : 'shipping')}>shipping {infoOption === 'shipping' ? '-' : '+'}</button>
+      </div>
+      { infoOption === 'shipping' && <div className="shipping-wrapper-info">
+        <ul>
+        <li> Free shipping on all orders</li>
+        <li> Postnord MyPack Collect or MyPack Home in 1-2 days</li>
+        <li> Pick-up in store within the hour</li>
+        <li> 14 days return policy</li>
+        <li> Climate compensated</li>
+        </ul>
+      </div>}
     </div>
     <div className="right">
-        <img src={images[featuredImage]} alt="" />
-        <img src={images[featuredImage]} alt="" />
-        <img src={images[featuredImage]} alt="" />
-        <img src={images[featuredImage]} alt="" />
+        <img src={images[0].image1} alt="" />
+        <img src={images[0].image2} alt="" />
+        <img src={images[0].image3} alt="" />
+        <img src={images[0].image4} alt="" />
     </div>
   </div>
     <div className="category-grid" ref={categoryGridRef}>

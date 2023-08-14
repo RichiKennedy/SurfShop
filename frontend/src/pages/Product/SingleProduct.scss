@@ -5,42 +5,78 @@
     position: relative;
     
     .left {
-        background-color: plum;
         position: fixed;
         left: 0;
         width: 50%;
         transition: 0.7s ease-in-out;
 
         div {
-            border-bottom: 1px solid #555;
+            border-bottom: 1px solid #ededed;
             display: flex;
             align-items: center;
             padding: 10px;
+
+            h1{
+                text-transform: capitalize;
+                font-size: 20px;
+                margin: 0;
+            }
+            h2{
+                text-transform: capitalize;
+                font-size: 16px;
+            }
         }
-        button {
+        .price-wrapper {
+            border-top: 1px solid #555;
+            .price {
+                
+            }
+        }
+        button.add {
             width: 100%;
             padding: 10px;
             border: none;
             background-color: rgba(19, 19, 19, 1);
             color: #FFF;
             cursor: pointer;
+            text-transform: capitalize;
         }
 
-        .shipping-wrapper {
-
-            ul {
-
-                li {
-                    margin-top: 10px;
-                }
+        .extra-info-wrapper {
+            button {
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+                text-transform: capitalize;
+                font-size: 14px;
+                font-weight: 700;
             }
+        }
+        .description-wrapper {
+            padding-left: 20px;
+        }
+        .shipping-wrapper-info {
+            
+            ul {
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+                gap: 7px;
+                li {
+                    list-style: disc;
+                    text-transform: capitalize;
+                    font-weight: 700px;
+                    font-size: 14px;
+                    }
+            }
+
         }
     }
     
     .right {
         width: 50%;
-        border: 1px solid #555;
-        border-bottom: none;
+        border-left: 1px solid #555;
+        border-right: 1px solid #555;
         img {
             width: 100%;
             border-bottom: 1px solid #555;
