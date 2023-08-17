@@ -4,19 +4,21 @@ import {Link} from 'react-router-dom'
 
 const Card = ({item, pageType}) => {
   return (
-    <Link className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}  to={`/product/${item.id}`}>
+    <Link className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}  to={`/product/${item?.id}`}>
     <div className="image-container">
-      {item.isOrganic && <span>Organic</span>}
-    <img src={item.img1} className='mainImg' key={`mainImg_${item.id}`} alt=''/>
-    <img src={item.img2} className='secondImg' key={`secondImg_${item.id}`} alt=''/>
+      {item?.attributes?.isOrganic && <span>Organic</span>}
+    <img src={
+      process.env.REACT_APP_UPLOAD_URL + item.attributes?.img1?.data?.attributes.url} className='mainImg' key={`mainImg_${item?.id}`} alt=''/>
+    <img src={
+      process.env.REACT_APP_UPLOAD_URL + item.attributes?.img2?.data?.attributes.url} className='secondImg' key={`secondImg_${item?.id}`} alt=''/>
     </div>
     <div className="image-info">
         <div className="info-top">
-            <h3>{item.title}</h3>
-            <p>{item.info}</p>
+            <h3>{item?.attributes?.title}</h3> 
+            <p>{item?.attributes?.info}</p>
         </div>
         <div className="info-middle">
-            <span>{item.newPrice} sek </span>
+            <span>{item?.attributes?.price} sek </span>
         </div>
         <div className="info-bottom">
             <p>add to bag +</p>
