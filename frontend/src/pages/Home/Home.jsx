@@ -18,9 +18,9 @@ const Home = () => {
     >
       {/* <Slider /> */}
       <CategoryHero />
-      <FeaturedProducts type='collection' />
+      <FeaturedProducts type='new-collection' />
       <CategoryGrid />
-      <FeaturedProducts type='boards'/>
+      <FeaturedProducts type='recommended'/>
     </motion.div>
   )
 }

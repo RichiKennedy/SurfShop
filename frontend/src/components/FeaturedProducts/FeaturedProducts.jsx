@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import './FeaturedProducts.scss'
 import Card from '../Card/Card'
 import { Link } from 'react-router-dom'
+import useFetch from '../../Hooks/useFetch'
 
 const FeaturedProducts = ({type}) => {
+    const {data, loading, error} = useFetch(`/products?populate=*&[filters][type][$eq]=${type}`)
     const [imageData, setImageData] = useState([])
     const [mens, setMens] = useState(true)
-    const [data, setData] = useState([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(process.env.REACT_APP_API_URL + "/products?populate=*", 
-                {
-                   headers: { 
-                    Authorization: "bearer " + process.env.REACT_APP_API_TOKEN, 
-                   },
-                }
-                );
-                setData(res.data.data)
-            } catch(err) {
-                console.log(`err ${err}`);
-            }
-        };
-        fetchData();
-    }, []);
-console.log(data)
+//     useEffect(() => {
+//         const fetchData = async () => {
+//             try {
+//                 const res = await axios.get(process.env.REACT_APP_API_URL + `/products?populate=*&[filters][type][$eq]=${type}`, 
+//                 {
+//                    headers: { 
+//                     Authorization: "bearer " + process.env.REACT_APP_API_TOKEN, 
+//                    },
+//                 }
+//                 );
+//                 setData(res.data.data)
+//             } catch(err) {
+//                 console.log(`err ${err}`);
+//             }
+//         };
+//         fetchData();
+//     }, []);
+// console.log(data)
     const menData = [
         {
             id: 1,
@@ -236,11 +237,11 @@ console.log(data)
             </ul>
             </div>
             <div className="image-grid-container"> 
-            {data.map((item) => {
-                return (
-                    <Card item={item} key={item?.id}/>
-                )
-            })}
+            {error 
+            ? "something went wrong" 
+            :loading 
+            ? "loading" 
+            : data?.map((item) => <Card item={item} key={item?.id}/>)}
             <Link to={ mens ? '/products/men' : '/products/women' } className="view-all">
             <h1> view all </h1>
             </Link>

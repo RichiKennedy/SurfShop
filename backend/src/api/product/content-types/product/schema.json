@@ -66,8 +66,7 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "normal",
-        "featured",
+        "new-collection",
         "recommended"
       ]
     }
