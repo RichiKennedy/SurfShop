@@ -215,9 +215,7 @@ const [imageData, setImageData] = useState([])
       useEffect(() => {
         setImageData(props.catId === 'men' ? menData : womenData);
       }, [props.catId]);
-      useEffect(() => {
-        console.log(imageData); // Log imageData whenever it changes
-      }, [imageData]);
+
 
   return (
     <motion.div 
