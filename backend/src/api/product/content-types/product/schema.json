@@ -66,10 +66,13 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "normal",
-        "featured",
+        "new collection",
         "recommended"
       ]
+    },
+    "mens": {
+      "type": "boolean",
+      "required": true
     }
   }
 }
