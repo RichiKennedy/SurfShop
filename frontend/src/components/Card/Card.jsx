@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const Card = ({item, pageType}) => {
   return (
-    <Link className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}  to={`/product/${item?.id}`}>
+    <Link to={`/product/${item?.id}`} className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}>
     <div className="image-container">
       {item?.attributes?.isOrganic && <span>Organic</span>}
     <img src={
