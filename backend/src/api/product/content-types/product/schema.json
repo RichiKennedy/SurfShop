@@ -15,7 +15,7 @@
     "title": {
       "type": "string"
     },
-    "desc": {
+    "smallDesc": {
       "type": "text"
     },
     "img1": {
@@ -73,6 +73,9 @@
     "mens": {
       "type": "boolean",
       "required": true
+    },
+    "largeDesc": {
+      "type": "text"
     }
   }
 }
