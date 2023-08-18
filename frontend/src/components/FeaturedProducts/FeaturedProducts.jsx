@@ -7,7 +7,7 @@ import useFetch from '../../Hooks/useFetch'
 const FeaturedProducts = ({type}) => {
     const [mens, setMens] = useState(true)
     const {data, loading, error} = useFetch(`/products?populate=*&[filters][mens][$eq]=${mens ? true : false}&[filters][type][$eq]=${type}`)
-
+    
   return (
     <section className='featured-products'>
         <div className="title-wrapper">
