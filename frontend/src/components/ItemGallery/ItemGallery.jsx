@@ -5,11 +5,10 @@ import Card from '../Card/Card'
 import useFetch from '../../Hooks/useFetch'
 
 const ItemGallery = (props) => {
-    const [imageData, setImageData] = useState([])
-    const {data, loading, error} = useFetch(`/products?populate=*&[filters][mens][$eq]=${imageData === 'men' ? true : false}`)
+    const {data, loading, error} = useFetch(`/products?populate=*&[filters][mens][$eq]=${props.catId === 'men' ? true : false}`)
         
       useEffect(() => {
-        setImageData(props.catId);
+        // updates fetch call anytime the categoryID changes
       }, [props.catId]);
 
 
