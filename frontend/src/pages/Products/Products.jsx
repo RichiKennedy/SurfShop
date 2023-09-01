@@ -41,7 +41,7 @@ useEffect(() => {
     >
     <div className='products'>
       <div className="header">
-        <h3> New Arrivals</h3>
+        <h3> {`New Arrivals for ${catId}`} </h3>
       </div>
       <div 
       className="filter-wrapper"
@@ -59,8 +59,8 @@ useEffect(() => {
     <AnimatePresence>
         {openFilter && (
           <DropDownMenu
-            setOpen={() => setOpenFilter(false)} // Set openFilter to false when the filter dropdown is closed
-            isOpen={openFilter} // Use openFilter state as the isOpen prop
+            setOpen={() => setOpenFilter(false)} 
+            isOpen={openFilter} 
             isFilter={true}
             catId={catId}
           />

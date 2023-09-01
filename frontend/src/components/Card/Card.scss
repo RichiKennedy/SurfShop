@@ -83,7 +83,7 @@ border-top: 1px solid #555;
             padding-left: 5px;
             border-top: 1px solid #555;
             border-bottom: 1px solid #555;
-            color: white;
+            color: #FFF;
             transition: 0.2s ease-in-out;
 
             p {
@@ -92,7 +92,9 @@ border-top: 1px solid #555;
         }
         .info-bottom:hover {
             background-color: #000;
-            color: white;
+        }
+        .info-bottom:hover p {
+            color: #FFF;
         }
 
     }

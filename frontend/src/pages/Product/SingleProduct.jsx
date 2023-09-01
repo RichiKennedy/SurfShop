@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import './SingleProduct.scss'
+import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 
 
 const SingleProduct = () => {
@@ -18,7 +19,6 @@ const SingleProduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +40,8 @@ const SingleProduct = () => {
           });
           setHasCapturedCollision(false);
         }
+      } else {
+        console.log('error')
       }
     };
 
@@ -136,7 +138,7 @@ const images = [
     </div>
   </div>
     <div className="category-grid" ref={categoryGridRef}>
-    some other cool content
+      <FeaturedProducts type='recommended' />
     </div>
  </motion.div>
   )
