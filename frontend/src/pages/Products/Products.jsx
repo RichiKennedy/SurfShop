@@ -7,14 +7,19 @@ import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
 import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
+
 const Products = () => {
   const [openFilter, setOpenFilter] = useState(false);
+  const [selectedSubCats, setSelectedSubCats] = useState([])
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   })
-
   const catId = useParams().id
-
+  
+  const handleSelectedSubCatsChange = (newSelectedSubCats) => {
+    setSelectedSubCats(newSelectedSubCats);
+  }
+  
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {
@@ -54,7 +59,9 @@ useEffect(() => {
           </div>
           </Link> 
       </div>
-      <ItemGallery catId={catId} />
+      <ItemGallery 
+      catId={catId}
+      selectedSubCats={selectedSubCats}/>
     </div>
     <AnimatePresence>
         {openFilter && (
@@ -63,6 +70,8 @@ useEffect(() => {
             isOpen={openFilter} 
             isFilter={true}
             catId={catId}
+            selectedSubCats={selectedSubCats} 
+            onSelectedSubCatsChange={handleSelectedSubCatsChange} 
           />
         )}
       </AnimatePresence>

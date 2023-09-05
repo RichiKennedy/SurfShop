@@ -1,8 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Filter.scss'
+import useFetch from '../../Hooks/useFetch'
 
-const Filter = () => {
+const Filter = ({catId, selectedSubCats, onSelectedSubCatsChange}) => {
     const [sort, setSort] = useState(null)
+    const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][title][$eq]=${catId}`)
+    
+    const handleChange = (e) => {
+      const value = e.target.value;
+      const isChecked = e.target.checked;
+    
+      const updatedSelectedSubCats = isChecked
+      ? [...selectedSubCats, value]
+      : selectedSubCats.filter((item) => item !== value);
+
+    onSelectedSubCatsChange(updatedSelectedSubCats);
+  };
+
+   
   return (
      <div className="filter">
         <ul className="form-control-container">
@@ -22,55 +37,13 @@ const Filter = () => {
         </ul>
         
         <ul className="form-control-container">
-          <h6>type of product</h6>
-          <li className='form-control'>
-              <input type='radio' name='shoes' id='shoes'/>
-            <label htmlFor='shoes'> shoes </label>
+          <h6>type of product</h6> 
+          { data?.map((subCats) => (
+          <li className='form-control' id={subCats.id} key={subCats.id} >
+            <input type='checkbox' name='shoes' id={subCats.id} value={subCats.id} onChange={handleChange}/>
+            <label htmlFor={subCats.id}> {subCats.attributes.title} </label>
           </li>
-          <li className='form-control'>
-              <input type='radio' name='hats' id='hats'/>
-            <label htmlFor='hats'> hats </label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='jeans' id='jeans'/>
-            <label htmlFor='jeans'> jeans</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='outerwear' id='outerwear'/>
-            <label htmlFor='outerwear'> outerwear</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='knitwear' id='knitwear'/>
-            <label htmlFor='knitwear'> knitwear</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='sweatshirts' id='sweatshirts'/>
-            <label htmlFor='sweatshirts'> sweatshirts</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='shirts' id='shirts'/>
-            <label htmlFor='shirts'> shirts</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='t-shirts' id='t-shirts'/>
-            <label htmlFor='t-shirts'> t-shirts</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='trousers' id='trousers'/>
-            <label htmlFor='trousers'> trousers</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='shorts' id='shorts'/>
-            <label htmlFor='shorts'> shorts</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='bags' id='bags'/>
-            <label htmlFor='bags'> bags</label>
-          </li>
-          <li className='form-control'>
-              <input type='radio' name='jewellery' id='jewellery'/>
-            <label htmlFor='jewellery'> jewellery</label>
-          </li>
+          ))}
         </ul>
       </div> 
   )
