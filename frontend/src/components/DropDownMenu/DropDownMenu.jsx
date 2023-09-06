@@ -4,7 +4,7 @@ import {motion} from 'framer-motion'
 import Filter from '../Filter/Filter'
 import Cart from '../Cart/Cart'
 
-const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId, selectedSubCats, onSelectedSubCatsChange }) => {
+const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId, selectedSubCat, onselectedSubCatChange }) => {
 
 
   useEffect(() => {
@@ -53,8 +53,8 @@ const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId, selectedSubCats
       {isFilter && (
       <Filter 
       catId={catId}
-      selectedSubCats={selectedSubCats} 
-      onSelectedSubCatsChange={onSelectedSubCatsChange}/>
+      selectedSubCat={selectedSubCat} 
+      onselectedSubCatChange={onselectedSubCatChange}/>
       )}
       {isCart && (
         < Cart />

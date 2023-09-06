@@ -10,14 +10,14 @@ import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 const Products = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSubCats, setSelectedSubCats] = useState([])
+  const [selectedSubCat, setselectedSubCat] = useState([])
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   })
   const catId = useParams().id
   
-  const handleSelectedSubCatsChange = (newSelectedSubCats) => {
-    setSelectedSubCats(newSelectedSubCats);
+  const handleselectedSubCatChange = (newselectedSubCat) => {
+    setselectedSubCat(newselectedSubCat);
   }
   
 useEffect(() => {
@@ -61,7 +61,7 @@ useEffect(() => {
       </div>
       <ItemGallery 
       catId={catId}
-      selectedSubCats={selectedSubCats}/>
+      selectedSubCat={selectedSubCat}/>
     </div>
     <AnimatePresence>
         {openFilter && (
@@ -70,8 +70,8 @@ useEffect(() => {
             isOpen={openFilter} 
             isFilter={true}
             catId={catId}
-            selectedSubCats={selectedSubCats} 
-            onSelectedSubCatsChange={handleSelectedSubCatsChange} 
+            selectedSubCat={selectedSubCat} 
+            onselectedSubCatChange={handleselectedSubCatChange} 
           />
         )}
       </AnimatePresence>
