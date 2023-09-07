@@ -4,18 +4,26 @@ import {motion} from 'framer-motion'
 import Filter from '../Filter/Filter'
 import Cart from '../Cart/Cart'
 
-const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId, selectedSubCats, onSelectedSubCatsChange }) => {
+const DropDownMenu = (
+  {
+  setOpen, 
+  isOpen, 
+  isFilter, 
+  isCart, 
+  catId, 
+  selectedSubCat, 
+  onselectedSubCatChange,
+  amountOfProducts 
+}) => {
 
 
   useEffect(() => {
     if (!isOpen) {
-      // Call the setOpen function to set the state of the parent component (Navbar or Products) to false
       setOpen(false);
     }
   }, [isOpen, setOpen]);
 
   useEffect(() => {
-    // Add a useEffect to prevent scrolling when the dropdown is opened
     const handleScroll = (event) => {
       if (isOpen && (isFilter || isCart)) {
         event.preventDefault();
@@ -53,14 +61,14 @@ const DropDownMenu = ({setOpen, isOpen, isFilter, isCart, catId, selectedSubCats
       {isFilter && (
       <Filter 
       catId={catId}
-      selectedSubCats={selectedSubCats} 
-      onSelectedSubCatsChange={onSelectedSubCatsChange}/>
+      selectedSubCat={selectedSubCat} 
+      onselectedSubCatChange={onselectedSubCatChange}/>
       )}
       {isCart && (
         < Cart />
       )}
       <div className="filter-footer"> 
-        <button onClick={() => setOpen(!isOpen)}> {isCart ? 'checkout' : 'view items'} </button>
+        <button onClick={() => setOpen(!isOpen)}> {isCart ? 'checkout' : `view items (${amountOfProducts})`} </button>
       </div>
     </div>
   </motion.div>

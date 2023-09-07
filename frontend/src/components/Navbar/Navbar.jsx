@@ -61,8 +61,8 @@ const Navbar = () => {
       <AnimatePresence>
         {openCart && (
           <DropDownMenu
-            setOpen={() => setOpenCart(false)} // Set openCart to false when the cart dropdown is closed
-            isOpen={openCart} // Use openCart state as the isOpen prop
+            setOpen={() => setOpenCart(false)} 
+            isOpen={openCart} 
             isCart={true}
           />
         )}

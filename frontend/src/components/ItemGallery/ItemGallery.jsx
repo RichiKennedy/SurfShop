@@ -4,12 +4,16 @@ import './ItemGallery.scss'
 import Card from '../Card/Card'
 import useFetch from '../../Hooks/useFetch'
 
-const ItemGallery = ({catId, selectedSubCats }) => {
-
-    const subCategoryFilters = selectedSubCats.map(
-      (item) => `&filters[sub_categories][id][$eq]=${item}`);
-      const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${catId}${subCategoryFilters.join('')}`;
-      const {data, loading, error} = useFetch(filterQuery)
+const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts }) => {
+  const subCategoryFilter = !selectedSubCat ? '' : `&filters[sub_categories][id][$eq]=${selectedSubCat}`;
+  const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${catId}${subCategoryFilter}`;
+  const { data, loading, error } = useFetch(filterQuery);
+  
+  useEffect(() => {
+    if (!loading && data !== null) { // Add a check for data not being null
+      setAmountOfProducts(data.length);
+    }
+  }, [data, loading, setAmountOfProducts, catId]);
 
   return (
     <motion.div 
@@ -19,7 +23,7 @@ const ItemGallery = ({catId, selectedSubCats }) => {
       className='gallery-wrapper'> 
       { loading 
       ? 'loading'
-      : data 
+      : data
       ? (data.map((item) => <Card item={item} key={item.id} />)) 
       : (
         'No data available'
