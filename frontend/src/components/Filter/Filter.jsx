@@ -7,23 +7,11 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange}) => {
   const [sort, setSort] = useState(null)
   const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][title][$eq]=${catId}`)
 
-  //   const handleChange = (e) => {
-  //     const value = e.target.value;
-  //     const isChecked = e.target.checked;
-    
-  //     const updatedselectedSubCat = isChecked
-  //     ? [...selectedSubCat, value]
-  //     : selectedSubCat.filter((item) => item !== value);
-
-  //   onselectedSubCatChange(updatedselectedSubCat);
-  // };
-
   const handleRadioChange = (index) => {
     const selectedValue = data && data[index] ? data[index].id : '';
     onselectedSubCatChange(selectedValue);
   };
  
-console.log(selectedSubCat)
   return (
      <div className="filter">
         <ul className="form-control-container">
@@ -62,9 +50,9 @@ console.log(selectedSubCat)
             type='radio'
             name='subCategory'
             id='allProducts'
-            value='' // Set it to the default value
+            value=''
             onChange={() => handleRadioChange(-1)}
-            checked={!selectedSubCat} // Check if no sub-category is selected
+            checked={!selectedSubCat} 
           />
           <label htmlFor='allProducts'> All Products</label>
         </li>

@@ -10,7 +10,8 @@ import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 const Products = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSubCat, setselectedSubCat] = useState([])
+  const [selectedSubCat, setselectedSubCat] = useState('')
+  const [amountOfProducts, setAmountOfProducts] = useState(0)
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   })
@@ -19,7 +20,7 @@ const Products = () => {
   const handleselectedSubCatChange = (newselectedSubCat) => {
     setselectedSubCat(newselectedSubCat);
   }
-  
+
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {
@@ -37,6 +38,7 @@ useEffect(() => {
 
 useEffect(() => {
   window.scrollTo(0, 0)
+  setselectedSubCat('')
 },[catId])
   return (
     <motion.div
@@ -52,7 +54,7 @@ useEffect(() => {
       className="filter-wrapper"
       style={{position: cssStyles.position}}
       >
-        <div className="product-count"> <span>116</span> <span>items</span> </div>
+        <div className="product-count"> <span>{`items ( ${amountOfProducts} )`}</span> </div>
         <Link onClick={() => setOpenFilter(!openFilter)}> 
          <div className="filter">
           <h6> <FilterListOutlinedIcon className='filter-icon' /> filter </h6>
@@ -61,7 +63,8 @@ useEffect(() => {
       </div>
       <ItemGallery 
       catId={catId}
-      selectedSubCat={selectedSubCat}/>
+      selectedSubCat={selectedSubCat}
+      setAmountOfProducts={setAmountOfProducts}/>
     </div>
     <AnimatePresence>
         {openFilter && (
@@ -72,6 +75,7 @@ useEffect(() => {
             catId={catId}
             selectedSubCat={selectedSubCat} 
             onselectedSubCatChange={handleselectedSubCatChange} 
+            amountOfProducts={amountOfProducts}
           />
         )}
       </AnimatePresence>
