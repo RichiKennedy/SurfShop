@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import './DropDownMenu.scss'
-import {motion} from 'framer-motion'
-import Filter from '../Filter/Filter'
-import Cart from '../Cart/Cart'
+import React, { useEffect } from 'react';
+import './DropDownMenu.scss';
+import {motion} from 'framer-motion';
+import Filter from '../Filter/Filter';
+import Cart from '../Cart/Cart';
 
 const DropDownMenu = (
   {
@@ -13,7 +13,8 @@ const DropDownMenu = (
   catId, 
   selectedSubCat, 
   onselectedSubCatChange,
-  amountOfProducts 
+  amountOfProducts,
+  setSort
 }) => {
 
 
@@ -62,7 +63,8 @@ const DropDownMenu = (
       <Filter 
       catId={catId}
       selectedSubCat={selectedSubCat} 
-      onselectedSubCatChange={onselectedSubCatChange}/>
+      onselectedSubCatChange={onselectedSubCatChange}
+      setSort={setSort}/>
       )}
       {isCart && (
         < Cart />

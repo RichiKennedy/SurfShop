@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import './ItemGallery.scss'
-import Card from '../Card/Card'
-import useFetch from '../../Hooks/useFetch'
+import './ItemGallery.scss';
+import Card from '../Card/Card';
+import useFetch from '../../Hooks/useFetch';
 
-const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts }) => {
+const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts, sort }) => {
   const subCategoryFilter = !selectedSubCat ? '' : `&filters[sub_categories][id][$eq]=${selectedSubCat}`;
-  const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${catId}${subCategoryFilter}`;
-  const { data, loading, error } = useFetch(filterQuery);
+  const sortPriceFilter = !sort ? '' : `&sort=price:${sort}`;
+  const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${catId}${subCategoryFilter}${sortPriceFilter}`;
+  const { data, loading } = useFetch(filterQuery);
   
   useEffect(() => {
-    if (!loading && data !== null) { // Add a check for data not being null
+    if (!loading && data !== null) { 
       setAmountOfProducts(data.length);
     }
   }, [data, loading, setAmountOfProducts, catId]);
@@ -32,4 +33,4 @@ const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts }) => {
   );
 };
 
-export default ItemGallery
+export default ItemGallery;
