@@ -1,44 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import './Products.scss'
+import './Products.scss';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { Link, useParams } from 'react-router-dom';
-import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
+import DropDownMenu from '../../components/DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 
 const Products = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSubCat, setselectedSubCat] = useState('')
-  const [amountOfProducts, setAmountOfProducts] = useState(0)
+  const [selectedSubCat, setselectedSubCat] = useState('');
+  const [amountOfProducts, setAmountOfProducts] = useState(0);
+  const [sort, setSort] = useState('');
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
-  })
-  const catId = useParams().id
+  });
+  const catId = useParams().id;
   
   const handleselectedSubCatChange = (newselectedSubCat) => {
     setselectedSubCat(newselectedSubCat);
-  }
+  };
 
 useEffect(() => {
   const changePosition = () => {
     if (window.scrollY >= 150) {
       setCSSStyles({
         position: 'fixed',
-      })
+      });
     } else {
       setCSSStyles({
         position: 'relative',
-      })
+      });
     }
-  }
-  window.addEventListener('scroll', changePosition)
+  };
+  window.addEventListener('scroll', changePosition);
 })
 
 useEffect(() => {
-  window.scrollTo(0, 0)
-  setselectedSubCat('')
+  window.scrollTo(0, 0);
+},[selectedSubCat, sort])
+
+useEffect(() => {
+  window.scrollTo(0, 0);
+  setselectedSubCat('');
 },[catId])
   return (
     <motion.div
@@ -64,7 +69,8 @@ useEffect(() => {
       <ItemGallery 
       catId={catId}
       selectedSubCat={selectedSubCat}
-      setAmountOfProducts={setAmountOfProducts}/>
+      setAmountOfProducts={setAmountOfProducts}
+      sort={sort}/>
     </div>
     <AnimatePresence>
         {openFilter && (
@@ -76,6 +82,7 @@ useEffect(() => {
             selectedSubCat={selectedSubCat} 
             onselectedSubCatChange={handleselectedSubCatChange} 
             amountOfProducts={amountOfProducts}
+            setSort={setSort}
           />
         )}
       </AnimatePresence>
@@ -83,4 +90,4 @@ useEffect(() => {
   )
 }
 
-export default Products
+export default Products;
