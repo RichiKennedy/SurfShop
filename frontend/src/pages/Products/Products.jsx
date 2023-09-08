@@ -43,7 +43,8 @@ useEffect(() => {
 
 useEffect(() => {
   window.scrollTo(0, 0);
-  setselectedSubCat('');
+  setselectedSubCat('')
+  setSort('');
 },[catId])
   return (
     <motion.div

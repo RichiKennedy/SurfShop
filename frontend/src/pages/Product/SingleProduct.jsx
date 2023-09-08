@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import './SingleProduct.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
+import { useParams } from 'react-router-dom';
+import useFetch from '../../Hooks/useFetch';
 
 
 const SingleProduct = () => {
@@ -12,6 +14,10 @@ const SingleProduct = () => {
     position: 'fixed',
     bottom: 'unset',
   });
+  const productId = useParams().id
+  const product = `/products/${productId}?populate=*`;
+  const {data, loading, error} = useFetch(product)
+console.log(data)
 
   const leftElementRef = useRef(null);
   const categoryGridRef = useRef(null);
@@ -56,26 +62,26 @@ const SingleProduct = () => {
 
   
 
-const images = [
-  {
-    title: 'waterfall',
-    shortDesc: 'boxy graphic t-shirt',
-    price: 200,
-    longDesc: 'A hot off the press logo t-shirt. Melt into a premium-feel eco-friendly blend of recycled cotton and organic cotton jersey, featuring a melting style logo graphic. Cut in our boxy fit block, this t-shirt provides a relaxed fit and slightly shorter drop - size up for an oversized look. Pair back with some hemp denim for an easy-go-to fit.',
-    itemDetails: [
-      'Mens Boxy LogoT-Shirt',
-      'boxy fit',
-      'wide ribbed crew neck',
-      'Our model wears a size M and is 193cm tall.',
-      '50% Recycled Cotton 50% Organic Cotton Jersey Jersey Midweight, 200gsm',
-    ],
-    image1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
-    image2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
-    image3: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
-    image4: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
-  }
+// const images = [
+//   {
+//     title: 'waterfall',
+//     shortDesc: 'boxy graphic t-shirt',
+//     price: 200,
+//     longDesc: 'A hot off the press logo t-shirt. Melt into a premium-feel eco-friendly blend of recycled cotton and organic cotton jersey, featuring a melting style logo graphic. Cut in our boxy fit block, this t-shirt provides a relaxed fit and slightly shorter drop - size up for an oversized look. Pair back with some hemp denim for an easy-go-to fit.',
+//     itemDetails: [
+//       'Mens Boxy LogoT-Shirt',
+//       'boxy fit',
+//       'wide ribbed crew neck',
+//       'Our model wears a size M and is 193cm tall.',
+//       '50% Recycled Cotton 50% Organic Cotton Jersey Jersey Midweight, 200gsm',
+//     ],
+//     image1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
+//     image2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
+//     image3: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
+//     image4: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
+//   }
    
-];
+// ];
   
   return (
 <motion.div
@@ -84,17 +90,21 @@ const images = [
   animate={{ opacity: 1 }}
   exit={{ opacity: 0 }}
   >
-  <div className='singleProduct'>
+  { loading 
+  ? 'poducts loading' 
+  : (
+  <>
+   <div className='singleProduct'>
     <div className="left" ref={leftElementRef}
           style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
       <div className="title-wrapper">
-      <h1>{images[0].title}</h1>
+      <h1>{data?.attributes.title}</h1>
       </div>
       <div className="sub-title-wrapper">
-      <h2>{images[0].shortDesc}</h2>
+      <h2>{data?.attributes.smallDesc}</h2>
       </div>
       <div className="price-wrapper">
-      <h5 className='price'> {images[0].price} SEK </h5>
+      <h5 className='price'> {data?.attributes.price} SEK </h5>
       </div>
       <button className='add'>
         Add to bag +
@@ -103,18 +113,18 @@ const images = [
         <button onClick={() => setInfoOption(infoOption === 'description' ? null : 'description')}>description {infoOption === 'description' ? '-' : '+'}</button>
       </div>
       { infoOption ==='description' && <div className="description-wrapper">
-      <p>{images[0].longDesc}</p>
+      <p>{data?.attributes.largeDesc}</p>
       </div>}
       <div className="extra-info-wrapper">
         <button onClick={() => setInfoOption(infoOption === 'details' ? null : 'details')}>details {infoOption === 'details' ? '-' : '+'}</button>
       </div>
       { infoOption === 'details' && <div className="shipping-wrapper-info">
         <ul>
-        <li> {images[0].itemDetails[0]} </li>
-        <li> {images[0].itemDetails[1]} </li>
-        <li> {images[0].itemDetails[2]} </li>
-        <li> {images[0].itemDetails[3]} </li>
-        <li> {images[0].itemDetails[4]} </li>
+          <li> {data?.attributes?.desc1}</li>
+          <li> {data?.attributes?.desc2}</li>
+          <li> {data?.attributes?.desc3}</li>
+          <li> {data?.attributes?.desc4}</li>
+          <li> {data?.attributes?.desc5}</li>
         </ul>
       </div>}
       <div className="extra-info-wrapper">
@@ -131,12 +141,14 @@ const images = [
       </div>}
     </div>
     <div className="right">
-        <img src={images[0].image1} alt="" />
-        <img src={images[0].image2} alt="" />
-        <img src={images[0].image3} alt="" />
-        <img src={images[0].image4} alt="" />
+        <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img1?.data?.attributes.url} alt="" />
+        <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img2?.data?.attributes.url} alt="" />
+        <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img3?.data?.attributes.url} alt="" />
+        <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img4?.data?.attributes.url} alt="" />
     </div>
   </div>
+  </>
+  )}
     <div className="category-grid" ref={categoryGridRef}>
       <FeaturedProducts type='recommended' />
     </div>
