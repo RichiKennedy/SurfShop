@@ -76,6 +76,41 @@
     },
     "largeDesc": {
       "type": "text"
+    },
+    "desc1": {
+      "type": "string"
+    },
+    "desc2": {
+      "type": "string"
+    },
+    "desc3": {
+      "type": "string"
+    },
+    "desc4": {
+      "type": "string"
+    },
+    "desc5": {
+      "type": "string"
+    },
+    "img3": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "img4": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
