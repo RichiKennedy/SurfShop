@@ -8,27 +8,25 @@ import useFetch from '../../Hooks/useFetch';
 
 const SingleProduct = () => {
   const [infoOption, setInfoOption] = useState(null);
-  const [collisionPosition, setCollisionPosition] = useState(null); // To store the collision position
-  const [hasCapturedCollision, setHasCapturedCollision] = useState(false); // Flag to indicate collision capture
+  const [collisionPosition, setCollisionPosition] = useState(null); 
+  const [hasCapturedCollision, setHasCapturedCollision] = useState(false); 
   const [cssStyles, setCssStyles] = useState({
     position: 'fixed',
     bottom: 'unset',
   });
   const productId = useParams().id
   const product = `/products/${productId}?populate=*`;
-  const {data, loading, error} = useFetch(product)
-console.log(data)
-
+  const { data, loading, error } = useFetch(product);
   const leftElementRef = useRef(null);
   const categoryGridRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (leftElementRef.current && categoryGridRef.current) {
+      if (data && leftElementRef.current && categoryGridRef.current) {
         const leftBottom = leftElementRef.current.getBoundingClientRect().bottom;
         const categoryGridTop = categoryGridRef.current.getBoundingClientRect().top;
 
@@ -46,54 +44,31 @@ console.log(data)
           });
           setHasCapturedCollision(false);
         }
-      } else {
-        console.log('error')
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    if (data) {
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('resize', handleScroll);
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [collisionPosition, hasCapturedCollision]);
+  }, [data, collisionPosition, hasCapturedCollision]);
 
-  
-
-// const images = [
-//   {
-//     title: 'waterfall',
-//     shortDesc: 'boxy graphic t-shirt',
-//     price: 200,
-//     longDesc: 'A hot off the press logo t-shirt. Melt into a premium-feel eco-friendly blend of recycled cotton and organic cotton jersey, featuring a melting style logo graphic. Cut in our boxy fit block, this t-shirt provides a relaxed fit and slightly shorter drop - size up for an oversized look. Pair back with some hemp denim for an easy-go-to fit.',
-//     itemDetails: [
-//       'Mens Boxy LogoT-Shirt',
-//       'boxy fit',
-//       'wide ribbed crew neck',
-//       'Our model wears a size M and is 193cm tall.',
-//       '50% Recycled Cotton 50% Organic Cotton Jersey Jersey Midweight, 200gsm',
-//     ],
-//     image1: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112825.849_900x.png?v=1681349319',
-//     image2: 'https://afends.com/cdn/shop/products/NewProject-2023-04-13T112647.453_900x.png?v=1681349254',
-//     image3: 'https://afends.com/cdn/shop/products/M220000-BLK_0428_900x.jpg?v=1680658142',
-//     image4: 'https://afends.com/cdn/shop/products/AfendsMensWaterfall-LongSleeveShirt-White_0357_900x.png?v=1681799012',
-//   }
-   
-// ];
-  
   return (
+    <>
+    { loading 
+    ? 'poducts loading' 
+    : (
 <motion.div
   className='single-product-wrapper'
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   exit={{ opacity: 0 }}
   >
-  { loading 
-  ? 'poducts loading' 
-  : (
-  <>
    <div className='singleProduct'>
     <div className="left" ref={leftElementRef}
           style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
@@ -147,12 +122,12 @@ console.log(data)
         <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img4?.data?.attributes.url} alt="" />
     </div>
   </div>
-  </>
-  )}
     <div className="category-grid" ref={categoryGridRef}>
       <FeaturedProducts type='recommended' />
     </div>
  </motion.div>
+  )}
+  </>
   )
 }
 
