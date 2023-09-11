@@ -59,16 +59,16 @@ const SingleProduct = () => {
   }, [data, collisionPosition, hasCapturedCollision]);
 
   return (
-    <>
+    <motion.div
+    className='single-product-wrapper'
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    >
     { loading 
     ? 'poducts loading' 
     : (
-<motion.div
-  className='single-product-wrapper'
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  exit={{ opacity: 0 }}
-  >
+      <>
    <div className='singleProduct'>
     <div className="left" ref={leftElementRef}
           style={{ position: cssStyles.position, bottom: cssStyles.bottom }} >
@@ -122,12 +122,12 @@ const SingleProduct = () => {
         <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img4?.data?.attributes.url} alt="" />
     </div>
   </div>
+  </>
+  )}
     <div className="category-grid" ref={categoryGridRef}>
       <FeaturedProducts type='recommended' />
     </div>
  </motion.div>
-  )}
-  </>
   )
 }
 
