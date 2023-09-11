@@ -5,6 +5,7 @@ Welcome to the Fashion House Ecommerce Website repository! This project aims to 
 ## Technologies Used
 
 - **React**: A popular frontend JavaScript library for building user interfaces.
+- **Redux**: An open-source JavaScript library for managing and centralizing application state.
 - **Strapi**: A powerful headless CMS (Content Management System) for managing content and products.
 - **SCSS**: A CSS preprocessor that enhances the styling capabilities of the website.
 
