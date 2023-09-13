@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import './SingleProduct.scss'
+import '../../components/Cart/Cart.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import { useParams } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Redux/cartReducer';
 
 
 const SingleProduct = () => {
@@ -14,11 +17,12 @@ const SingleProduct = () => {
     position: 'fixed',
     bottom: 'unset',
   });
-  const productId = useParams().id
+  const productId = useParams().id;
   const product = `/products/${productId}?populate=*`;
-  const { data, loading, error } = useFetch(product);
+  const { data, loading } = useFetch(product);
   const leftElementRef = useRef(null);
   const categoryGridRef = useRef(null);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -81,8 +85,16 @@ const SingleProduct = () => {
       <div className="price-wrapper">
       <h5 className='price'> {data?.attributes.price} SEK </h5>
       </div>
-      <button className='add'>
-        Add to bag +
+      <button className='add' onClick={() => dispatch(addToCart(
+        {
+        id: data?.id,
+        title: data?.attributes?.title,
+        desc: data?.attributes?.smallDesc,
+        price: data?.attributes?.price,
+        img: data?.attributes?.img1.data.attributes.url
+        }
+      ))}>
+        add to bag +
         </button>
       <div className="extra-info-wrapper">
         <button onClick={() => setInfoOption(infoOption === 'description' ? null : 'description')}>description {infoOption === 'description' ? '-' : '+'}</button>

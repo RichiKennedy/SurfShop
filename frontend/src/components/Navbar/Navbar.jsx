@@ -6,14 +6,31 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import Dropdown from './NewNav/Dropdown';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
+  const [isNewProductAdded, setIsNewProductAdded] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     backgroundColor: '#FFF',
     color: 'rgba(19, 19, 19, 100)',
   })
-  
+  const products = useSelector(state => state.cart.products)
+  useEffect(() => {
+    if (products.length > 0) {
+      setIsNewProductAdded(true); // Set flag when a new product is added
+      setOpenCart(true); // Open the cart
+      
+      // Set a timer to close the cart after 5 seconds (5000 milliseconds)
+      const timer = setTimeout(() => {
+        setOpenCart(false);
+        setIsNewProductAdded(false);
+      }, 5000);
+      
+      // Clean up the timer when the component unmounts
+      return () => clearTimeout(timer);
+    }
+  }, [products]);
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 1) {
@@ -53,7 +70,9 @@ const Navbar = () => {
           <section className='right'>
           <Link className="icon-button" onClick={() => setOpenCart(true)}>
             <ShoppingBagOutlinedIcon />
-            <span>2</span>
+            {products.length >= 1 
+            ? <span>{products.length}</span>
+            : null}
           </Link>
           <Dropdown />
         </section>
