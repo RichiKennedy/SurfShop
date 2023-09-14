@@ -5,11 +5,13 @@ import '../../components/Cart/Cart.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import { useParams } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/cartReducer';
+import { useAppContext } from '../../Context/cartContext';
 
 
 const SingleProduct = () => {
+  const { setIsNewProductAdded } = useAppContext()
   const [infoOption, setInfoOption] = useState(null);
   const [collisionPosition, setCollisionPosition] = useState(null); 
   const [hasCapturedCollision, setHasCapturedCollision] = useState(false); 
@@ -85,17 +87,23 @@ const SingleProduct = () => {
       <div className="price-wrapper">
       <h5 className='price'> {data?.attributes.price} SEK </h5>
       </div>
-      <button className='add' onClick={() => dispatch(addToCart(
-        {
+      <button
+  className='add'
+  onClick={() => {
+    setIsNewProductAdded(true);
+    dispatch(
+      addToCart({
         id: data?.id,
         title: data?.attributes?.title,
         desc: data?.attributes?.smallDesc,
         price: data?.attributes?.price,
-        img: data?.attributes?.img1.data.attributes.url
-        }
-      ))}>
-        add to bag +
-        </button>
+        img: data?.attributes?.img1.data.attributes.url,
+      })
+    );
+  }}
+>
+  add to bag +
+</button>
       <div className="extra-info-wrapper">
         <button onClick={() => setInfoOption(infoOption === 'description' ? null : 'description')}>description {infoOption === 'description' ? '-' : '+'}</button>
       </div>
