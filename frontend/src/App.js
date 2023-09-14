@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import './app.scss'
 import Dropdown from "./components/Navbar/NewNav/Dropdown";
 import { AnimatePresence } from "framer-motion";
+import { AppProvider } from "./Context/cartContext";
 
 
 
@@ -53,7 +54,9 @@ function App() {
   return (
     <div className="app">
       <AnimatePresence>
-     <RouterProvider router={router} />
+        <AppProvider>
+          <RouterProvider router={router} />
+        </AppProvider>
       </AnimatePresence>
     </div>
   );
