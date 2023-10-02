@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Cart.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {removeItem, incrementItemQuantity, decrementItemQuantity} from '../../Redux/cartReducer'
