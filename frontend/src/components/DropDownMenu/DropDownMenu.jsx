@@ -3,6 +3,9 @@ import './DropDownMenu.scss';
 import {motion} from 'framer-motion';
 import Filter from '../Filter/Filter';
 import Cart from '../Cart/Cart';
+import {loadStripe} from '@stripe/stripe-js';
+import { makeRequest } from '../../makeRequest';
+import { useSelector } from 'react-redux';
 
 const DropDownMenu = (
   {
@@ -16,7 +19,8 @@ const DropDownMenu = (
   amountOfProducts,
   setSort
 }) => {
-
+  const products = useSelector(state => state.cart.products);
+  const stripePromise = loadStripe('pk_test_51MO5P6KAt5kWRJ4QLUIg82OJN4TK1SJuontYgyO5i7BDsEVGAl810bNG4IHln5nFLKuwM7J4k8kN2hwvLeFRnxjg002w5viYYu');
 
   useEffect(() => {
     if (!isOpen) {
@@ -40,7 +44,23 @@ const DropDownMenu = (
       document.body.style.overflow = 'auto';
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isOpen, isFilter, isCart]);
+  }, [isOpen, isFilter, isCart]); 
+
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+      const res = await makeRequest.post('/orders', {
+        products,
+      });
+
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id
+      }); 
+
+    } catch(err) {
+      console.log(err)
+    }
+  }
   
   return (
     <>
@@ -70,7 +90,9 @@ const DropDownMenu = (
         < Cart />
       )}
       <div className="filter-footer"> 
-        <button onClick={() => setOpen(!isOpen)}> {isCart ? 'checkout' : `view items (${amountOfProducts})`} </button>
+      {isCart 
+      ? <button onClick={handlePayment}> checkout </button>
+      : <button onClick={() => setOpen(!isOpen)}> {`view items (${amountOfProducts})`} </button>}
       </div>
     </div>
   </motion.div>

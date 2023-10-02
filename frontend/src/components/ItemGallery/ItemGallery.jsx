@@ -22,9 +22,7 @@ const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts, sort }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className='gallery-wrapper'> 
-      { loading 
-      ? 'loading'
-      : data
+      { loading ? 'loading': data
       ? (data.map((item) => <Card item={item} key={item.id} />)) 
       : (
         'No data available'
