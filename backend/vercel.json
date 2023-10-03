@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "surfshop",
     "builds": [
       {
         "src": "index.js", 
