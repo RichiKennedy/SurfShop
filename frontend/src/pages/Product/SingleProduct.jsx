@@ -15,6 +15,9 @@ const SingleProduct = () => {
   const [infoOption, setInfoOption] = useState(null);
   const [collisionPosition, setCollisionPosition] = useState(null); 
   const [hasCapturedCollision, setHasCapturedCollision] = useState(false); 
+  const [recommendedCat, setRecommendedCat] = useState('' || null);
+  const [gender, setGender] = useState('' || null);
+  const [isLoading, setIsLoading] = useState(true);
   const [cssStyles, setCssStyles] = useState({
     position: 'fixed',
     bottom: 'unset',
@@ -28,8 +31,17 @@ const SingleProduct = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
 
+    if (!loading && data) {
+      console.log('not loading, data exists', data)
+      setRecommendedCat(data?.attributes.sub_categories.data[0].id)
+      setGender(data?.attributes.categories.data[0].id)
+      setIsLoading(false);
+    } else if (loading && !data) {
+      console.log('still loading... no data')
+    }
+  }, [data, loading]);
+  console.log('data', data)
   useEffect(() => {
     const handleScroll = () => {
       if (data && leftElementRef.current && categoryGridRef.current) {
@@ -71,7 +83,7 @@ const SingleProduct = () => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     >
-    { loading 
+    { isLoading 
     ? 'poducts loading' 
     : (
       <>
@@ -145,7 +157,7 @@ const SingleProduct = () => {
   </>
   )}
     <div className="category-grid" ref={categoryGridRef}>
-      <FeaturedProducts type='recommended' />
+      <FeaturedProducts type='recommended' recommendedCat={recommendedCat} gender={gender}/>
     </div>
  </motion.div>
   )
