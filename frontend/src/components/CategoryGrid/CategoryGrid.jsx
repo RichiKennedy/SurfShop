@@ -6,7 +6,7 @@ const CategoryGrid = () => {
   return (
     <section className='category-grid-wrapper'>
             <div className="col">
-                    <Link className="row" to="/products/1" >
+                    <Link className="row" to="/products/accessories" >
                         <img src='https://afends.com/cdn/shop/products/NewProject-2023-03-14T091610.597_900x.png?v=1678745789' alt='accessories' />
                         <div className="overlay">
                           <h3>Accessories</h3>
