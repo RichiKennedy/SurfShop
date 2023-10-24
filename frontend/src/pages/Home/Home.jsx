@@ -20,7 +20,6 @@ const Home = () => {
       <CategoryHero />
       <FeaturedProducts type='new collection' />
       <CategoryGrid />
-      <FeaturedProducts type='recommended'/>
     </motion.div>
   )
 }
