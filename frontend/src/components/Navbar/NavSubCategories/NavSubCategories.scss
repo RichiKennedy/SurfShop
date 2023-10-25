@@ -1,0 +1,36 @@
+.subCatMenuWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50.5px;
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+
+    .subCat-overlay {
+        background-color: rgba(0, 0, 0, 0.4);
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+
+    }
+    .subCat-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    .subCatMenu {
+        display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          top: 0;
+          right: 0;
+          width: 100%;
+          z-index: 9999;
+          position: absolute;
+          height: 400px;
+          background-color: #FFF;
+          color: #000;
+    }
+}
