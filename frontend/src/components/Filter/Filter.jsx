@@ -15,12 +15,6 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
      <div className="filter">
         <ul className="form-control-container">
           <h6>sort by</h6>
-          {/* POSSIBLE FILTER START */}
-          {/* <li className='form-control'>
-              <input type='radio' name='sort-by' id='Newest'/>
-            <label htmlFor='Newest'> Newest</label>
-          </li> */}
-          {/* POSSIBLE FILTER ENDS*/}
           <li className='form-control'>
               <input type='radio' value='lowToHigh' name='sort-by' id='lowToHigh'onChange={e => setSort('asc') } />
             <label htmlFor='asc'> Price (Low to High)</label>
