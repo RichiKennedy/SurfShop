@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fits",
+  "info": {
+    "singularName": "fit",
+    "pluralName": "fits",
+    "displayName": "fit",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sub_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sub-category.sub-category",
+      "inversedBy": "fits"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "fits"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

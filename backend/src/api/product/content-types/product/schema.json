@@ -93,24 +93,32 @@
       "type": "string"
     },
     "img3": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "img4": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "fits": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::fit.fit",
+      "mappedBy": "products"
     }
   }
 }

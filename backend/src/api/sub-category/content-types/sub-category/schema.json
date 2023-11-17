@@ -26,6 +26,12 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "sub_categories"
+    },
+    "fits": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::fit.fit",
+      "mappedBy": "sub_categories"
     }
   }
 }
