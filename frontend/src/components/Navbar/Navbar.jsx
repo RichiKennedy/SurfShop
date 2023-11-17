@@ -13,7 +13,7 @@ import NavSubCategories from './NavSubCategories/NavSubCategories';
 
 const Navbar = () => {
   const { openCart, setOpenCart } = useAppContext();
-  const [navCatId, setNavCatId] = useState(null);
+  const [selectedCategory, setselectedCategory] = useState(null);
   const [openSubMenu, setOpenSubMenu] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     backgroundColor: '#FFF',
@@ -22,7 +22,6 @@ const Navbar = () => {
 
   const products = useSelector(state => state.cart.products)
   const {data} = useFetch(`/categories?[filters][categories][title]`);
-  console.log('data nav', data)
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 1) {
@@ -41,10 +40,10 @@ const Navbar = () => {
   }, [])
 
   const handleCategoryClick = (categoryId) => {
-    setNavCatId(categoryId);
+    setselectedCategory(categoryId);
     setOpenSubMenu(true)
   }
-  console.log('navCatId', navCatId)
+
   return (
     <>
     <nav className='navbar'     
@@ -57,8 +56,7 @@ const Navbar = () => {
               <div className='item' key={category.id}>
               <Link 
               className='link' 
-              onClick={() => handleCategoryClick(category.id)}
-              to={`/products/${category.attributes.title}`}> 
+              onClick={() => handleCategoryClick(category.attributes.title)}> 
               {category.attributes.title} 
               </Link>
           </div>
@@ -91,7 +89,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </nav>
-    {openSubMenu && <NavSubCategories setOpenSubMenu={setOpenSubMenu} openSubMenu={openSubMenu} />}
+    {openSubMenu && <NavSubCategories selectedCategory={selectedCategory} setOpenSubMenu={setOpenSubMenu} openSubMenu={openSubMenu} />}
     </>
   )
 }

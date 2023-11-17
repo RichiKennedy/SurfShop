@@ -4,17 +4,17 @@ import './ItemGallery.scss';
 import Card from '../Card/Card';
 import useFetch from '../../Hooks/useFetch';
 
-const ItemGallery = ({catId, selectedSubCat, setAmountOfProducts, sort }) => {
-  const subCategoryFilter = !selectedSubCat ? '' : `&filters[sub_categories][id][$eq]=${selectedSubCat}`;
+const ItemGallery = ({category, subCategory, setAmountOfProducts, sort, selectedSubCat }) => {
+  const subCategoryFilter = subCategory === 'view-all' ? '' : `&filters[sub_categories][title][$eq]=${subCategory}`;
   const sortPriceFilter = !sort ? '' : `&sort=price:${sort}`;
-  const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${catId}${subCategoryFilter}${sortPriceFilter}`;
+  const filterQuery = `/products?populate=*&filters[categories][title][$eq]=${category}${subCategoryFilter}${sortPriceFilter}`;
   const { data, loading } = useFetch(filterQuery);
-  
+console.log('item gallery data =', data)
   useEffect(() => {
     if (!loading && data !== null) { 
       setAmountOfProducts(data.length);
     }
-  }, [data, loading, setAmountOfProducts, catId]);
+  }, [data, loading, setAmountOfProducts, category, subCategory]);
 
   return (
     <motion.div 

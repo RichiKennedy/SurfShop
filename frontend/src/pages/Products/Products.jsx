@@ -9,18 +9,21 @@ import ItemGallery from '../../components/ItemGallery/ItemGallery';
 
 
 const Products = () => {
+  const { category, subCategory, fit } = useParams();
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSubCat, setselectedSubCat] = useState('');
+  const [selectedSubCat, setselectedSubCat] = useState(fit ? fit : subCategory);
+  const [selectedFit, setSelectedFit] = useState(''); 
   const [amountOfProducts, setAmountOfProducts] = useState(0);
   const [sort, setSort] = useState('');
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   });
-  const catId = useParams().id;
   
   const handleselectedSubCatChange = (newselectedSubCat) => {
     setselectedSubCat(newselectedSubCat);
   };
+
+console.log('selected subcat =', selectedSubCat)
 
 useEffect(() => {
   const changePosition = () => {
@@ -45,7 +48,7 @@ useEffect(() => {
   window.scrollTo(0, 0);
   setselectedSubCat('')
   setSort('');
-},[catId])
+},[category, subCategory])
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -54,7 +57,7 @@ useEffect(() => {
     >
     <div className='products'>
       <div className="header">
-        <h3> {`New Arrivals for ${catId}`} </h3>
+        <h3> {`${category}'s ${subCategory}`} </h3>
       </div>
       <div 
       className="filter-wrapper"
@@ -68,9 +71,11 @@ useEffect(() => {
           </Link> 
       </div>
       <ItemGallery 
-      catId={catId}
-      selectedSubCat={selectedSubCat}
+      category={category}
+      subCategory={subCategory}
       setAmountOfProducts={setAmountOfProducts}
+      selectedFit={selectedFit}
+      selectedSubCat={selectedSubCat}
       sort={sort}/>
     </div>
     <AnimatePresence>
@@ -79,9 +84,11 @@ useEffect(() => {
             setOpen={() => setOpenFilter(false)} 
             isOpen={openFilter} 
             isFilter={true}
-            catId={catId}
-            selectedSubCat={selectedSubCat} 
+            category={category}
+            subCategory={subCategory}
+            selectedSubCat={selectedSubCat}
             onselectedSubCatChange={handleselectedSubCatChange} 
+            setSelectedFit={setSelectedFit}
             amountOfProducts={amountOfProducts}
             setSort={setSort}
           />

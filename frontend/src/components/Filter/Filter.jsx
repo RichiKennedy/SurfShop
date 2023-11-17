@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Filter.scss';
 import useFetch from '../../Hooks/useFetch';
+import { useParams } from 'react-router-dom';
 
 
-const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
-  const {data} = useFetch(`/sub-categories?[filters][categories][title][$eq]=${catId}`);
+const Filter = ({ onselectedSubCatChange, setSort, selectedSubCat }) => {
+  const { category, subCategory } = useParams();
+  const viewAllSubCats = `/sub-categories?[filters][categories][title][$eq]=${category}`;
+  const subCatFit = `/fits?[filters][sub_categories][title][$eq]=${subCategory}`;
+  const isViewAll = subCategory === 'view-all';
+  const apiUrl = isViewAll ? viewAllSubCats : subCatFit;
 
+  const { data: smallSubCat } = useFetch(apiUrl);
+  useEffect(() => {
+    console.log('Fetching data from API:', apiUrl);
+  }, [apiUrl]);
+  
+  console.log('smallSubCat', smallSubCat)
   const handleRadioChange = (index) => {
-    const selectedValue = data && data[index] ? data[index].id : '';
+    const selectedValue = smallSubCat && smallSubCat[index] ? smallSubCat[index].attributes.title : '';
     onselectedSubCatChange(selectedValue);
   };
  
@@ -27,7 +38,7 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
         
         <ul className="form-control-container">
         <h6>type of product</h6>
-        {data?.map((subCats, index) => (
+        {smallSubCat?.map((subCats, index) => (
           <li className='form-control' id={subCats.id} key={subCats.id}>
             <input
               type='radio'
@@ -35,7 +46,7 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
               id={subCats.id}
               value={subCats.id}
               onChange={() => handleRadioChange(index)}
-              checked={selectedSubCat === subCats.id}
+              checked={subCategory === subCats.attributes.title}
             />
             <label htmlFor={subCats.attributes.title}> {subCats.attributes.title} </label>
           </li>
@@ -47,7 +58,7 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
             id='allProducts'
             value=''
             onChange={() => handleRadioChange(-1)}
-            checked={!selectedSubCat} 
+            checked={!subCategory} 
           />
           <label htmlFor='allProducts'> All Products</label>
         </li>
@@ -55,5 +66,4 @@ const Filter = ({catId, selectedSubCat, onselectedSubCatChange, setSort}) => {
       </div> 
   )
 }
-
 export default Filter;
