@@ -10,10 +10,11 @@ import { useSelector } from 'react-redux';
 import { useAppContext } from '../../Context/cartContext';
 import useFetch from '../../Hooks/useFetch';
 import NavSubCategories from './NavSubCategories/NavSubCategories';
+import { useFilterContext } from '../../Context/filterContext';
 
 const Navbar = () => {
+  const { setSelectedCategory } = useFilterContext()
   const { openCart, setOpenCart } = useAppContext();
-  const [selectedCategory, setselectedCategory] = useState(null);
   const [openSubMenu, setOpenSubMenu] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     backgroundColor: '#FFF',
@@ -40,8 +41,8 @@ const Navbar = () => {
   }, [])
 
   const handleCategoryClick = (categoryId) => {
-    setselectedCategory(categoryId);
-    setOpenSubMenu(true)
+    setSelectedCategory(categoryId);
+    setOpenSubMenu(true);
   }
 
   return (
@@ -89,7 +90,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </nav>
-    {openSubMenu && <NavSubCategories selectedCategory={selectedCategory} setOpenSubMenu={setOpenSubMenu} openSubMenu={openSubMenu} />}
+    {openSubMenu && <NavSubCategories setOpenSubMenu={setOpenSubMenu} openSubMenu={openSubMenu} />}
     </>
   )
 }

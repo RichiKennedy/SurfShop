@@ -1,29 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Products.scss';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
+import { useFilterContext } from '../../Context/filterContext';
 
 
 const Products = () => {
-  const { category, subCategory, fit } = useParams();
+  const { category } = useParams();
+  const navigate = useNavigate();
+  const {
+    setShouldNavigate,
+    shouldNavigate,
+    selectedCategory,
+    selectedSubCat,
+    setSelectedSubCat,
+    selectedFit,
+    setSelectedFit,
+    sort,
+    setSort,
+  } = useFilterContext();
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSubCat, setselectedSubCat] = useState(fit ? fit : subCategory);
-  const [selectedFit, setSelectedFit] = useState(''); 
   const [amountOfProducts, setAmountOfProducts] = useState(0);
-  const [sort, setSort] = useState('');
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
   });
-  
-  const handleselectedSubCatChange = (newselectedSubCat) => {
-    setselectedSubCat(newselectedSubCat);
-  };
-
-console.log('selected subcat =', selectedSubCat)
 
 useEffect(() => {
   const changePosition = () => {
@@ -42,13 +47,81 @@ useEffect(() => {
 
 useEffect(() => {
   window.scrollTo(0, 0);
-},[selectedSubCat, sort])
+},[selectedCategory, selectedSubCat, selectedFit, sort])
 
 useEffect(() => {
   window.scrollTo(0, 0);
-  setselectedSubCat('')
   setSort('');
-},[category, subCategory])
+},[]);
+
+const navigateToCategory = () => {
+  setSelectedFit('');
+  setSelectedSubCat('');
+  setShouldNavigate(true);
+}
+const navigateToSubCategory = () => {
+  setSelectedFit('');
+  setShouldNavigate(true);
+}
+
+const navigateIfNeeded = () => {
+  if (shouldNavigate) {
+    let path = `/products/${selectedCategory}`
+
+    if (selectedSubCat) {
+      path += `/${selectedSubCat}`;
+      if (selectedFit) {
+        const encodedFit = selectedFit.replace(/\s/g, '-');
+        path += `/${encodedFit}`;
+      }
+    };
+
+    navigate(path);
+
+    setShouldNavigate(false);
+  }
+};
+
+useEffect(() => {
+  navigateIfNeeded()
+}, [shouldNavigate])
+
+const generateHeaderText = () => {
+  if (selectedCategory === category && !selectedSubCat) {
+    return category !== 'accessories'
+    ? `${category}'s collection`
+    : `${category}`
+
+  } else if (selectedSubCat && !selectedFit) {
+    return (
+      <>
+        <Link
+        onClick={() => navigateToCategory()}>
+           {category}'s collection
+           {' / '}
+        </Link>
+          {selectedSubCat}
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Link
+        onClick={() => navigateToCategory()}>
+           {category}'s collection
+        {` / `}
+        </Link>
+        <Link
+        onClick={() => navigateToSubCategory()}>
+          {selectedSubCat}
+        {` / `}
+        </Link>
+        {selectedFit}
+      </>
+    );
+  }
+};
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -57,7 +130,7 @@ useEffect(() => {
     >
     <div className='products'>
       <div className="header">
-        <h3> {`${category}'s ${subCategory}`} </h3>
+        <h3> {generateHeaderText()} </h3>
       </div>
       <div 
       className="filter-wrapper"
@@ -71,12 +144,7 @@ useEffect(() => {
           </Link> 
       </div>
       <ItemGallery 
-      category={category}
-      subCategory={subCategory}
-      setAmountOfProducts={setAmountOfProducts}
-      selectedFit={selectedFit}
-      selectedSubCat={selectedSubCat}
-      sort={sort}/>
+      setAmountOfProducts={setAmountOfProducts}/>
     </div>
     <AnimatePresence>
         {openFilter && (
@@ -84,13 +152,7 @@ useEffect(() => {
             setOpen={() => setOpenFilter(false)} 
             isOpen={openFilter} 
             isFilter={true}
-            category={category}
-            subCategory={subCategory}
-            selectedSubCat={selectedSubCat}
-            onselectedSubCatChange={handleselectedSubCatChange} 
-            setSelectedFit={setSelectedFit}
             amountOfProducts={amountOfProducts}
-            setSort={setSort}
           />
         )}
       </AnimatePresence>

@@ -12,6 +12,7 @@ import './app.scss'
 import Dropdown from "./components/Navbar/NewNav/Dropdown";
 import { AnimatePresence } from "framer-motion";
 import { AppProvider } from "./Context/cartContext";
+import { FilterProvider } from './Context/filterContext'
 
 
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "/products/:category/:subCategory",
+        path: "/products/:category/:subCategory?/:fit?",
         element: <Products />
       },
       {
@@ -55,7 +56,9 @@ function App() {
     <div className="app">
       <AnimatePresence>
         <AppProvider>
+          <FilterProvider>
           <RouterProvider router={router} />
+          </FilterProvider>
         </AppProvider>
       </AnimatePresence>
     </div>

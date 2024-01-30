@@ -13,10 +13,7 @@ const DropDownMenu = (
   isOpen, 
   isFilter, 
   isCart, 
-  onselectedSubCatChange,
   amountOfProducts,
-  setSort,
-  selectedSubCat
 }) => {
   const products = useSelector(state => state.cart.products);
   const stripePromise = loadStripe('pk_test_51MO5P6KAt5kWRJ4QLUIg82OJN4TK1SJuontYgyO5i7BDsEVGAl810bNG4IHln5nFLKuwM7J4k8kN2hwvLeFRnxjg002w5viYYu');
@@ -79,10 +76,7 @@ const DropDownMenu = (
         </button>
       </div>
       {isFilter && (
-      <Filter 
-      onselectedSubCatChange={onselectedSubCatChange}
-      selectedSubCat={selectedSubCat}
-      setSort={setSort}/>
+      <Filter />
       )}
       {isCart && (
         < Cart />

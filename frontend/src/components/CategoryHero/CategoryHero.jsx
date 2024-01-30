@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import './CategoryHero.scss'
 import { Link } from 'react-router-dom'
