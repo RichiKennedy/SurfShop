@@ -5,7 +5,7 @@ import '../../components/Cart/Cart.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import { useParams } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Redux/cartReducer';
 import { useAppContext } from '../../Context/cartContext';
 

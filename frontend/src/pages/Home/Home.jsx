@@ -10,6 +10,7 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   },[])
+  
   return (
     <motion.div className='home'
       initial={{ opacity: 0 }}
