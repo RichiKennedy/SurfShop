@@ -1,12 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import './CategoryHero.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { debounce } from 'lodash'
+import { useFilterContext } from '../../Context/filterContext'
 
 
 const CategoryHero = () => {
-    const [offsetY, setOffsetY] = useState(0);
+  const { selectedCategory, setSelectedCategory, shouldNavigate, setShouldNavigate} = useFilterContext();
+  const [offsetY, setOffsetY] = useState(0);
+  const navigate = useNavigate();
+
+    const navigateToMens = () => {
+      setSelectedCategory('men');
+      setShouldNavigate(true);
+    }
+    const navigateToWomens = () => {
+      setSelectedCategory('women');
+      setShouldNavigate(true);
+    }
+
+    useEffect(() => {
+      if (shouldNavigate && selectedCategory) {
+        navigate(`/products/${selectedCategory}`);
+        setShouldNavigate(false);
+      }
+    })
 
     const handleScroll = debounce(() => {
         setOffsetY(window.scrollY);
@@ -27,7 +46,8 @@ const CategoryHero = () => {
 
   return (
     <section className='hero-wrapper'>
-        <Link className='link' to="/products/men">
+        <Link className='link'
+        onClick={() => navigateToMens()}>
         <div className="image-container" style={{ transform: `translateY(${offsetY * 0.4}px)` }}>
             <img 
             src={data[0]} 
@@ -39,7 +59,8 @@ const CategoryHero = () => {
             </div>
         </div>
         </Link>
-        <Link className='link' to="/products/women">
+        <Link className='link'
+        onClick={() => navigateToWomens()}>
         <div className="image-container" style={{ transform: `translateY(${offsetY * 0.4}px)` }}>
         <img 
         src={data[1]} 
