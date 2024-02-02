@@ -5,10 +5,14 @@ import './Home.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
 import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
+import { useFilterContext } from '../../Context/filterContext';
 
 const Home = () => {
+  const {setSelectedSubCat, setSelectedFit} = useFilterContext();
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    setSelectedSubCat('');
+    setSelectedFit('');
   },[])
   
   return (
