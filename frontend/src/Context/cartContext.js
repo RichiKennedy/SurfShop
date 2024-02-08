@@ -1,38 +1,29 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { createContext, useState, useContext } from 'react';
+import { toast } from 'react-toastify'
 
-const AppContext = createContext();
+const CartContext = createContext();
 
-export const AppProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
     const [openCart, setOpenCart] = useState(false);
     const [isNewProductAdded, setIsNewProductAdded] = useState(false);
-    const products = useSelector(state => state.cart.products)
 
-    useEffect(() => {
-        if (products.length > 0 && isNewProductAdded) {
-          setOpenCart(true);
-          
-          const timer = setTimeout(() => {
-            setIsNewProductAdded(false);
-          }, 1000);
-          
-          return () => clearTimeout(timer);
-        }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [products]);
+    const handleAddToCartMsg = (product) => {
+        toast.success(`Added ${product.attributes.smallDesc} to the cart!`)
+    }
 
   return (
-    <AppContext.Provider value={{ 
+    <CartContext.Provider value={{ 
         openCart, 
         setOpenCart,
         isNewProductAdded,
         setIsNewProductAdded,
+        handleAddToCartMsg
         }}>
       {children}
-    </AppContext.Provider>
+    </CartContext.Provider>
   );
 };
 
-export const useAppContext = () => {
-  return useContext(AppContext);
+export const useCartContext = () => {
+  return useContext(CartContext);
 };

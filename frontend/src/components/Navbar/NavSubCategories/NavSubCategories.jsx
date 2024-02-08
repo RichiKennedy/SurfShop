@@ -28,11 +28,9 @@ const NavSubCategories = ({ setOpenSubMenu, openSubMenu}) => {
   }, [openSubMenu]); 
 
   useEffect(() => {
-    console.log('use effect running');
   
     if (selectedCategory && shouldNavigate) {
       if (!selectedSubCat) {
-        console.log('should Navigate must be true = ', shouldNavigate);
         navigate(`/products/${selectedCategory}`);
         setShouldNavigate(false);
         setOpenSubMenu(!openSubMenu)
@@ -86,7 +84,6 @@ const NavSubCategories = ({ setOpenSubMenu, openSubMenu}) => {
     key={subCats.id}
     className='link'
     onClick={() => handleSubCategoryClick(subCats?.attributes.title)}
-    // to={`/products/${selectedCategory}/${subCats?.attributes.title}`}
   >
     {subCats?.attributes.title}
   </Link>

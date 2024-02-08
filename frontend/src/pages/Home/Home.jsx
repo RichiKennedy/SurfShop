@@ -13,6 +13,9 @@ const Home = () => {
     window.scrollTo(0, 0);
     setSelectedSubCat('');
     setSelectedFit('');
+
+    // ONLY WANT THIS TO RUN WHEN HOME PAGE IS OPENED NO NEED FOR DEPENDENCIES
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
   return (
