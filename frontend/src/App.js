@@ -11,8 +11,10 @@ import Footer from "./components/Footer/Footer";
 import './app.scss'
 import Dropdown from "./components/Navbar/NewNav/Dropdown";
 import { AnimatePresence } from "framer-motion";
-import { AppProvider } from "./Context/cartContext";
+import { CartProvider } from "./Context/cartContext";
 import { FilterProvider } from './Context/filterContext'
+import { ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
@@ -55,11 +57,12 @@ function App() {
   return (
     <div className="app">
       <AnimatePresence>
-        <AppProvider>
+        <CartProvider>
           <FilterProvider>
           <RouterProvider router={router} />
+          <ToastContainer />
           </FilterProvider>
-        </AppProvider>
+        </CartProvider>
       </AnimatePresence>
     </div>
   );

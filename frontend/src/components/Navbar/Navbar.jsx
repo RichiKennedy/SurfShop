@@ -7,14 +7,14 @@ import Dropdown from './NewNav/Dropdown';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
-import { useAppContext } from '../../Context/cartContext';
+import { useCartContext } from '../../Context/cartContext';
 import useFetch from '../../Hooks/useFetch';
 import NavSubCategories from './NavSubCategories/NavSubCategories';
 import { useFilterContext } from '../../Context/filterContext';
 
 const Navbar = () => {
   const { setSelectedCategory } = useFilterContext()
-  const { openCart, setOpenCart } = useAppContext();
+  const { openCart, setOpenCart } = useCartContext();
   const [openSubMenu, setOpenSubMenu] = useState(false);
   const [cssStyles, setCSSStyles] = useState({
     backgroundColor: '#FFF',

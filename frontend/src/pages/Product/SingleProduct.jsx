@@ -7,11 +7,11 @@ import { useParams } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Redux/cartReducer';
-import { useAppContext } from '../../Context/cartContext';
+import { useCartContext } from '../../Context/cartContext';
 
 
 const SingleProduct = () => {
-  const { setIsNewProductAdded } = useAppContext()
+  const { setIsNewProductAdded, handleAddToCartMsg } = useCartContext()
   const [infoOption, setInfoOption] = useState(null);
   const [collisionPosition, setCollisionPosition] = useState(null); 
   const [hasCapturedCollision, setHasCapturedCollision] = useState(false); 
@@ -31,17 +31,13 @@ const SingleProduct = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
     if (!loading && data) {
-      console.log('not loading, data exists', data)
       setRecommendedCat(data?.attributes.sub_categories.data[0].id)
       setGender(data?.attributes.categories.data[0].id)
       setIsLoading(false);
-    } else if (loading && !data) {
-      console.log('still loading... no data')
-    }
+    } 
   }, [data, loading]);
-  console.log('data', data)
+
   useEffect(() => {
     const handleScroll = () => {
       if (data && leftElementRef.current && categoryGridRef.current) {
@@ -112,6 +108,7 @@ const SingleProduct = () => {
         img: data?.attributes?.img1.data.attributes.url,
       })
     );
+    handleAddToCartMsg(data);
   }}
 >
   add to bag +

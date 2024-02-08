@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../Redux/cartReducer'
-import { useAppContext } from '../../Context/cartContext'
+import { useCartContext } from '../../Context/cartContext'
 
 
 const Card = ({item, pageType}) => {
-  const {setIsNewProductAdded} = useAppContext()
+  const {setIsNewProductAdded, handleAddToCartMsg} = useCartContext()
   const dispatch = useDispatch();
   return (
     <div className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}>
@@ -46,6 +46,8 @@ const Card = ({item, pageType}) => {
               img: item?.attributes?.img1.data.attributes.url,
             })
           );
+
+          handleAddToCartMsg(item);
         }}
       >
             <p>add to bag +</p>

@@ -41,6 +41,7 @@ const FeaturedProducts = ({ type, recommendedCat, gender }) => {
       navigate(`/products/${selectedCategory}`);
       setShouldNavigate(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldNavigate, selectedCategory])
   return (
     <section className="featured-products">
