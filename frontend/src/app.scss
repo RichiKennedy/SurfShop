@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  padding-top: 50px;
+}
 .app {
   min-height: 100vh;
   display: flex;
