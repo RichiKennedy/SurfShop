@@ -3,17 +3,16 @@ import React, { createContext, useContext, useState } from 'react';
 const FilterContext = createContext();
 
 export const FilterProvider = ({ children }) => {
-  const [shouldNavigate, setShouldNavigate] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedSubCat, setSelectedSubCat] = useState('');
   const [selectedFit, setSelectedFit] = useState('');
   const [sort, setSort] = useState('');
-
+  const [openFilter, setOpenFilter] = useState(false);
+  const [popUpMenuCategory, setPopUpMenuCategory] = useState(null);
+  const [productSelected, setProductSelected] = useState(false);
   return (
     <FilterContext.Provider
       value={{
-        shouldNavigate, 
-        setShouldNavigate,
         selectedCategory,
         setSelectedCategory,
         selectedSubCat,
@@ -22,6 +21,12 @@ export const FilterProvider = ({ children }) => {
         setSelectedFit,
         sort,
         setSort,
+        openFilter, 
+        setOpenFilter,
+        popUpMenuCategory, 
+        setPopUpMenuCategory,
+        productSelected, 
+        setProductSelected,
       }}
     >
       {children}

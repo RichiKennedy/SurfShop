@@ -9,7 +9,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::order.order', ({strapi}) => ({
   async create(ctx){
-    const { products } = ctx.request.body;
+    const { products, name, email } = ctx.request.body;
 
     const lineItems = products.map((product) => {
       return {
@@ -41,6 +41,8 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         data: {
           products,
           stripeId: session.id, 
+          email,
+          name,
         },
       });
 

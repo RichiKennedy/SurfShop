@@ -17,6 +17,24 @@
     },
     "products": {
       "type": "json"
+    },
+    "confirmedAt": {
+      "type": "datetime"
+    },
+    "email": {
+      "type": "email"
+    },
+    "name": {
+      "type": "string"
+    },
+    "shippedTo": {
+      "type": "json"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
     }
   }
 }

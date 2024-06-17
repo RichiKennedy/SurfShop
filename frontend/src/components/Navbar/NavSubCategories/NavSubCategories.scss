@@ -32,5 +32,23 @@
           height: 400px;
           background-color: #FFF;
           color: #000;
+
+          nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-transform: capitalize;
+          }
+
+          ul {
+            display: flex;
+
+              li {
+                cursor: pointer;
+                margin: 10px 10px;
+              }
+          }
+
     }
 }

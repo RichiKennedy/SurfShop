@@ -6,7 +6,7 @@ import useFetch from '../../Hooks/useFetch';
 import { useFilterContext } from '../../Context/filterContext';
 
 const FeaturedProducts = ({ type, recommendedCat, gender }) => {
-  const {selectedCategory, setSelectedCategory, shouldNavigate, setShouldNavigate} = useFilterContext();
+  const { selectedCategory, setSelectedCategory } = useFilterContext();
   const [recommendedProducts, setRecommendedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
   const [selectedCategoryTemp, setSelectedCategoryTemp] = useState('men');
@@ -33,16 +33,13 @@ const FeaturedProducts = ({ type, recommendedCat, gender }) => {
   }
   const navigateToCategory = () => {
     setSelectedCategory(selectedCategoryTemp);
-    setShouldNavigate(true)
   }
 
   useEffect(() => {
-    if (shouldNavigate && selectedCategory) {
+    if (selectedCategory) {
       navigate(`/products/${selectedCategory}`);
-      setShouldNavigate(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldNavigate, selectedCategory])
+  }, [ selectedCategory, navigate ])
   return (
     <section className="featured-products">
       <div className="title-wrapper">
