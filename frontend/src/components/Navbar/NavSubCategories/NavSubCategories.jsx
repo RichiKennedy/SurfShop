@@ -1,23 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
-import './NavSubCategories.scss'
-import {motion} from 'framer-motion';
+import React, { useEffect } from 'react';
+import './NavSubCategories.scss';
+import { motion } from 'framer-motion';
 import useFetch from '../../../Hooks/useFetch';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFilterContext } from '../../../Context/filterContext';
 
-const NavSubCategories = ({ setOpenSubMenu, openSubMenu}) => {
-  const { selectedCategory, selectedSubCat, setSelectedSubCat, setSelectedFit, shouldNavigate, setShouldNavigate } = useFilterContext()
-  const { data: subCategories } = useFetch(`/sub-categories?[filters][categories][title][$eq]=${selectedCategory}`);
+const NavSubCategories = () => {
+  const { popUpMenuCategory, setPopUpMenuCategory } = useFilterContext();
+  const { data: subCategories } = useFetch(
+    `/sub-categories?[filters][categories][title][$eq]=${popUpMenuCategory}`
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = (event) => {
-      if (openSubMenu) {
+      if (popUpMenuCategory) {
         event.preventDefault();
       }
     };
-    if (openSubMenu) {
+    if (popUpMenuCategory) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('scroll', handleScroll, { passive: false });
     }
@@ -25,75 +27,44 @@ const NavSubCategories = ({ setOpenSubMenu, openSubMenu}) => {
       document.body.style.overflow = 'auto';
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [openSubMenu]); 
+  }, [popUpMenuCategory]);
 
-  useEffect(() => {
-  
-    if (selectedCategory && shouldNavigate) {
-      if (!selectedSubCat) {
-        navigate(`/products/${selectedCategory}`);
-        setShouldNavigate(false);
-        setOpenSubMenu(!openSubMenu)
-      } else {
-        navigate(`/products/${selectedCategory}/${selectedSubCat}`);
-        setShouldNavigate(false);
-        setOpenSubMenu(!openSubMenu)
-      }
-    } 
-  
-  }, [shouldNavigate]);
-  
-  const handleViewAllClick = () => {  
-    setShouldNavigate(true);
-    setSelectedSubCat('');
-    setSelectedFit('');
-  };
-  const handleSubCategoryClick = (subCategoryTitle) => {
-    if (selectedCategory) {
-      setSelectedSubCat(subCategoryTitle);
-      setShouldNavigate(true);
-      setSelectedFit('');
+  const viewProducts = (category, subCat) => {
+    if (category && subCat) {
+      navigate(`/products/${category}/${subCat}`);
+    } else if (!subCat && category) {
+      navigate(`/products/${category}`);
     }
+    setPopUpMenuCategory(null);
   };
 
   return (
-    <>
-  <motion.div
-    className="subCatMenuWrapper"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.3 }}
+    <motion.div
+      className="subCatMenuWrapper"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
     >
-      <div 
-      className="subCat-overlay"
-      onClick={() => setOpenSubMenu(!openSubMenu)}></div>
-        <div className="subCatMenu">
-          <nav>
-            <strong> clothing </strong>
-            <ul>
-            <Link 
-  className='link'
-  onClick={() => handleViewAllClick()}
->
-  view all
-</Link>
+      <div className="subCat-overlay" onClick={() => setPopUpMenuCategory(null)}></div>
+      <div className="subCatMenu">
+        <nav>
+          <strong className="link" onClick={() => viewProducts(popUpMenuCategory, null)}> all {popUpMenuCategory} </strong>
+          <ul>
+            {subCategories?.map((subCats) => (
+              <li
+                key={subCats.id}
+                className="link"
+                onClick={() => viewProducts(popUpMenuCategory, subCats?.attributes.title)}
+              >
+                {subCats?.attributes.title}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </motion.div>
+  );
+};
 
-{subCategories?.map((subCats) => 
-  <Link 
-    key={subCats.id}
-    className='link'
-    onClick={() => handleSubCategoryClick(subCats?.attributes.title)}
-  >
-    {subCats?.attributes.title}
-  </Link>
-              )}
-            </ul>
-          </nav>
-        </div>
-      </motion.div>
-    </>
-  )
-}
-
-export default NavSubCategories
+export default NavSubCategories;

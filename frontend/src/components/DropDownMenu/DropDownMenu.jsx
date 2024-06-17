@@ -46,7 +46,7 @@ const DropDownMenu = (
     try {
       const stripe = await stripePromise;
       const res = await makeRequest.post('/orders', {
-        products,
+        products, 
       });
 
       await stripe.redirectToCheckout({

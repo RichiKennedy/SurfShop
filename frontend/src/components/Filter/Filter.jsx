@@ -1,69 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Filter.scss';
 import useFetch from '../../Hooks/useFetch';
 import { useFilterContext } from '../../Context/filterContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const Filter = () => {
-  const {
-    shouldNavigate,
-    setShouldNavigate,
-    selectedCategory,
-    selectedSubCat,
-    setSelectedSubCat,
-    selectedFit,
-    setSelectedFit,
-    setSort,
-  } = useFilterContext();
+  const { setSort } = useFilterContext();
+  const {category, subCategory, fit} = useParams();
   const navigate = useNavigate();
-  const viewAllSubCats = `/sub-categories?[filters][categories][title][$eq]=${selectedCategory}`;
-  const subCatFit = `/fits?[filters][sub_categories][title][$eq]=${selectedSubCat}`;
-  const apiUrl = !selectedSubCat ? viewAllSubCats : subCatFit;
+  const viewAllSubCats = `/sub-categories?[filters][categories][title][$eq]=${category}`;
+  const subCatFit = `/fits?[filters][sub_categories][title][$eq]=${subCategory}`;
+  const apiUrl = !subCategory ? viewAllSubCats : subCatFit;
 
   const { data } = useFetch(apiUrl);
   
   const handleSubCatChange = (index) => {
-    if (!selectedSubCat) {
+    if (!subCategory) {
       const selectedSubCatValue = data && data[index] ? data[index].attributes.title : '';
-      setSelectedSubCat(selectedSubCatValue);
-      setShouldNavigate(true);
-
+      navigate(`/products/${category}/${selectedSubCatValue}`);
+    } else if (index === -1) {
+      navigate(`/products/${category}/${subCategory}`);
     } else {
       const selectedFitValue = data && data[index] ? data[index].attributes.title : '';
-      setSelectedFit(selectedFitValue);
-      setShouldNavigate(true);
+      navigate(`/products/${category}/${subCategory}/${selectedFitValue}`);
     }
   };
 
   const removeSubCategory = () => {
-    setSelectedSubCat('');
-    setSelectedFit('');
-    setShouldNavigate(true);
+    navigate(`/products/${category}`);
   }
-
-  const navigateIfNeeded = () => {
-    if (shouldNavigate) {
-      let path = `/products/${selectedCategory}`
-
-      if (selectedSubCat) {
-        path += `/${selectedSubCat}`;
-        if (selectedFit) {
-          const encodedFit = selectedFit.replace(/\s/g, '-');
-          path += `/${encodedFit}`;
-        }
-      };
-
-      navigate(path);
-
-      setShouldNavigate(false);
-    }
-  };
-
-  useEffect(() => {
-    navigateIfNeeded()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldNavigate])
 
   return (
      <div className="filter">
@@ -80,9 +46,9 @@ const Filter = () => {
         </ul>
         
         <ul className="form-control-container">
-        <h6>{!selectedSubCat ? 
-        `${selectedCategory !== 'accessories' ? 
-        `${selectedCategory}'s clothing` : `${selectedCategory}`}` : `type of ${selectedSubCat}`}
+        <h6>{!subCategory ? 
+        `${category !== 'accessories' ? 
+        `${category}'s clothing` : `${category}`}` : `type of ${subCategory}`}
         </h6>
         {data?.map((subCats, index) => (
           <li className='form-control' id={subCats.id} key={subCats.id}>
@@ -92,32 +58,32 @@ const Filter = () => {
               id={subCats.id}
               value={subCats.id}
               onChange={() => handleSubCatChange(index)}
-              checked={selectedSubCat === subCats.attributes.title}
+              checked={subCategory === subCats.attributes.title}
             />
             <label htmlFor={subCats.attributes.title}> {subCats.attributes.title} </label>
           </li>
         ))}
-        { selectedFit && <li className='form-control'>
+        { fit && <li className='form-control'>
           <input
             type='radio'
             name='fit'
             id='fit'
             value=''
             onChange={() => handleSubCatChange(-1)}
-            checked={!selectedSubCat} 
+            checked={!subCategory} 
           />
-          <label htmlFor='allProducts'> All {!selectedSubCat ? 'products' : selectedSubCat}</label>
+          <label htmlFor='allProducts'> All {!subCategory ? 'products' : subCategory}</label>
         </li>}
-        { selectedSubCat && <li className='form-control'>
+        { subCategory && <li className='form-control'>
           <input
             type='radio'
             name='subCategory'
             id='allProducts'
             value=''
             onClick={() => removeSubCategory()}
-            checked={!selectedSubCat} 
+            checked={!subCategory} 
           />
-          <label htmlFor='allProducts'>{selectedCategory} collection</label>
+          <label htmlFor='allProducts'>{category} collection</label>
         </li>}
       </ul>
       </div> 

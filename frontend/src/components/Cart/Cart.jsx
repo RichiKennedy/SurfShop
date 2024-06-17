@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import {removeItem, incrementItemQuantity, decrementItemQuantity} from '../../Redux/cartReducer'
 
 const Cart = () => {
-  const products = useSelector(state => state.cart.products);
+  const cartProducts = useSelector(state => state.cart.products);
   const dispatch = useDispatch();
-  const shouldRemoveBorder = products.length >= 3;
+  const shouldRemoveBorder = cartProducts.length >= 3;
   const handleRemoveItem = (itemId) => {
     dispatch(removeItem({itemId}));
   }
@@ -26,7 +26,7 @@ const Cart = () => {
 
     const handleTotalPrice = () => {
       let total = 0;
-      products.forEach(item => {
+      cartProducts.forEach(item => {
         total += item.quantity * item.price;
       });
   
@@ -36,10 +36,10 @@ const Cart = () => {
   return (
     <>
      <div className={`cart ${shouldRemoveBorder ? 'remove-border' : ''}`}>
-      {products?.map((item, index) => (
+      {cartProducts?.map((item, index) => (
         <div 
         key={item.id}
-        className={`item ${index === products.length - 1 ? 'last-item' : ''}`}>
+        className={`item ${index === cartProducts.length - 1 ? 'last-item' : ''}`}>
           <div className="item-header">
             <h1>{item.title}</h1>
             <span>{formatPrice(item.price)}</span>

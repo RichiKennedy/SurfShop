@@ -1,14 +1,22 @@
 import React from 'react'
 import './Card.scss'
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../Redux/cartReducer'
 import { useCartContext } from '../../Context/cartContext'
+import { useFilterContext } from '../../Context/filterContext'
 
 
 const Card = ({item, pageType}) => {
-  const {setIsNewProductAdded, handleAddToCartMsg} = useCartContext()
+  const { setIsNewProductAdded, handleAddToCartMsg } = useCartContext();
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+     navigate(`/product/${productId}`)
+  };
+
+
   const dispatch = useDispatch();
   return (
     <div className={`image-card ${pageType === 'products' ? 'products-page' : 'home-page'}`}>
@@ -17,13 +25,16 @@ const Card = ({item, pageType}) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="image-container">
-      <Link to={`/product/${item?.id}`} >
-           {item?.attributes?.isOrganic && <span>Organic</span>}
-            <img src={
-              process.env.REACT_APP_UPLOAD_URL + item.attributes?.img1?.data?.attributes.url} className='mainImg' key={`mainImg_${item?.id}`} alt=''/>
-            <img src={
-              process.env.REACT_APP_UPLOAD_URL + item.attributes?.img2?.data?.attributes.url} className='secondImg' key={`secondImg_${item?.id}`} alt=''/>
-      </Link>
+            { item && (
+            <div 
+            onClick={() => handleProductClick(item.id)}>
+                 {item?.attributes?.isOrganic && <span>Organic</span>}
+                  <img src={
+                    process.env.REACT_APP_UPLOAD_URL + item.attributes?.img1?.data?.attributes.url} className='mainImg' key={`mainImg_${item?.id}`} alt=''/>
+                  <img src={
+                    process.env.REACT_APP_UPLOAD_URL + item.attributes?.img2?.data?.attributes.url} className='secondImg' key={`secondImg_${item?.id}`} alt=''/>
+            </div>
+            )}
         </motion.div>
     <div className="image-info">
         <div className="info-top">

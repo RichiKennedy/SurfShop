@@ -7,23 +7,20 @@ import { useFilterContext } from '../../Context/filterContext'
 
 
 const CategoryHero = () => {
-  const { selectedCategory, setSelectedCategory, shouldNavigate, setShouldNavigate} = useFilterContext();
+  const { selectedCategory, setSelectedCategory } = useFilterContext();
   const [offsetY, setOffsetY] = useState(0);
   const navigate = useNavigate();
 
     const navigateToMens = () => {
       setSelectedCategory('men');
-      setShouldNavigate(true);
     }
     const navigateToWomens = () => {
       setSelectedCategory('women');
-      setShouldNavigate(true);
     }
 
     useEffect(() => {
-      if (shouldNavigate && selectedCategory) {
+      if (selectedCategory) {
         navigate(`/products/${selectedCategory}`);
-        setShouldNavigate(false);
       }
     })
 

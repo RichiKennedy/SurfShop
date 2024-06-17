@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Products.scss';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
 import ItemGallery from '../../components/ItemGallery/ItemGallery';
@@ -11,20 +11,14 @@ import { useFilterContext } from '../../Context/filterContext';
 
 
 const Products = () => {
-  const { category } = useParams();
+  const { category, subCategory, fit } = useParams();
   const navigate = useNavigate();
   const {
-    setShouldNavigate,
-    shouldNavigate,
-    selectedCategory,
-    selectedSubCat,
-    setSelectedSubCat,
-    selectedFit,
-    setSelectedFit,
     sort,
     setSort,
+    openFilter, 
+    setOpenFilter
   } = useFilterContext();
-  const [openFilter, setOpenFilter] = useState(false);
   const [amountOfProducts, setAmountOfProducts] = useState(0);
   const [cssStyles, setCSSStyles] = useState({
     position: 'relative',
@@ -47,7 +41,7 @@ useEffect(() => {
 
 useEffect(() => {
   window.scrollTo(0, 0);
-},[selectedCategory, selectedSubCat, selectedFit, sort])
+},[category, subCategory, fit, sort])
 
 useEffect(() => {
   window.scrollTo(0, 0);
@@ -55,68 +49,47 @@ useEffect(() => {
 },[]);
 
 const navigateToCategory = () => {
-  setSelectedFit('');
-  setSelectedSubCat('');
-  setShouldNavigate(true);
+  navigate(`/products/${category}`);
 }
 const navigateToSubCategory = () => {
-  setSelectedFit('');
-  setShouldNavigate(true);
+  navigate(`/products/${category}/${subCategory}`);
 }
 
-const navigateIfNeeded = () => {
-  if (shouldNavigate) {
-    let path = `/products/${selectedCategory}`
-
-    if (selectedSubCat) {
-      path += `/${selectedSubCat}`;
-      if (selectedFit) {
-        const encodedFit = selectedFit.replace(/\s/g, '-');
-        path += `/${encodedFit}`;
-      }
-    };
-
-    navigate(path);
-
-    setShouldNavigate(false);
-  }
-};
-
-useEffect(() => {
-  navigateIfNeeded()
-}, [shouldNavigate])
-
 const generateHeaderText = () => {
-  if (selectedCategory === category && !selectedSubCat) {
+  if (category && !subCategory) {
     return category !== 'accessories'
-    ? `${category}'s collection`
-    : `${category}`
+    ? <h3>{category}'s collection</h3>
+    : <h3>{category}</h3>
 
-  } else if (selectedSubCat && !selectedFit) {
+  } else if (category && subCategory && !fit) {
     return (
       <>
-        <Link
+        <h3
         onClick={() => navigateToCategory()}>
            {category}'s collection
            {' / '}
-        </Link>
-          {selectedSubCat}
+        </h3>
+        <h3 className='selected'>
+          {subCategory}
+        </h3>
       </>
     );
-  } else {
+  } else if (category && subCategory && fit) {
     return (
       <>
-        <Link
+        <h3
         onClick={() => navigateToCategory()}>
            {category}'s collection
         {` / `}
-        </Link>
-        <Link
+        </h3>
+        <h3
         onClick={() => navigateToSubCategory()}>
-          {selectedSubCat}
+          {subCategory}
         {` / `}
-        </Link>
-        {selectedFit}
+        </h3>
+        <h3 className='selected'>
+        {fit}
+        </h3>
       </>
     );
   }
@@ -130,7 +103,7 @@ const generateHeaderText = () => {
     >
     <div className='products'>
       <div className="header">
-        <h3> {generateHeaderText()} </h3>
+        {generateHeaderText()} 
       </div>
       <div 
       className="filter-wrapper"
@@ -143,8 +116,7 @@ const generateHeaderText = () => {
           </div>
           </Link> 
       </div>
-      <ItemGallery 
-      setAmountOfProducts={setAmountOfProducts}/>
+      <ItemGallery setAmountOfProducts={setAmountOfProducts} />
     </div>
     <AnimatePresence>
         {openFilter && (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Dropdown.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
@@ -8,16 +8,39 @@ import LanguageIcon from '@mui/icons-material/Language';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder'; 
 import SurfingIcon from '@mui/icons-material/Surfing';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
+import { useAuthContext } from '../../../Context/authContext';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+
 
 
 const Dropdown = () => {
-  const [open, setOpen] = useState(false)
-  const [signedIn, setSignedIn] = useState(true)
+  const [open, setOpen] = useState(false);
+  const { user } = useAuthContext()
+  const navigate = useNavigate();
 
+  const navigateToLogin = () => {
+    navigate('/login');
+    setOpen(!open)
+  }
+  const navigateToLogout = () => {
+    navigate('/logout');
+    setOpen(!open)
+  }
+  const navigateToRegister = () => {
+    navigate('/register');
+    setOpen(!open)
+  }
+  
   return (
     <>
-        <div className='nav-item'>
-          <Link  className='icon-button' onClick={ () => setOpen(!open)}> <AccountCircleIcon /> </Link>
+    <div className='item' onClick={() => setOpen(!open)}>
+      <Link className='link'>
+        <span>
+          {user && user.username ? user.username : 'account'}
+        </span>
+        <PermIdentityOutlinedIcon style={{ color: 'black' }} /> 
+      </Link>
+    </div>
           {open &&
            <div className='dropdown-menu'> 
             <div className="menu">
@@ -35,15 +58,14 @@ const Dropdown = () => {
            </ul>
            <ul className='menu-item-login'>
 
-           {signedIn ? (
-             <li className='menu-item' onClick={() => setSignedIn(false)}> Sign Out </li>
+           { user && user.username ? (
+             <li className='menu-item' onClick={() => navigateToLogout()}> Sign Out </li>
              ) : (
-               <><li className='menu-item' onClick={() => setSignedIn(true)}> Sign In </li><li className='menu-item'> Register </li></>
+               <><li className='menu-item' onClick={() => navigateToLogin()}> Sign In </li><li className='menu-item'onClick={() => navigateToRegister()}> Register </li></>
                )} 
            </ul>
             </div>
            }
-        </div>
       </>
   )
 }

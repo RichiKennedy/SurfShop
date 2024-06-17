@@ -4,7 +4,7 @@ import './Home.scss'
 // import Slider from '../../components/Slider/Slider'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
-import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
+// import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 import { useFilterContext } from '../../Context/filterContext';
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
       {/* <Slider /> */}
       <CategoryHero />
       <FeaturedProducts type='new collection' />
-      <CategoryGrid />
+      {/* <CategoryGrid /> */}
     </motion.div>
   )
 }

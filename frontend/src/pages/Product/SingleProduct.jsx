@@ -8,10 +8,12 @@ import useFetch from '../../Hooks/useFetch';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Redux/cartReducer';
 import { useCartContext } from '../../Context/cartContext';
+import { useFilterContext } from '../../Context/filterContext';
 
 
 const SingleProduct = () => {
-  const { setIsNewProductAdded, handleAddToCartMsg } = useCartContext()
+  const { setIsNewProductAdded, handleAddToCartMsg } = useCartContext();
+  const { setProductSelected } = useFilterContext();
   const [infoOption, setInfoOption] = useState(null);
   const [collisionPosition, setCollisionPosition] = useState(null); 
   const [hasCapturedCollision, setHasCapturedCollision] = useState(false); 
@@ -28,6 +30,12 @@ const SingleProduct = () => {
   const leftElementRef = useRef(null);
   const categoryGridRef = useRef(null);
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setProductSelected(false);
+    // No need for dependencies, as will only refresh state on page load
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -1,68 +1,57 @@
 import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider,
-} from "react-router-dom"
-import SingleProduct from "./pages/Product/SingleProduct"
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { AuthProvider } from "./Context/authContext";
+import { CartProvider } from "./Context/cartContext";
+import { FilterProvider } from './Context/filterContext';
+import { ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
+import Login from "./components/Authentication/Login/Login";
+import Logout from "./components/Authentication/Logout/Logout";
+import Register from "./components/Authentication/Register/Register";
+import Account from "./pages/Account/Account";
+import SingleProduct from "./pages/Product/SingleProduct";
 import Products from "./pages/Products/Products";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import './app.scss'
-import Dropdown from "./components/Navbar/NewNav/Dropdown";
-import { AnimatePresence } from "framer-motion";
-import { CartProvider } from "./Context/cartContext";
-import { FilterProvider } from './Context/filterContext'
-import { ToastContainer } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css'
-
-
+import './app.scss';
 
 const Layout = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/products/:category/:subCategory?/:fit?" element={<Products />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/account" element={<Account />} />
+      </Routes>
       <Footer />
     </div>
-  )
-}
-
-const router = createBrowserRouter([
-  {
-    path:"/",
-    element:<Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "/products/:category/:subCategory?/:fit?",
-        element: <Products />
-      },
-      {
-        path: "/product/:id",
-        element: <SingleProduct />
-      },
-    ]
-  },
-  {
-    path: "/about",
-    element: <Dropdown />
-  }
-])
+  );
+};
 
 function App() {
   return (
     <div className="app">
       <AnimatePresence>
-        <CartProvider>
-          <FilterProvider>
-          <RouterProvider router={router} />
-          <ToastContainer />
-          </FilterProvider>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <FilterProvider>
+              <Router>
+                <Layout />
+              </Router>
+              <ToastContainer />
+            </FilterProvider>
+          </CartProvider>
+        </AuthProvider>
       </AnimatePresence>
     </div>
   );

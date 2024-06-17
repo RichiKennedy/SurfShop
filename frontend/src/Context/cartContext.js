@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import { toast } from 'react-toastify'
 
 const CartContext = createContext();
@@ -6,10 +6,16 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [openCart, setOpenCart] = useState(false);
     const [isNewProductAdded, setIsNewProductAdded] = useState(false);
-
     const handleAddToCartMsg = (product) => {
-        toast.success(`Added ${product.attributes.smallDesc} to the cart!`)
+        toast.success(`Added ${product.attributes.smallDesc} to the cart!`);
     }
+
+    useEffect(() => {
+      if(isNewProductAdded) {
+        setOpenCart(true);
+        setIsNewProductAdded(false)
+      }
+    }, [isNewProductAdded])
 
   return (
     <CartContext.Provider value={{ 
@@ -17,7 +23,7 @@ export const CartProvider = ({ children }) => {
         setOpenCart,
         isNewProductAdded,
         setIsNewProductAdded,
-        handleAddToCartMsg
+        handleAddToCartMsg,
         }}>
       {children}
     </CartContext.Provider>
