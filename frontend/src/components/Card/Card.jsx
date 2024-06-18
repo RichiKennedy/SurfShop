@@ -1,11 +1,10 @@
 import React from 'react'
 import './Card.scss'
-import { Link, useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../Redux/cartReducer'
 import { useCartContext } from '../../Context/cartContext'
-import { useFilterContext } from '../../Context/filterContext'
+import { useNavigate } from 'react-router-dom'
 
 
 const Card = ({item, pageType}) => {
