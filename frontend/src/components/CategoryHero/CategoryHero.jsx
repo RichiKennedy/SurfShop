@@ -21,6 +21,7 @@ const CategoryHero = () => {
     useEffect(() => {
       if (selectedCategory) {
         navigate(`/products/${selectedCategory}`);
+        setSelectedCategory('')
       }
     })
 
@@ -37,8 +38,6 @@ const CategoryHero = () => {
     const data = [
         process.env.PUBLIC_URL + '/images/Mens-hero.webp',
         process.env.PUBLIC_URL + '/images/Womens-hero.webp',
-        // 'https://afends.com/cdn/shop/files/HP-BANNER_01_2_1000x.png?v=1683072682',
-        // 'https://afends.com/cdn/shop/files/HP-BANNER_02_3_028161e4-f0ae-49f0-a887-e1981729e9e2_1000x.png?v=1683072673',
     ] 
 
   return (
