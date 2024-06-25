@@ -1,37 +1,36 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({
-        username: '',
-        email: '',
-        password: ''
-      })
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('userData');
+        return storedUser ? JSON.parse(storedUser).user : {
+            username: '',
+            email: '',
+            password: ''
+        };
+    });
+
     const [registerUser, setRegisterUser] = useState({
         username: '',
         email: '',
         password: ''
-      });
-      // Check if user exists before logging
-      if (user) {
-        console.log('User:');
-        if (user.username) {
-          console.log('Username:', user.username);
+    });
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('userData', JSON.stringify({ user }));
+        } else {
+            localStorage.removeItem('userData');
         }
-        if (user.email) {
-          console.log('Email:', user.email);
-        }
-        // Similarly, check and log other properties as needed
-      } else {
-        console.log('User not logged in');
-      }
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{
             user,
             setUser,
-            registerUser, 
+            registerUser,
             setRegisterUser,
         }}>
             {children}

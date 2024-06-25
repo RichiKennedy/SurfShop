@@ -18,7 +18,7 @@ const registerNewUser = async () => {
     if (registerUser.username && registerUser.email && registerUser.password) {
       const res = await axios.post(url, registerUser);
       if (res.status === 200) {
-        console.log('success registered 200 registerUser =', registerUser);
+        toast.success('Registered Successfully');
         setRegisterUser({
           username: '',
           email: '',
