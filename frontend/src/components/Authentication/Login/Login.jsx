@@ -9,25 +9,18 @@ const Login = () => {
   const { user, setUser } = useAuthContext();
   const navigate = useNavigate();
 
-  const handleChange = ({target}) => {
-    const { name, value } = target
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
     setUser((currentUser) => ({
       ...currentUser,
       [name]: value,
     }));
   };
 
-  const storeUser = (userData) => {
-    // Store user data in localStorage
-    localStorage.setItem('userData', JSON.stringify(userData));
-  };
   useEffect(() => {
     const storedUser = localStorage.getItem('userData');
-  
     if (storedUser) {
       const userData = JSON.parse(storedUser);
-  
-      // Set the user state with the stored user data
       setUser(userData.user);
     }
   }, [setUser]);
@@ -36,21 +29,22 @@ const Login = () => {
     const url = `http://localhost:1337/api/auth/local`;
     try {  
       if (user?.identifier && user?.password) {
-        const { data } = await axios.post(url, user);
-        console.log('Login response:', data); // Log the API response
+        const { data } = await axios.post(url, {
+          identifier: user.identifier,
+          password: user.password
+        });
+        console.log('Login response:', data); 
         if (data.jwt) {
-          storeUser(data);
           setUser(data.user);
           toast.success('Logged in successfully');
           setTimeout(() => {
             navigate('/');
-          }, 1000)
+          }, 1000);
         } else {
-            toast.error('Login Attempt Failed');
-            console.log('login failed but caught the error')
+          toast.error('Login Attempt Failed');
+          console.log('login failed but caught the error');
         }
       }
-  
     } catch (error) {
       toast.error('Login Attempt Failed');
       console.error('Login error:', error);
@@ -59,40 +53,42 @@ const Login = () => {
 
   const navigateToRegister = () => {
     navigate(`/register`);
-  }
+  };
 
   return (
     <div className='login-wrapper'>
       <div className="login-box">
         <h3>Sign in</h3>
-      <form>
-        <label></label>
-        <input 
-        type='email' 
-        name='identifier'
-        value={user?.identifier || ''}
-        onChange={handleChange}
-        placeholder='Enter your email...'></input>
-      </form>
-      <form>
-        <label></label>
-        <input 
-        type='password' 
-        name='password'
-        value={user?.password || ''}
-        onChange={handleChange}
-        placeholder='Enter your password...'></input>
-      </form>
-      <button onClick={handleLogin}>continue</button>
-      <div className="line-container">
-        <div class="line"></div>
-        <h6>or</h6>
-        <div class="line"></div>
-      </div>
-      <button onClick={navigateToRegister}>register</button>
+        <form>
+          <label></label>
+          <input 
+            type='email' 
+            name='identifier'
+            value={user?.identifier || ''}
+            onChange={handleChange}
+            placeholder='Enter your email...'
+          />
+        </form>
+        <form>
+          <label></label>
+          <input 
+            type='password' 
+            name='password'
+            value={user?.password || ''}
+            onChange={handleChange}
+            placeholder='Enter your password...'
+          />
+        </form>
+        <button onClick={handleLogin}>Continue</button>
+        <div className="line-container">
+          <div className="line"></div>
+          <h6>or</h6>
+          <div className="line"></div>
+        </div>
+        <button onClick={navigateToRegister}>Register</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
