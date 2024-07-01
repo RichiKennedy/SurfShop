@@ -17,32 +17,37 @@ const Login = () => {
     }));
   };
 
+  console.log('user:', user);
+
   useEffect(() => {
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       const userData = JSON.parse(storedUser);
-      setUser(userData.user);
+      setUser(userData);
     }
   }, [setUser]);
 
   const handleLogin = async () => {
     const url = `http://localhost:1337/api/auth/local`;
-    try {  
+    try {
       if (user?.identifier && user?.password) {
         const { data } = await axios.post(url, {
           identifier: user.identifier,
-          password: user.password
+          password: user.password,
         });
-        console.log('Login response:', data); 
+        console.log('Login response:', data);
         if (data.jwt) {
+          localStorage.setItem('token', data.jwt);
+          localStorage.setItem('userData', JSON.stringify(data.user));
           setUser(data.user);
-          toast.success('Logged in successfully');
+          const successMessage = `Successful login! Welcome ${data.user.username}`.toUpperCase();
+          toast.success(successMessage);
           setTimeout(() => {
             navigate('/');
           }, 1000);
         } else {
           toast.error('Login Attempt Failed');
-          console.log('login failed but caught the error');
+          console.log('Login failed but caught the error');
         }
       }
     } catch (error) {

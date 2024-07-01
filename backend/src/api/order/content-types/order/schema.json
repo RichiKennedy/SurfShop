@@ -21,10 +21,10 @@
     "confirmedAt": {
       "type": "datetime"
     },
-    "email": {
+    "userEmail": {
       "type": "email"
     },
-    "name": {
+    "userName": {
       "type": "string"
     },
     "shippedTo": {
@@ -35,6 +35,13 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "orders"
+    },
+    "user": {
+      "type": "integer"
+    },
+    "guest": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
