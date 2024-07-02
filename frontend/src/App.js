@@ -19,6 +19,7 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import './app.scss';
+import { CheckoutProvider } from "./Context/checkoutContext";
 
 const Layout = () => {
   return (
@@ -43,14 +44,16 @@ function App() {
     <div className="app">
       <AnimatePresence>
         <AuthProvider>
-          <CartProvider>
-            <FilterProvider>
-              <Router>
-                <Layout />
-              </Router>
-              <ToastContainer />
-            </FilterProvider>
-          </CartProvider>
+          <CheckoutProvider>
+            <CartProvider>
+              <FilterProvider>
+                <Router>
+                  <Layout />
+                </Router>
+                <ToastContainer />
+              </FilterProvider>
+            </CartProvider>
+          </CheckoutProvider>
         </AuthProvider>
       </AnimatePresence>
     </div>
