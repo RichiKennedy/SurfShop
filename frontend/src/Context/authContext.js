@@ -11,9 +11,6 @@ export const AuthProvider = ({ children }) => {
             password: ''
         };
     });
-    const [guestName, setGuestName] = useState('');
-    const [guestEmail, setGuestEmail] = useState('');
-    const [isFormVisible, setIsFormVisible] = useState(false);
 
     const [registerUser, setRegisterUser] = useState({
         username: '',
@@ -35,12 +32,6 @@ export const AuthProvider = ({ children }) => {
             setUser,
             registerUser,
             setRegisterUser,
-            guestName,
-            setGuestName,
-            guestEmail,
-            setGuestEmail,
-            isFormVisible,
-            setIsFormVisible
         }}>
             {children}
         </AuthContext.Provider>
