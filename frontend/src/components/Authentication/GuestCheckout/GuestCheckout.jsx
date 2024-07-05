@@ -16,11 +16,10 @@ const GuestCheckout = () => {
         const handleGuestInfoSubmit = (e) => {
             e.preventDefault();
             if (guestName && guestEmail) {
-              handleGuestCheckout({ guestName, guestEmail }); // Assuming handleGuestCheckout is provided by CheckoutContext
-              setIsFormVisible(false); // Close the form after submission
+              handleGuestCheckout({ guestName, guestEmail });
+              setIsFormVisible(false); 
               setCheckoutProcess(false);
             } else {
-              // Handle case where guestName or guestEmail is missing
               console.error('Guest name or email is missing');
             }
           };

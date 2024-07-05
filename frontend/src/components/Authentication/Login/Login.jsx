@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import GuestCheckout from '../GuestCheckout/GuestCheckout';
 
 const Login = () => {
-  const { user, setUser } = useAuthContext();
+  const { setUser } = useAuthContext();
   const { checkoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
   const [formData, setFormData] = useState({ identifier: '', password: '' });
   const [loading, setLoading] = useState(false);
