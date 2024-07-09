@@ -9,7 +9,7 @@ import GuestCheckout from '../GuestCheckout/GuestCheckout';
 
 const Register = () => {
   const { setUser } = useAuthContext();
-  const { checkoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
+  const { checkoutProcess, setCheckoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const navigate = useNavigate();
 
@@ -42,6 +42,11 @@ const Register = () => {
     } catch (error) {
       toast.error('Registration Attempt Failed');
     }
+  };
+
+  const handleClose = () => {
+    setCheckoutProcess(false);
+    navigate('/'); // Navigate to a default route
   };
 
   return (
@@ -79,6 +84,9 @@ const Register = () => {
           }
         </form>
       </div>
+      {checkoutProcess && (
+          <button className="close-checkout" onClick={() => handleClose() }>Close x</button>
+        )}
       <GuestCheckout />
     </div>
   );

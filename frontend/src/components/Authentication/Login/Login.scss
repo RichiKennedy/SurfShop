@@ -5,6 +5,7 @@
     flex-direction: column;
     gap: 15px;
     min-height: 90vh;
+    position: relative;
 
     .login-box {
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -22,7 +23,6 @@
 
 
         form {
-            background-color: red;
             width: 100%;
 
             input {
@@ -66,4 +66,15 @@
           
 
     }
+
+    button.close-checkout {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: 50px;
+        cursor: pointer;
+        text-transform: uppercase;
+        border: none;
+        background: none;
+      }
 }

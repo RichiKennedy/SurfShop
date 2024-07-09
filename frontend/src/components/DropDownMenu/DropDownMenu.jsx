@@ -48,6 +48,7 @@ useEffect(() => {
       handleCheckout(user);
     } else {
       setCheckoutProcess(true);
+      setOpen(!isOpen);
       navigate('/login');
     }
   };

@@ -19,12 +19,13 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import './app.scss';
-import { CheckoutProvider } from "./Context/checkoutContext";
+import { CheckoutProvider, useCheckoutContext } from "./Context/checkoutContext";
 
 const Layout = () => {
+  const { checkoutProcess } = useCheckoutContext();
   return (
     <div>
-      <Navbar />
+      { !checkoutProcess && <Navbar />}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/products/:category/:subCategory?/:fit?" element={<Products />} />

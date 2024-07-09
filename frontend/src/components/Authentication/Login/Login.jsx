@@ -9,7 +9,7 @@ import GuestCheckout from '../GuestCheckout/GuestCheckout';
 
 const Login = () => {
   const { setUser } = useAuthContext();
-  const { checkoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
+  const { checkoutProcess, setCheckoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
   const [formData, setFormData] = useState({ identifier: '', password: '' });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -59,6 +59,11 @@ const Login = () => {
   const navigateToRegister = () => {
     navigate(`/register`);
   };
+  const handleClose = () => {
+    setCheckoutProcess(false);
+    navigate('/'); 
+  };
+
 
   return (
     <div className='login-wrapper'>
@@ -95,6 +100,9 @@ const Login = () => {
           <button onClick={() => handleGuestCheckoutClick()}>Continue as Guest</button>
         )}
       </div>
+        {checkoutProcess && (
+          <button className="close-checkout" onClick={() => handleClose() }>Close x</button>
+        )}
       <GuestCheckout />
     </div>
   );
