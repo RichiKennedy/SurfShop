@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.scss'
 import './NewNav/Dropdown.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import ShoppingBagSharpIcon from '@mui/icons-material/ShoppingBagSharp';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
@@ -22,6 +22,9 @@ const Navbar = () => {
     backgroundColor: '#FFF',
     color: 'rgba(19, 19, 19, 100)',
   })
+  const [previousPath, setPreviousPath] = useState('/');
+  const navigate = useNavigate();
+  const location = useLocation();
   const products = useSelector(state => state.cart.products)
   const {data} = useFetch(`/categories?[filters][categories][title]`);
   useEffect(() => {
@@ -43,7 +46,22 @@ const Navbar = () => {
   const handleCategoryClick = (categoryId) => {
     setPopUpMenuCategory(categoryId);
   }
-console.log('pop up menu =', popUpMenuCategory)
+
+  useEffect(() => {
+    if (location.pathname !== '/account' && location.pathname !== '/login') {
+      setPreviousPath(location.pathname);
+    }
+  }, [location.pathname]);
+
+  const handleAccountClick = () => {
+    if (location.pathname === '/account' || location.pathname === '/login') {
+      // If the account or login page is open, close it and go back to the previous path
+      navigate(previousPath);
+    } else {
+      // If the account or login page is not open, open it and save the current path
+      navigate(user && user.username ? '/account' : '/login');
+    }
+  };
   return (
     <>
     <nav className='navbar'     
@@ -66,12 +84,12 @@ console.log('pop up menu =', popUpMenuCategory)
             <Link className='link' to="/"> The Shop </Link>
           </section>
           <section className='right'>
-          <Link to={user && user.username ? "/account" : "/login"} className='link'>
+          <span className='link' onClick={handleAccountClick}>
             <div className='mui-wrapper'>
               <PermIdentityOutlinedIcon className='mui-icon' /> 
             </div>
             <span className='link'>{user && user.username ? user.username : 'account'}</span>
-          </Link>  
+          </span>  
           <Link className='link' onClick={() => setOpenCart(true)}>
             <div className='mui-wrapper'>
             {products.length >= 1 ?

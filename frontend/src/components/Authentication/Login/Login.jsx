@@ -29,6 +29,10 @@ const Login = () => {
     }
   }, [setUser]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const handleLogin = async () => {
     const url = `http://localhost:1337/api/auth/local`;
     try {
