@@ -19,11 +19,13 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import './app.scss';
+import { CheckoutProvider, useCheckoutContext } from "./Context/checkoutContext";
 
 const Layout = () => {
+  const { checkoutProcess } = useCheckoutContext();
   return (
     <div>
-      <Navbar />
+      { !checkoutProcess && <Navbar />}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/products/:category/:subCategory?/:fit?" element={<Products />} />
@@ -43,14 +45,16 @@ function App() {
     <div className="app">
       <AnimatePresence>
         <AuthProvider>
-          <CartProvider>
-            <FilterProvider>
-              <Router>
-                <Layout />
-              </Router>
-              <ToastContainer />
-            </FilterProvider>
-          </CartProvider>
+          <CheckoutProvider>
+            <CartProvider>
+              <FilterProvider>
+                <Router>
+                  <Layout />
+                </Router>
+                <ToastContainer />
+              </FilterProvider>
+            </CartProvider>
+          </CheckoutProvider>
         </AuthProvider>
       </AnimatePresence>
     </div>

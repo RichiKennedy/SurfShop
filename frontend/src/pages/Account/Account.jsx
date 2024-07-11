@@ -21,6 +21,10 @@ const Account = () => {
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   if (!user) {
     return null; 
   }
@@ -29,8 +33,6 @@ const Account = () => {
     navigate('/logout');
   };
 
-
-  console.log('order =', orders);
   return (
     <div className='account-wrapper'>
       <div className="account-info-wrapper">
@@ -46,20 +48,39 @@ const Account = () => {
           </li>
         </ul>
         <h2>Your Orders</h2>
+      </div>
         <>
-        <div>
+      <div>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             <ul>
-                {orders && orders.map((order) => (
-                    <li key={order.id}>
-                        Reference No: {order.id}, Total: {order.totalAmount}
-                    </li>
+            {orders && orders.map((order) => (
+                    <div className="order-container" key={order.id}>
+                      <div className="order-details">
+                        <h3>Order ID: {order.id}</h3>
+                        <h4>Order Date: {order.createdAt}</h4>
+                      </div>
+                      <div className="products-container">
+                        {order.attributes.products && order.attributes.products.map((product) => (
+                          <div className="product-container" key={product.id}>
+                            <div className="product-img-wrapper">
+                              {product.img && (
+                                <img src={process.env.REACT_APP_UPLOAD_URL + product.img} alt={product.title} />
+                              )}
+                            </div>
+                            <div className="product-details">
+                              <h4>{product.title}</h4>
+                              <p>Price: ${product.price}</p>
+                              {/* Add more details as needed */}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div> 
                 ))}
             </ul>
-        </div>
-        </>
       </div>
+        </>
       <button onClick={navigateToLogout}>Logout</button>
     </div>
   );

@@ -1,90 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthContext } from '../../../Context/authContext';
+import { useCheckoutContext } from '../../../Context/checkoutContext';
 import './Register.scss';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import GuestCheckout from '../GuestCheckout/GuestCheckout';
 
 const Register = () => {
+  const { setUser } = useAuthContext();
+  const { checkoutProcess, setCheckoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const navigate = useNavigate();
-  const { registerUser, setRegisterUser } = useAuthContext()
-  const notify = () => toast("Wow so easy!");
 
-
-const registerNewUser = async () => {
-  try {
-    const url = `http://localhost:1337/api/auth/local/register`;
-    if (registerUser.username && registerUser.email && registerUser.password) {
-      const res = await axios.post(url, registerUser);
-      if (res.status === 200) {
-        toast.success('Registered Successfully');
-        setRegisterUser({
-          username: '',
-          email: '',
-          password: ''
-        });
-        setTimeout(() => {
-          navigate('/login');
-        }, 1500);
-      } else {
-        toast.error('Registration failed. Please try again.');
-        console.log('Registration failed. Status code:', res.status);
-      }
-
-    }
-  } catch (error) {
-    toast.error('Registration failed. Please try again.');
-    console.log('404 registerUser =', registerUser)
-  }
-}
-
-const handleUserChange = ({target}) => {
-  const { name, value } = target
-    setRegisterUser((currentUser) => ({
-      ...currentUser,
+  const handleUserChange = ({ target: { name, value } }) => {
+    setFormData((currentForm) => ({
+      ...currentForm,
       [name]: value,
     }));
-}
+  };
+
+  const registerNewUser = async () => {
+    try {
+      const url = `http://localhost:1337/api/auth/local/register`;
+      if (formData.username && formData.email && formData.password) {
+        const { data } = await axios.post(url, formData);
+        if (data.jwt) {
+          toast.success('Registered Successfully');
+          localStorage.setItem('token', data.jwt);
+          localStorage.setItem('userData', JSON.stringify(data.user));
+          setUser(data.user);
+          if (checkoutProcess) {
+            handleCheckout(data.user);
+          } else {
+            navigate('/');
+          }
+        } else {
+          toast.error('Registration Attempt Failed');
+        }
+      }
+    } catch (error) {
+      toast.error('Registration Attempt Failed');
+    }
+  };
+
+  const handleClose = () => {
+    setCheckoutProcess(false);
+    navigate('/'); // Navigate to a default route
+  };
 
   return (
     <div className='register-wrapper'>
       <div className="register-box">
         <h3>Register</h3>
-      <form>
-        <label></label>
-        <input 
-        type='text' 
-        name='username'
-        value={registerUser.username}
-        onChange={handleUserChange}
-        placeholder='First Name'></input>
-      </form>
-      <form>
-        <label></label>
-        <input 
-        type='email' 
-        name='email'
-        value={registerUser.email}
-        onChange={handleUserChange}
-        placeholder='Enter your email...'></input>
-      </form>
-      <form>
-        <label></label>
-        <input 
-        type='password' 
-        name='password'
-        value={registerUser.password}
-        onChange={handleUserChange}
-        placeholder='Enter your password...'></input>
-      </form>
-      <button onClick={registerNewUser}>register</button>
-      <button onClick={notify}>Notify!</button>
-      <a href='/login'> <span>Already have an account?</span> </a>
+        <form>
+          <label>Username</label>
+          <input 
+            type='text' 
+            name='username'
+            value={formData.username}
+            onChange={handleUserChange}
+            placeholder='Enter your username...'
+          />
+          <label>Email</label>
+          <input 
+            type='email' 
+            name='email'
+            value={formData.email}
+            onChange={handleUserChange}
+            placeholder='Enter your email...'
+          />
+          <label>Password</label>
+          <input 
+            type='password' 
+            name='password'
+            value={formData.password}
+            onChange={handleUserChange}
+            placeholder='Enter your password...'
+          />
+          <button type="button" onClick={registerNewUser}>Continue</button>
+          { checkoutProcess &&
+          <button type="button" onClick={handleGuestCheckoutClick}></button>  
+          }
+        </form>
       </div>
-      <ToastContainer/>
+      {checkoutProcess && (
+          <button className="close-checkout" onClick={() => handleClose() }>Close x</button>
+        )}
+      <GuestCheckout />
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

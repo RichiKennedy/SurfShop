@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.scss';
 import { useAuthContext } from '../../../Context/authContext';
+import { useCheckoutContext } from '../../../Context/checkoutContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import GuestCheckout from '../GuestCheckout/GuestCheckout';
 
 const Login = () => {
-  const { user, setUser } = useAuthContext();
+  const { setUser } = useAuthContext();
+  const { checkoutProcess, setCheckoutProcess, handleCheckout, handleGuestCheckoutClick } = useCheckoutContext();
+  const [formData, setFormData] = useState({ identifier: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setUser((currentUser) => ({
-      ...currentUser,
+  const handleChange = ({ target: { name, value } }) => {
+    setFormData((currentForm) => ({
+      ...currentForm,
       [name]: value,
     }));
   };
-
-  console.log('user:', user);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('userData');
@@ -27,71 +29,85 @@ const Login = () => {
     }
   }, [setUser]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const handleLogin = async () => {
     const url = `http://localhost:1337/api/auth/local`;
     try {
-      if (user?.identifier && user?.password) {
-        const { data } = await axios.post(url, {
-          identifier: user.identifier,
-          password: user.password,
-        });
-        console.log('Login response:', data);
+      if (formData.identifier && formData.password) {
+        setLoading(true);
+        const { data } = await axios.post(url, formData);
+        setLoading(false);
         if (data.jwt) {
           localStorage.setItem('token', data.jwt);
           localStorage.setItem('userData', JSON.stringify(data.user));
           setUser(data.user);
-          const successMessage = `Successful login! Welcome ${data.user.username}`.toUpperCase();
-          toast.success(successMessage);
-          setTimeout(() => {
+          toast.success(`Successful login! Welcome ${data.user.username}`);
+          if (checkoutProcess) {
+            handleCheckout(data.user);
+          } else {
             navigate('/');
-          }, 1000);
+          }
         } else {
           toast.error('Login Attempt Failed');
-          console.log('Login failed but caught the error');
         }
       }
     } catch (error) {
+      setLoading(false);
       toast.error('Login Attempt Failed');
-      console.error('Login error:', error);
     }
   };
 
   const navigateToRegister = () => {
     navigate(`/register`);
   };
+  const handleClose = () => {
+    setCheckoutProcess(false);
+    navigate('/'); 
+  };
+
 
   return (
     <div className='login-wrapper'>
       <div className="login-box">
         <h3>Sign in</h3>
         <form>
-          <label></label>
+          <label>Email</label>
           <input 
             type='email' 
             name='identifier'
-            value={user?.identifier || ''}
+            value={formData.identifier}
             onChange={handleChange}
             placeholder='Enter your email...'
           />
-        </form>
-        <form>
-          <label></label>
+          <label>Password</label>
           <input 
             type='password' 
             name='password'
-            value={user?.password || ''}
+            value={formData.password}
             onChange={handleChange}
             placeholder='Enter your password...'
           />
+          <button type="button" onClick={handleLogin} disabled={loading}>
+            {loading ? 'Loading...' : 'Continue'}
+          </button>
         </form>
-        <button onClick={handleLogin}>Continue</button>
         <div className="line-container">
           <div className="line"></div>
           <h6>or</h6>
           <div className="line"></div>
         </div>
         <button onClick={navigateToRegister}>Register</button>
+        {checkoutProcess && (
+          <button onClick={() => handleGuestCheckoutClick()}>Continue as Guest</button>
+        )}
       </div>
+        {checkoutProcess && (
+          <button className="close-checkout" onClick={() => handleClose() }>Close x</button>
+        )}
+      <GuestCheckout />
     </div>
   );
 };
