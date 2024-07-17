@@ -55,10 +55,8 @@ const Navbar = () => {
 
   const handleAccountClick = () => {
     if (location.pathname === '/account' || location.pathname === '/login') {
-      // If the account or login page is open, close it and go back to the previous path
       navigate(previousPath);
     } else {
-      // If the account or login page is not open, open it and save the current path
       navigate(user && user.username ? '/account' : '/login');
     }
   };
@@ -88,7 +86,7 @@ const Navbar = () => {
             <div className='mui-wrapper'>
               <PermIdentityOutlinedIcon className='mui-icon' /> 
             </div>
-            <span className='link'>{user && user.username ? user.username : 'account'}</span>
+            <span>{user && user.username ? user.username : 'account'}</span>
           </span>  
           <Link className='link' onClick={() => setOpenCart(true)}>
             <div className='mui-wrapper'>

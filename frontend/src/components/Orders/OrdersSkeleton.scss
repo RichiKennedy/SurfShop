@@ -1,0 +1,45 @@
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+    
+    .order-skeleton-container {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 900px;
+        border-radius: 10px;
+        animation: pulse 1.5s infinite;
+
+        .skeleton-products-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+    
+            .skeleton-product-container {
+                display: flex;
+                gap: 10px;
+                width: 25%;
+
+                    .card-placegolder {
+                        max-width: 100%;
+                        object-fit: contain;
+                        color: lightcoral;
+                    }
+            }
+
+        }  
+    }
+    @keyframes pulse {
+        0% {
+          background-color: rgba(165, 165, 165, 0.4);
+        }
+        50% {
+          background-color: rgba(165, 165, 165, 0.8);
+        }
+        100% {
+          background-color: rgba(165, 165, 165, 0.4);
+        }
+      }
+}
