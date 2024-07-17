@@ -51,18 +51,17 @@
             width: 33.3%;
             gap: 15px;
 
-            .mui-wrapper {
-                display: flex;
-                align-items: flex-end;
-                justify-content: center;
-
-                
-                .mui-icon {
-                    color: #000;
-                }
-            }
-            .link span {
+            span.link {
                 text-transform: uppercase;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                .mui-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
         }
 
