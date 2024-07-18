@@ -57,4 +57,12 @@
               }
         }
     }
+    .orders-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        ul {
+           margin: 20px 0px; 
+        }
+    }
 }
