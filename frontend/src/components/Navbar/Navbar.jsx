@@ -53,13 +53,24 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
+  const closeCategoryPopUpMenu = () => {
+    setPopUpMenuCategory(null);
+  }
+
   const handleAccountClick = () => {
     if (location.pathname === '/account' || location.pathname === '/login') {
       navigate(previousPath);
     } else {
       navigate(user && user.username ? '/account' : '/login');
     }
+    closeCategoryPopUpMenu();
   };
+
+  const handleCartClick = () => {
+    closeCategoryPopUpMenu();
+    setOpenCart(true);
+    }
+
   return (
     <>
     <nav className='navbar'     
@@ -79,7 +90,12 @@ const Navbar = () => {
             )}
           </section>
           <section className='center'>
-            <Link className='link' to="/"> The Shop </Link>
+            <Link 
+            className='link' 
+            to="/"
+            onClick={closeCategoryPopUpMenu}> 
+            The Shop 
+            </Link>
           </section>
           <section className='right'>
           <span className='link' onClick={handleAccountClick}>
@@ -88,7 +104,7 @@ const Navbar = () => {
             </div>
             <span>{user && user.username ? user.username : 'account'}</span>
           </span>  
-          <Link className='link' onClick={() => setOpenCart(true)}>
+          <Link className='link' onClick={handleCartClick}>
             <div className='mui-wrapper'>
             {products.length >= 1 ?
             <ShoppingBagSharpIcon className='mui-icon' style={{ fill: 'lime', stroke: 'black', strokeWidth: '1.5'}}  /> :
