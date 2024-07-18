@@ -37,7 +37,7 @@ const Orders = () => {
 
 
       return (
-        <ul>
+        <>
           {(loading || !imagesLoaded) && <OrdersSkeleton />}
           {error && <p>Error: {error.message}</p>}
           {!loading && imagesLoaded && orders && orders.map((order) => {
@@ -68,7 +68,7 @@ const Orders = () => {
               </div>
             );
           })}
-        </ul>
+        </>
       );
     };
 

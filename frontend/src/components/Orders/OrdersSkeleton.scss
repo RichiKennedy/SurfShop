@@ -1,9 +1,4 @@
-ul {
-    display: flex;
-    flex-direction: column;
-    gap: 40px; 
-    
-    .order-skeleton-container {
+        .order-skeleton-container {
         display: flex;
         flex-direction: column;
         background-color: rgba(0, 0, 0, 0.2);
@@ -11,6 +6,7 @@ ul {
         width: 900px;
         border-radius: 10px;
         animation: pulse 1.5s infinite;
+        margin: 0px 0px 30px;
 
         .skeleton-products-container {
             display: flex;
@@ -42,4 +38,3 @@ ul {
           background-color: rgba(165, 165, 165, 0.4);
         }
       }
-}

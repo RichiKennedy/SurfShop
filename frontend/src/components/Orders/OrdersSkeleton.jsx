@@ -3,7 +3,7 @@ import './OrdersSkeleton.scss'
 
 const OrdersSkeleton = () => {
   return (
-    <ul>
+    <>
           { [1, 2, 3, 4].map((order) => (
           <div className="order-skeleton-container">
           <div className="skeleton-products-container">
@@ -23,8 +23,8 @@ const OrdersSkeleton = () => {
                 ))}
           </div>
         </div>))}
-            
-</ul>
+    </>
+ 
   )
 }
 

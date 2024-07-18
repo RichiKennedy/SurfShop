@@ -53,7 +53,9 @@ const Account = () => {
       </div>
       <div className="orders-wrapper">
         <h2>Your Orders</h2>
+        <ul>
         {user && <Orders />}
+        </ul>
       </div>
     </motion.div>
   );
