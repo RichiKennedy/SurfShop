@@ -22,7 +22,7 @@ const FeaturedProducts = ({ type, recommendedCat, gender }) => {
   useEffect(() => {
     if (!loading && data) {
       const shuffledData = data.sort(() => Math.random() - 0.5);
-      const limitedData = shuffledData.slice(0, 6);
+      const limitedData = shuffledData.slice(0, 7);
       setRecommendedProducts(limitedData);
       setIsLoading(false);
     }
