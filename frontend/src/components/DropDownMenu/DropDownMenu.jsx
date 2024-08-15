@@ -6,10 +6,12 @@ import Cart from '../Cart/Cart';
 import { useAuthContext } from '../../Context/authContext';
 import { useCheckoutContext } from '../../Context/checkoutContext';
 import { useNavigate } from 'react-router-dom';
+import { useCartContext } from '../../Context/cartContext';
 
 const DropDownMenu = ({ setOpen, isOpen, isFilter, isCart, amountOfProducts }) => {
   const navigate = useNavigate()
   const { user } = useAuthContext();
+  const { cartProducts } = useCartContext();
   const { 
     isFormVisible,
     handleCheckout,
@@ -75,13 +77,18 @@ useEffect(() => {
         {isCart && (
           <Cart />
         )}
-        <div className="filter-footer">
-          {isCart ?
-            <button onClick={handleCheckoutButtonClick}>Checkout</button> :
+          {isCart ? (        
+            cartProducts.length >= 1 ? (
+      <div className="filter-footer">
+      <button onClick={handleCheckoutButtonClick}>Checkout</button>
+      </div>
+    ) : null
+          ) : (
+            <div className="filter-footer">
             <button onClick={() => setOpen(!isOpen)}>View Items ({amountOfProducts})</button>
-          }
+            </div>
+          )}
         </div>
-    </div>
     </motion.div>
   )
 }
