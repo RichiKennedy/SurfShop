@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './DropDownMenu.scss';
 import { motion } from 'framer-motion';
 import Filter from '../Filter/Filter';
@@ -12,6 +12,7 @@ const DropDownMenu = ({ setOpen, isOpen, isFilter, isCart, amountOfProducts }) =
   const navigate = useNavigate()
   const { user } = useAuthContext();
   const { cartProducts } = useCartContext();
+  const [loading, setLoading] = useState(false);
   const { 
     isFormVisible,
     handleCheckout,
@@ -46,8 +47,9 @@ useEffect(() => {
   }, [isOpen, isFilter, isCart]);
   
   const handleCheckoutButtonClick = () => {
+    setLoading(true);
     if (user && user.id) {
-      handleCheckout(user);
+      handleCheckout(user).finally(() => setLoading(false));
     } else {
       setCheckoutProcess(true);
       setOpen(!isOpen);
@@ -80,7 +82,12 @@ useEffect(() => {
           {isCart ? (        
             cartProducts.length >= 1 ? (
       <div className="filter-footer">
-      <button onClick={handleCheckoutButtonClick}>Checkout</button>
+      <button 
+          onClick={handleCheckoutButtonClick} 
+          className={loading ? 'loading' : ''}
+          disabled={loading}>
+          {loading ? 'Processing...' : 'Checkout'}
+      </button>
       </div>
     ) : null
           ) : (
