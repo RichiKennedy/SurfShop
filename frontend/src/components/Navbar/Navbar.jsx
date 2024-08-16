@@ -107,7 +107,7 @@ const Navbar = () => {
           <Link className='link' onClick={handleCartClick}>
             <div className='mui-wrapper'>
             {products.length >= 1 ?
-            <ShoppingBagSharpIcon className='mui-icon' style={{ fill: 'lime', stroke: 'black', strokeWidth: '1.5'}}  /> :
+            <ShoppingBagSharpIcon className='mui-icon' style={{ fill: '#1cd760', stroke: 'black', strokeWidth: '1.5'}}  /> :
             <ShoppingBagOutlinedIcon className='mui-icon' />
             }
             </div>
