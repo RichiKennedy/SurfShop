@@ -6,6 +6,7 @@ import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
 // import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 import { useFilterContext } from '../../Context/filterContext';
+import VideoAdvertisement from '../../components/VideoAdvertisement/VideoAdvertisement';
 
 const Home = () => {
   const {setSelectedSubCat, setSelectedFit} = useFilterContext();
@@ -27,6 +28,7 @@ const Home = () => {
       {/* <Slider /> */}
       <CategoryHero />
       <FeaturedProducts type='new collection' />
+      <VideoAdvertisement />
       {/* <CategoryGrid /> */}
     </motion.div>
   )
