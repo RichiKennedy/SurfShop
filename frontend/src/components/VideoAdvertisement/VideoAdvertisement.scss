@@ -1,0 +1,21 @@
+.video-advertisement-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 800px;
+
+    .video-overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.2);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        position: absolute;
+        font-size: 40px;
+    }
+}
