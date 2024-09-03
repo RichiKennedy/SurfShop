@@ -15,7 +15,7 @@ const VideoAdvertisement = () => {
   return (
     <div className='video-advertisement-container'>
         <div className="video-overlay">
-            New fall collection 
+            <h4>New fall collection</h4> 
             </div>
       {videoUrl ? (
         <video autoPlay loop muted playsInline className="video-banner__content">
@@ -23,7 +23,9 @@ const VideoAdvertisement = () => {
           Your browser does not support the video tag.
         </video>
       ) : (
-        <div>No video available</div>
+        <div>
+          <h4>No video available</h4>
+        </div>
       )}
     </div>
   );
