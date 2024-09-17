@@ -12,7 +12,7 @@ makeRequest.interceptors.request.use(
     const token = localStorage.getItem('token');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
-      console.log('Authorization Header:', config.headers['Authorization']); // Log the Authorization header
+      console.log('Authorization Header:', config.headers['Authorization']); 
     }
     return config;
   },

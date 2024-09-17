@@ -4,74 +4,118 @@ import Card from '../Card/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
 import { useFilterContext } from '../../Context/filterContext';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 
 const FeaturedProducts = ({ type, recommendedCat, gender }) => {
   const { selectedCategory, setSelectedCategory } = useFilterContext();
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
   const [recommendedProducts, setRecommendedProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCategoryTemp, setSelectedCategoryTemp] = useState('men');
-  
-  const whatGender = !gender ? '' : `&filters[categories][id][$eq]=${gender}`
-  const recommended = !recommendedCat ? '' : `&filters[sub_categories][id][$eq]=${recommendedCat}${whatGender}`;
-  const collection = `&filters[categories][title][$eq]=${selectedCategoryTemp}`;
-  const toggleProducts = type === 'recommended' ? recommended : collection;
   const navigate = useNavigate();
-  const { data, loading, error } = useFetch(`/products?populate=*${toggleProducts}`);
-  const {data: category} = useFetch(`/categories?[filters][categories][title]`);
+  const genderFilter = gender ? `&filters[categories][id][$eq]=${gender}` : '';
+  const recommendedFilter = recommendedCat ? `&filters[sub_categories][id][$eq]=${recommendedCat}${genderFilter}` : '';
+  const collectionFilter = `&filters[categories][title][$eq]=${selectedCategoryTemp}`;
+  const productQuery = type === 'recommended' ? recommendedFilter : collectionFilter;
+  const { data, loading } = useFetch(`/products?populate=*${productQuery}`);
+  const { data: categories } = useFetch(`/categories?[filters][categories][title]`);
 
   useEffect(() => {
     if (!loading && data) {
-      const shuffledData = data.sort(() => Math.random() - 0.5);
-      const limitedData = shuffledData.slice(0, 7);
-      setRecommendedProducts(limitedData);
+      const shuffledProducts = [...data].sort(() => Math.random() - 0.5).slice(0, 15);
+      setRecommendedProducts(shuffledProducts);
       setIsLoading(false);
     }
-  }, [data, loading, error]);
-
-  const menOrWomen = (categorySelected) => {
-    setSelectedCategoryTemp(categorySelected)
-  }
-  const navigateToCategory = () => {
-    setSelectedCategory(selectedCategoryTemp);
-  }
+  }, [data, loading]);
 
   useEffect(() => {
     if (selectedCategory) {
       navigate(`/products/${selectedCategory}`);
     }
-  }, [ selectedCategory, navigate ])
+  }, [selectedCategory, navigate]);
+
+  const handleScroll = () => {
+    const container = document.querySelector('.image-grid-container');
+    if (!container) return;
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    setIsAtStart(container.scrollLeft === 0);
+    setIsAtEnd(container.scrollLeft >= maxScrollLeft - 1); 
+  };
+
+  const scrollContainer = (direction) => {
+    const container = document.querySelector('.image-grid-container');
+    const productCard = container.querySelector('.image-card');
+
+    if (productCard) {
+      const productWidth = productCard.clientWidth;
+      const scrollAmount = productWidth * Math.floor(container.clientWidth / productWidth);
+
+      container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    const container = document.querySelector('.image-grid-container');
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      handleScroll(); 
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [recommendedProducts]);
+
   return (
     <section className="featured-products">
       <div className="title-wrapper">
         <h2 className="title">{type}</h2>
-        {type === 'new collection' && (
+        {type === 'new collection' && categories && (
           <ul>
-            {category?.map((gender) =>  
-            <li
-              className=""
-              key={gender.attributes.title}
-              onClick={() => menOrWomen(gender.attributes.title)}
-              style={{
-                textDecoration: gender.attributes.title !== selectedCategoryTemp ? 'none' : 'line-through',
-              }}
-            >
-              {gender.attributes?.title}
-            </li>)}
+            {categories.map((cat) => (
+              <li
+                key={cat.attributes.title}
+                onClick={() => setSelectedCategoryTemp(cat.attributes.title)}
+                style={{
+                  textDecoration: cat.attributes.title === selectedCategoryTemp ? 'line-through' : 'none',
+                }}
+              >
+                {cat.attributes.title}
+              </li>
+            ))}
           </ul>
         )}
       </div>
-      <div className="image-grid-container">
-      {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          recommendedProducts &&
-          recommendedProducts.map((item) => <Card item={item} key={item?.id} />)
+
+      <div className="product-section">
+        <div className="image-grid-container">
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            recommendedProducts.map((item) => <Card item={item} key={item?.id} />)
+          )}
+          {type === 'new collection' && (
+            <Link className="view-all" onClick={() => setSelectedCategory(selectedCategoryTemp)}>
+              <h1>View All</h1>
+            </Link>
+          )}
+        </div>
+
+        {!isAtStart && (
+          <div className="button left" role="button" onClick={() => scrollContainer(-1)}>
+            <ChevronLeftOutlinedIcon style={{ fill: '#FFF' }} />
+          </div>
         )}
-        { type === 'new collection' && (
-        <Link className="view-all"
-        onClick={() => navigateToCategory()}>
-          <h1> view all </h1>
-        </Link>)}
+
+        {!isAtEnd && (
+          <div className="button right" role="button" onClick={() => scrollContainer(1)}>
+            <ChevronRightOutlinedIcon style={{ fill: '#FFF' }} />
+          </div>
+        )}
       </div>
     </section>
   );

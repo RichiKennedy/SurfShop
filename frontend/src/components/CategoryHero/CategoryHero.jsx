@@ -51,7 +51,7 @@ const CategoryHero = () => {
 
               />
             <div className="overlay">
-                <h4>Shop Mens</h4>
+                <h4 role='button'>Shop Mens</h4>
             </div>
         </div>
         </Link>
@@ -63,7 +63,7 @@ const CategoryHero = () => {
         alt='Category-Womens'
           />
             <div className="overlay">
-                <h4>Shop Womens</h4>
+                <h4 role='button'>Shop Womens</h4>
             </div>
         </div>
         </Link>

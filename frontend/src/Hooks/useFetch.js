@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { makeRequest } from "../makeRequest"; // Ensure this is your axios instance
+import { makeRequest } from "../makeRequest"; 
 
 const useFetch = (url, withAuth = false) => {
   const [data, setData] = useState(null);
