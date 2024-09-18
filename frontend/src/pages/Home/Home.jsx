@@ -29,6 +29,8 @@ const Home = () => {
       <CategoryHero />
       <FeaturedProducts type='new collection' />
       <VideoAdvertisement />
+      <FeaturedProducts type='pants' />
+      <FeaturedProducts type='outerwear' />
       {/* <CategoryGrid /> */}
     </motion.div>
   )
