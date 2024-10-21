@@ -4,6 +4,7 @@ const FilterContext = createContext();
 
 export const FilterProvider = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedMetaCategory, setSelectedMetaCategory] = useState('')
   const [selectedSubCat, setSelectedSubCat] = useState('');
   const [selectedFit, setSelectedFit] = useState('');
   const [sort, setSort] = useState('');
@@ -27,6 +28,8 @@ export const FilterProvider = ({ children }) => {
         setPopUpMenuCategory,
         productSelected, 
         setProductSelected,
+        selectedMetaCategory, 
+        setSelectedMetaCategory
       }}
     >
       {children}

@@ -17,7 +17,13 @@ const buildProductQuery = (type, recommendedCat, gender, selectedCategoryTemp) =
 };
 
 const FeaturedProducts = ({ type, recommendedCat, gender }) => {
-  const { selectedCategory, setSelectedCategory, selectedSubCat, setSelectedSubCat } = useFilterContext();
+  const { 
+    selectedCategory, 
+    setSelectedCategory, 
+    selectedMetaCategory, 
+    setSelectedMetaCategory, 
+    selectedSubCat, 
+    setSelectedSubCat } = useFilterContext();
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [products, setProducts] = useState([]);
@@ -29,26 +35,31 @@ const FeaturedProducts = ({ type, recommendedCat, gender }) => {
 
   const productQuery = buildProductQuery(type, recommendedCat, gender, selectedCategoryTemp);
   
-  const { data, loading } = useFetch(`/products?populate=*${productQuery}`);
+  const { data: productData, loading } = useFetch(`/products?populate=*${productQuery}`);
   const { data: categories } = useFetch(`/categories?[filters][categories][title]`);
+  const { data: metaCategoryData } = useFetch(`/meta-categories?filters[sub_categories][title][$eq]=${type}`);
 
   useEffect(() => {
-    if (!loading && data) {
-      const shuffledProducts = [...data].sort(() => Math.random() - 0.5).slice(0, 15);
+    if (!loading && productData) {
+      const shuffledProducts = [...productData].sort(() => Math.random() - 0.5).slice(0, 15);
       setProducts(shuffledProducts);
       setIsLoading(false);
     }
-  }, [data, loading]);
+  }, [productData, loading]);
 
-useEffect(() => {
-  if (selectedCategory && selectedSubCat) {
-    navigate(`/products/${selectedCategory}/${selectedSubCat}`);
-  }
-}, [navigate, selectedCategory, selectedSubCat])
+  useEffect(() => {
+    if (selectedCategory && selectedMetaCategory && selectedSubCat) {
+      navigate(`/products/${selectedCategory}/${selectedMetaCategory}/${selectedSubCat}`);
+    } 
+  }, [navigate, selectedCategory, selectedMetaCategory, selectedSubCat])
 
   const handleViewAllClick = () => {
     setSelectedCategory(selectedCategoryTemp);
     setSelectedSubCat(type);
+
+    if (metaCategoryData?.[0]?.attributes?.title) {
+      setSelectedMetaCategory(metaCategoryData[0].attributes.title);
+    }
   }
 
   const handleScroll = () => {

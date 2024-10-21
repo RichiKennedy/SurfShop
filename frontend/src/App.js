@@ -28,7 +28,7 @@ const Layout = () => {
       { !checkoutProcess && <Navbar />}
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/products/:category/:subCategory?/:fit?" element={<Products />} />
+        <Route path="/products/:category/:metaCategory?/:subCategory?/:fit?" element={<Products />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />

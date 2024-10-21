@@ -4,13 +4,15 @@ import useFetch from '../../Hooks/useFetch';
 import { useFilterContext } from '../../Context/filterContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
-
 const Filter = () => {
   const { setSort } = useFilterContext();
-  const {category, subCategory, fit} = useParams();
+  const { category, metaCategory, subCategory, fit } = useParams();
   const navigate = useNavigate();
-  const viewAllSubCats = `/sub-categories?[filters][categories][title][$eq]=${category}`;
-  const subCatFit = `/fits?[filters][sub_categories][title][$eq]=${subCategory}`;
+
+  const viewAllSubCats = `/sub-categories?[filters][categories][title][$eq]=${category}&[filters][meta_categories][title][$eq]=${metaCategory}`;
+  
+  const subCatFit = `/fits?[filters][categories][title][$eq]=${category}&[filters][sub_categories][title][$eq]=${subCategory}`;
+  
   const apiUrl = !subCategory ? viewAllSubCats : subCatFit;
 
   const { data } = useFetch(apiUrl);
@@ -18,23 +20,23 @@ const Filter = () => {
   const handleSubCatChange = (index) => {
     if (!subCategory) {
       const selectedSubCatValue = data && data[index] ? data[index].attributes.title : '';
-      navigate(`/products/${category}/${selectedSubCatValue}`);
+      navigate(`/products/${category}/${metaCategory}/${selectedSubCatValue}`);
     } else if (index === -1) {
-      navigate(`/products/${category}/${subCategory}`);
+      navigate(`/products/${category}/${metaCategory}/${subCategory}`);
     } else {
       const selectedFitValue = data && data[index] ? data[index].attributes.title : '';
-      navigate(`/products/${category}/${subCategory}/${selectedFitValue}`);
+      navigate(`/products/${category}/${metaCategory}/${subCategory}/${selectedFitValue}`);
     }
   };
 
   const removeSubCategory = () => {
-    navigate(`/products/${category}`);
+    navigate(`/products/${category}/${metaCategory}`);
   }
 
   return (
      <div className="filter">
         <ul className="form-control-container">
-          <h6>sort by</h6>
+          <h6>Sort by</h6>
           <li className='form-control'>
               <input type='radio' value='lowToHigh' name='sort-by' id='lowToHigh'onChange={e => setSort('asc') } />
             <label htmlFor='asc'> Price (Low to High)</label>
@@ -44,11 +46,10 @@ const Filter = () => {
             <label htmlFor='desc'> Price (High to Low)</label>
           </li>
         </ul>
-        
         <ul className="form-control-container">
         <h6>{!subCategory ? 
         `${category !== 'accessories' ? 
-        `${category}'s clothing` : `${category}`}` : `type of ${subCategory}`}
+        `${category}'s ${metaCategory}` : `${category}`}` : `Type of ${subCategory}`}
         </h6>
         {data?.map((subCats, index) => (
           <li className='form-control' id={subCats.id} key={subCats.id}>
@@ -83,10 +84,11 @@ const Filter = () => {
             onClick={() => removeSubCategory()}
             checked={!subCategory} 
           />
-          <label htmlFor='allProducts'>{category} collection</label>
+          <label htmlFor='allProducts'>{category} {metaCategory} Collection</label>
         </li>}
       </ul>
       </div> 
-  )
+  );
 }
+
 export default Filter;

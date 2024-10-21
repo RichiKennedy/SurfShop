@@ -11,7 +11,7 @@ import { useFilterContext } from '../../Context/filterContext';
 
 
 const Products = () => {
-  const { category, subCategory, fit } = useParams();
+  const { category, metaCategory, subCategory, fit } = useParams();
   const navigate = useNavigate();
   const {
     sort,
@@ -41,7 +41,7 @@ useEffect(() => {
 
 useEffect(() => {
   window.scrollTo(0, 0);
-},[category, subCategory, fit, sort])
+},[category, metaCategory, subCategory, fit, sort])
 
 useEffect(() => {
   window.scrollTo(0, 0);
@@ -51,17 +51,18 @@ useEffect(() => {
 const navigateToCategory = () => {
   navigate(`/products/${category}`);
 }
+const navigateToMetaCategory = () => {
+  navigate(`/products/${category}/${metaCategory}`);
+}
 const navigateToSubCategory = () => {
-  navigate(`/products/${category}/${subCategory}`);
+  navigate(`/products/${category}/${metaCategory}/${subCategory}`);
 }
 
 const generateHeaderText = () => {
-  if (category && !subCategory) {
-    return category !== 'accessories'
-    ? <h3>{category}'s collection</h3>
-    : <h3>{category}</h3>
+  if (category && !metaCategory) {
+    return category && <h3>{category}'s collection</h3>
 
-  } else if (category && subCategory && !fit) {
+  } else if (category && metaCategory && !subCategory) {
     return (
       <>
         <h3
@@ -70,16 +71,39 @@ const generateHeaderText = () => {
            {' / '}
         </h3>
         <h3 className='selected'>
-          {subCategory}
+          {metaCategory}
         </h3>
       </>
     );
-  } else if (category && subCategory && fit) {
+  } else if (metaCategory && subCategory && !fit) {
     return (
       <>
         <h3
         onClick={() => navigateToCategory()}>
            {category}'s collection
+        {` / `}
+        </h3>
+        <h3
+        onClick={() => navigateToMetaCategory()}>
+          {metaCategory}
+        {` / `}
+        </h3>
+        <h3 className='selected'>
+        {subCategory}
+        </h3>
+      </>
+    );
+  } else if (metaCategory && subCategory && fit) {
+    return (
+      <>
+        <h3
+        onClick={() => navigateToCategory()}>
+           {category}'s collection
+        {` / `}
+        </h3>
+        <h3
+        onClick={() => navigateToMetaCategory()}>
+          {metaCategory}
         {` / `}
         </h3>
         <h3

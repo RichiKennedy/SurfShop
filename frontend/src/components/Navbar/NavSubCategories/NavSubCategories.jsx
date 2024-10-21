@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './NavSubCategories.scss';
 import { motion } from 'framer-motion';
 import useFetch from '../../../Hooks/useFetch';
@@ -8,36 +7,46 @@ import { useFilterContext } from '../../../Context/filterContext';
 
 const NavSubCategories = () => {
   const { popUpMenuCategory, setPopUpMenuCategory } = useFilterContext();
-  const { data: subCategories } = useFetch(
-    `/sub-categories?[filters][categories][title][$eq]=${popUpMenuCategory}`
+  const featuredDisplay = 'new collection';
+
+  const { data: metaCategories } = useFetch(
+    `/meta-categories?populate[sub_categories][filters][categories][title][$eq]=${popUpMenuCategory}`
+  );  
+
+  const { data: newCollection } = useFetch(
+    `/sub-categories?populate=*&filters[title][$eq]=${featuredDisplay}`
   );
-  const navigate = useNavigate();
+
+  const [newCollectionImage, setNewCollectionImage] = useState('');
 
   useEffect(() => {
-    const handleScroll = (event) => {
-      if (popUpMenuCategory) {
-        event.preventDefault();
-      }
-    };
-    if (popUpMenuCategory) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('scroll', handleScroll, { passive: false });
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [popUpMenuCategory]);
+    if (newCollection?.[0]?.attributes?.image?.data) {
+      const imageData = newCollection[0].attributes.image.data;
 
-  const viewProducts = (category, subCat) => {
-    if (category && subCat) {
-      navigate(`/products/${category}/${subCat}`);
-    } else if (!subCat && category) {
+      let selectedImage = '';
+      if (popUpMenuCategory === 'men' && imageData[0]) {
+        selectedImage = imageData[0].attributes.url; // Image for men
+      } else if (popUpMenuCategory === 'women' && imageData[1]) {
+        selectedImage = imageData[1].attributes.url; // Image for women
+      }
+
+      setNewCollectionImage(`${process.env.REACT_APP_UPLOAD_URL}${selectedImage}`);
+    }
+  }, [newCollection, popUpMenuCategory]);
+
+  const navigate = useNavigate();
+
+  const viewProducts = (category, metaCat, subCat) => {
+    if (category && metaCat && subCat) {
+      navigate(`/products/${category}/${metaCat}/${subCat}`);
+    } else if (category && metaCat && !subCat) {
+      navigate(`/products/${category}/${metaCat}`);
+    } else if (!metaCat && category) {
       navigate(`/products/${category}`);
     }
     setPopUpMenuCategory(null);
   };
-
+console.log('metaCategories', metaCategories)
   return (
     <motion.div
       className="subCatMenuWrapper"
@@ -46,22 +55,52 @@ const NavSubCategories = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="subCat-overlay" onClick={() => setPopUpMenuCategory(null)}></div>
+      <div
+        className="subCat-overlay"
+        onClick={() => setPopUpMenuCategory(null)}
+      ></div>
       <div className="subCatMenu">
-        <nav>
-          <strong className="link" onClick={() => viewProducts(popUpMenuCategory, null)}> all {popUpMenuCategory} </strong>
-          <ul>
-            {subCategories?.map((subCats) => (
-              <li
-                key={subCats.id}
-                className="link"
-                onClick={() => viewProducts(popUpMenuCategory, subCats?.attributes.title)}
-              >
-                {subCats?.attributes.title}
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="menu-content-wrapper">
+          <nav className="nav-wrapper">
+            <div className="nav-menu">
+              {metaCategories?.map((metaCat) => (
+                <div className="menu" key={metaCat.id}>
+                  <h4>{metaCat?.attributes?.title}</h4>
+                  <ul>
+                  {metaCat?.attributes?.sub_categories?.data?.map((subCat) => (
+                    <li
+                      key={subCat.id}
+                      onClick={() => viewProducts(popUpMenuCategory, metaCat?.attributes?.title, subCat?.attributes?.title)}
+                    >
+                      {subCat?.attributes?.title}
+                    </li>
+                  ))}
+                </ul>
+                </div>
+              ))}
+            </div>
+          </nav>
+
+          <div className="card-wrapper">
+            <div className="card">
+              <div className="card-img-wrapper">
+                <img src={newCollectionImage} alt="New Collection" />
+              </div>
+              <div className="card-txt-wrapper">
+                <h4>{popUpMenuCategory} collection</h4>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-img-wrapper">
+                <img src={newCollectionImage} alt="New Collection" />
+              </div>
+              <div className="card-txt-wrapper">
+                <h4>{popUpMenuCategory} collection</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </motion.div>
   );

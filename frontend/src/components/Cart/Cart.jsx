@@ -37,8 +37,6 @@ const Cart = () => {
     return formatPrice(total);
   };
 
-  console.log('cart products', cartProducts);
-
   return (
     <>
       <div className={`cart ${shouldRemoveBorder ? 'remove-border' : ''}`}>

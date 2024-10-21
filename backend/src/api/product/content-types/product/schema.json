@@ -67,7 +67,8 @@
       "type": "enumeration",
       "enum": [
         "new collection",
-        "recommended"
+        "recommended",
+        "denim"
       ]
     },
     "mens": {
@@ -119,6 +120,12 @@
       "relation": "manyToMany",
       "target": "api::fit.fit",
       "mappedBy": "products"
+    },
+    "meta_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::meta-category.meta-category",
+      "inversedBy": "products"
     }
   }
 }

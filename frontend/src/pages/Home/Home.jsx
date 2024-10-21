@@ -7,13 +7,13 @@ import CategoryHero from '../../components/CategoryHero/CategoryHero'
 // import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 import { useFilterContext } from '../../Context/filterContext';
 import VideoAdvertisement from '../../components/VideoAdvertisement/VideoAdvertisement';
+import ImageAdvertisement from '../../components/ImageAdvertisement/ImageAdvertisement';
 
 const Home = () => {
-  const {setSelectedSubCat, setSelectedFit} = useFilterContext();
+  const {setSelectedSubCat} = useFilterContext();
   useEffect(() => {
     window.scrollTo(0, 0);
     setSelectedSubCat('');
-    setSelectedFit('');
 
     // ONLY WANT THIS TO RUN WHEN HOME PAGE IS OPENED NO NEED FOR DEPENDENCIES
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,7 +29,8 @@ const Home = () => {
       <CategoryHero />
       <FeaturedProducts type='new collection' />
       <VideoAdvertisement />
-      <FeaturedProducts type='pants' />
+      <ImageAdvertisement typeOfAdvert='denim'/>
+      <FeaturedProducts type='t-shirts' />
       <FeaturedProducts type='outerwear' />
       {/* <CategoryGrid /> */}
     </motion.div>

@@ -32,6 +32,23 @@
       "relation": "manyToMany",
       "target": "api::fit.fit",
       "mappedBy": "sub_categories"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "meta_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::meta-category.meta-category",
+      "mappedBy": "sub_categories"
     }
   }
 }
