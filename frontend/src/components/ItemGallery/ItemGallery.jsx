@@ -9,10 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 const ItemGallery = ({ setAmountOfProducts }) => {
   const navigate = useNavigate();
   const { sort } = useFilterContext();
-  const { category, subCategory, fit } = useParams();
+  const { category, metaCategory, subCategory, fit } = useParams();
 
   const categoryFilter = category 
     ? `/products?populate=*&filters[categories][title][$eq]=${category}`
+    : '';
+  const metaCategoryFilter = category && metaCategory && !subCategory
+    ? `&filters[meta_category][title][$eq]=${metaCategory}` 
     : '';
   const subCategoryFilter = category && subCategory 
     ? `&filters[sub_categories][title][$eq]=${subCategory}` 
@@ -23,9 +26,9 @@ const ItemGallery = ({ setAmountOfProducts }) => {
   const sortPriceFilter = sort 
     ? `&sort=price:${sort}` 
     : '';
-  const filterQuery = `${categoryFilter}${subCategoryFilter}${fitFilter}${sortPriceFilter}`;
+  const filterQuery = `${categoryFilter}${metaCategoryFilter}${subCategoryFilter}${fitFilter}${sortPriceFilter}`;
   const { data, loading } = useFetch(filterQuery);
-
+console.log('filterQuery', filterQuery)
   useEffect(() => {
     if (!loading && data !== null) {
       setAmountOfProducts(data.length);
