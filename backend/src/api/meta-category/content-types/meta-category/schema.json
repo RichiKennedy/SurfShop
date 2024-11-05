@@ -15,12 +15,6 @@
     "title": {
       "type": "string"
     },
-    "products": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product.product",
-      "mappedBy": "meta_category"
-    },
     "img": {
       "type": "media",
       "multiple": true,
@@ -37,6 +31,12 @@
       "relation": "manyToMany",
       "target": "api::sub-category.sub-category",
       "inversedBy": "meta_categories"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "mappedBy": "meta_categories"
     }
   }
 }

@@ -71,10 +71,6 @@
         "denim"
       ]
     },
-    "mens": {
-      "type": "boolean",
-      "required": true
-    },
     "largeDesc": {
       "type": "text"
     },
@@ -121,9 +117,9 @@
       "target": "api::fit.fit",
       "mappedBy": "products"
     },
-    "meta_category": {
+    "meta_categories": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::meta-category.meta-category",
       "inversedBy": "products"
     }
