@@ -6,7 +6,6 @@ import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
 // import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
 import { useFilterContext } from '../../Context/filterContext';
-import VideoAdvertisement from '../../components/VideoAdvertisement/VideoAdvertisement';
 import ImageAdvertisement from '../../components/ImageAdvertisement/ImageAdvertisement';
 
 const Home = () => {
@@ -28,7 +27,6 @@ const Home = () => {
       {/* <Slider /> */}
       <CategoryHero />
       <FeaturedProducts type='new collection' />
-      <VideoAdvertisement />
       <ImageAdvertisement typeOfAdvert='denim'/>
       <FeaturedProducts type='t-shirts' />
       <FeaturedProducts type='outerwear' />

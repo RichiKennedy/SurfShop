@@ -1,72 +1,57 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './CategoryHero.scss'
-import { Link, useNavigate } from 'react-router-dom'
-import { debounce } from 'lodash'
-import { useFilterContext } from '../../Context/filterContext'
+import { useNavigate } from 'react-router-dom'
+import useFetch from '../../Hooks/useFetch'
 
 
 const CategoryHero = () => {
-  const { selectedCategory, setSelectedCategory } = useFilterContext();
-  const [offsetY, setOffsetY] = useState(0);
   const navigate = useNavigate();
 
-    const navigateToMens = () => {
-      setSelectedCategory('men');
-    }
-    const navigateToWomens = () => {
-      setSelectedCategory('women');
-    }
+  const { data: heroVideo, loading, error } = useFetch('/contents?populate=*');
+  const {data: categoryTitle} = useFetch(`/categories?[filters][categories][title]`);
+  console.log('category', categoryTitle)
 
-    useEffect(() => {
-      if (selectedCategory) {
-        navigate(`/products/${selectedCategory}`);
-        setSelectedCategory('')
-      }
-    })
 
-    const handleScroll = debounce(() => {
-        setOffsetY(window.scrollY);
-      }, 1); 
-    
-      useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-    
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/products/${categoryId}`)
+  }
 
-    const data = [
-        process.env.PUBLIC_URL + '/images/Mens-hero.webp',
-        process.env.PUBLIC_URL + '/images/Womens-hero.webp',
-    ] 
+  if (loading) return <div>Loading...</div>;
+  if (error || !heroVideo || heroVideo.length === 0) return <div>Error loading video...</div>;
+
+  const videoUrl = heroVideo[0]?.attributes?.media?.data?.[0]?.attributes?.url;
+  const fullVideoUrl = process.env.REACT_APP_UPLOAD_URL + videoUrl; 
 
   return (
     <section className='hero-wrapper'>
-        <Link className='link'
-        onClick={() => navigateToMens()}>
-        <div className="image-container" style={{ transform: `translateY(${offsetY * 0.4}px)` }}>
-            <img 
-            src={data[0]} 
-            alt='Category-Mens'
-
-              />
-            <div className="overlay">
-                <h4 role='button'>Shop Mens</h4>
-            </div>
+      <div className='video-advertisement-container'>
+      {videoUrl ? (
+        <video autoPlay loop muted playsInline className="video-banner__content">
+          <source src={fullVideoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <div>
+          <h4>No video available</h4>
         </div>
-        </Link>
-        <Link className='link'
-        onClick={() => navigateToWomens()}>
-        <div className="image-container" style={{ transform: `translateY(${offsetY * 0.4}px)` }}>
-        <img 
-        src={data[1]} 
-        alt='Category-Womens'
-          />
-            <div className="overlay">
-                <h4 role='button'>Shop Womens</h4>
-            </div>
+      )}
+      </div>
+      <div className="txt-content-overlay">
+        <div className="title">
+          <h5>explore:</h5>
+          <h2>the shop</h2>
         </div>
-        </Link>
+        <div className="btn-container">
+          {categoryTitle?.map((category) => 
+          <div className="btn" onClick={() => handleCategoryClick(category.attributes.title)}>
+            <span>shop {category.attributes.title}s</span>
+            <div className="arrow-icon">
+              <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt="" />
+            </div>
+          </div>
+          )}
+        </div>
+      </div>
     </section>
   )
 }
