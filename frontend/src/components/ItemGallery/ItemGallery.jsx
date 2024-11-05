@@ -15,7 +15,7 @@ const ItemGallery = ({ setAmountOfProducts }) => {
     ? `/products?populate=*&filters[categories][title][$eq]=${category}`
     : '';
   const metaCategoryFilter = category && metaCategory && !subCategory
-    ? `&filters[meta_category][title][$eq]=${metaCategory}` 
+    ? `&filters[meta_categories][title][$eq]=${metaCategory}` 
     : '';
   const subCategoryFilter = category && subCategory 
     ? `&filters[sub_categories][title][$eq]=${subCategory}` 
