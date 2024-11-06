@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './CategoryHero.scss'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../Hooks/useFetch'
@@ -10,6 +10,9 @@ const CategoryHero = () => {
   const { data: heroVideo, loading, error } = useFetch('/contents?populate=*');
   const {data: categoryTitle} = useFetch(`/categories?[filters][categories][title]`);
   console.log('category', categoryTitle)
+  console.log('heroVideo', heroVideo)
+
+  const videoRef = useRef(null); 
 
 
   const handleCategoryClick = (categoryId) => {
@@ -22,14 +25,30 @@ const CategoryHero = () => {
   const videoUrl = heroVideo[0]?.attributes?.media?.data?.[0]?.attributes?.url;
   const fullVideoUrl = process.env.REACT_APP_UPLOAD_URL + videoUrl; 
 
+  const handleVideoEnd = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 3.2; 
+      videoRef.current.pause(); 
+    }
+  };
+
   return (
     <section className='hero-wrapper'>
       <div className='video-advertisement-container'>
       {videoUrl ? (
-        <video autoPlay loop muted playsInline className="video-banner__content">
-          <source src={fullVideoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          <video
+            ref={videoRef}
+            autoPlay
+            loop={false}  
+            muted
+            playsInline
+            className="video-banner__content"
+            onEnded={handleVideoEnd}  
+          >
+            <source src={fullVideoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
       ) : (
         <div>
           <h4>No video available</h4>
