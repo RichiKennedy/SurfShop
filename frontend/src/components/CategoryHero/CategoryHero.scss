@@ -18,20 +18,24 @@
         }
     }
     .txt-content-overlay {
-        position: absolute;
+        position: fixed;
         left: 0;
         bottom: 0;
         margin: 20px;
-
-            .title {
-                display: flex;
-                flex-direction: column;
-                color: rgba(255, 255, 255, 1);
-                text-transform: uppercase;
-                font-size: 5.5vw;
-
+        
+        .title {
+            display: flex;
+            flex-direction: column;
+            color: rgba(255, 255, 255, 1);
+            text-transform: uppercase;
+            font-size: 5.5vw;
+            transition: .3s ease-in-out;
+                
                 h5 {
                     font-weight: 500;
+                }
+                h2 {
+                    transition: .5s ease;
                 }
 
             }
@@ -40,6 +44,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                transition: .3s ease-in-out;
 
                 .btn {
                     background-color: rgba(255, 255, 255, 1);

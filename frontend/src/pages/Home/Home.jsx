@@ -4,18 +4,11 @@ import './Home.scss'
 // import Slider from '../../components/Slider/Slider'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
-// import CategoryGrid from '../../components/CategoryGrid/CategoryGrid'
-import { useFilterContext } from '../../Context/filterContext';
 import ImageAdvertisement from '../../components/ImageAdvertisement/ImageAdvertisement';
 
 const Home = () => {
-  const {setSelectedSubCat} = useFilterContext();
   useEffect(() => {
     window.scrollTo(0, 0);
-    setSelectedSubCat('');
-
-    // ONLY WANT THIS TO RUN WHEN HOME PAGE IS OPENED NO NEED FOR DEPENDENCIES
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
   return (
