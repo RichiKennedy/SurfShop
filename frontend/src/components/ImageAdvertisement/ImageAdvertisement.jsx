@@ -11,7 +11,6 @@ const ImageAdvertisement = ({ typeOfAdvert }) => {
 
     if (categoryLoading || categoryLoading || subCatLoading) return <p>Loading...</p>;
     if (categoryError || categoryError || subCatError) return <p>Error loading data...</p>;
-    console.log('metaCategoryData', metaCategoryData)
     const imageUrl = subCategoryData?.[0]?.attributes?.image?.data?.[0]?.attributes?.url;
     const fullImageUrl = process.env.REACT_APP_UPLOAD_URL + imageUrl;
 
