@@ -17,8 +17,6 @@ const SubCatBanners = ({ onVisibleSubCategoryChange }) => {
         }
     }, [subCategories]);
 
-    console.log('filteredSubCategories', filteredSubCategories)
-
     useEffect(() => {
         if (filteredSubCategories.length === 0) return;
 

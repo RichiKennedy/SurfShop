@@ -26,35 +26,45 @@
         .title {
             display: flex;
             flex-direction: column;
-            color: rgba(255, 255, 255, 1);
             text-transform: uppercase;
-            font-size: 5.5vw;
-            transition: .3s ease-in-out;
+            font-size: 70px;
+            transition: .3s ease;
                 
                 h5 {
                     font-weight: 500;
                 }
-                h2 {
-                    transition: .5s ease;
+                h2.animate {
+                
+                    position: relative;
+                    animation: slideInFromTop 0.5s ease forwards;
+                    opacity: 0;
                 }
-
+                @keyframes slideInFromTop {
+                    0% {
+                        top: -60px;
+                        opacity: 0;
+                    }
+                    100% {
+                        top: 0;
+                        opacity: 1;
+                    }
+                }
             }
             
             .btn-container {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                transition: .3s ease-in-out;
+                gap: 20px;
+                transition: .3s ease;
 
                 .btn {
-                    background-color: rgba(255, 255, 255, 1);
                     display: flex;
                     justify-content: space-between;
-                    width: calc(50% - 10px);
                     align-items: center;
+                    width: 350px;
                     height: 50px;
                     padding: 15px;
-                    transition: .5s ease-in-out;
+                    transition: .3s ease;
                     cursor: pointer;
                     
                     span {
@@ -68,7 +78,7 @@
                         align-items: center;
                         transform: rotate(-45deg);
                         justify-content: center;
-                        transition: .5s ease-in-out;
+                        transition: .3s ease;
 
                         img {
                             max-width: 100%;
@@ -77,13 +87,34 @@
                         }
                     }
                 }
-                .btn:hover {
-                    background-color: #222;
-                    color: rgba(255, 255, 255, 1);
-                }
-                .btn:hover .arrow-icon {
-                    filter: invert(1);
-                }
+                /* Default Style for .btn */
+.btn.default-hover {
+    background-color: #FFF;
+    color: #222;
+}
+
+/* Custom Style for .btn */
+.btn.custom-hover {
+    background-color: #222;
+    color: #FFF;
+}
+
+/* Default hover effect */
+.btn.default-hover:hover {
+    background-color: #222;
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Custom hover effect */
+.btn.custom-hover:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color: #222;
+}
+
+/* Arrow icon hover effect */
+.btn:hover .arrow-icon {
+    filter: invert(1);
+}
             }
     }
 }

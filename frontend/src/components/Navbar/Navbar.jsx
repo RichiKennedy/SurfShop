@@ -31,7 +31,7 @@ const Navbar = () => {
     const changeColor = () => {
       if (window.scrollY >= 1) {
         setCSSStyles({
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
         })
       } else {
         setCSSStyles({
