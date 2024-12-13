@@ -46,6 +46,12 @@
       "relation": "manyToMany",
       "target": "api::fit.fit",
       "inversedBy": "categories"
+    },
+    "meta_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::meta-category.meta-category",
+      "inversedBy": "categories"
     }
   }
 }

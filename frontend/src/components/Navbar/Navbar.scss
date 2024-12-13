@@ -1,11 +1,12 @@
 .navbar {
     display: flex;
     align-items: center;
+    position: sticky;
     height: 50px;
-    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 12;
     width: 100%;
-    margin-top: -50px;
     transition-timing-function: ease-in-out;
     transition: 0.4s;
     border-bottom: 1px solid #555;

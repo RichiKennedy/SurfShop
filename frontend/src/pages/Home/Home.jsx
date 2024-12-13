@@ -4,7 +4,7 @@ import './Home.scss'
 // import Slider from '../../components/Slider/Slider'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
-import ImageAdvertisement from '../../components/ImageAdvertisement/ImageAdvertisement';
+import SubCatBanners from '../../components/SubCatBanners/SubCatBanners';
 
 const Home = () => {
   useEffect(() => {
@@ -19,8 +19,8 @@ const Home = () => {
     >
       {/* <Slider /> */}
       <CategoryHero />
+      <SubCatBanners />
       <FeaturedProducts type='new collection' />
-      <ImageAdvertisement typeOfAdvert='denim'/>
       <FeaturedProducts type='t-shirts' />
       <FeaturedProducts type='outerwear' />
       {/* <CategoryGrid /> */}

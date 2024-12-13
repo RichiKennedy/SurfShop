@@ -15,7 +15,7 @@
     "title": {
       "type": "string"
     },
-    "img": {
+    "image": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -36,6 +36,12 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::product.product",
+      "mappedBy": "meta_categories"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
       "mappedBy": "meta_categories"
     }
   }
