@@ -1,60 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './CategoryHero.scss';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './CategoryHero.scss';
 import useFetch from '../../Hooks/useFetch';
 import SubCatBanners from '../SubCatBanners/SubCatBanners';
 
 const CategoryHero = () => {
-    const navigate = useNavigate();
     const { data: heroVideo, loading, error } = useFetch('/contents?populate=*');
     const { data: categoryTitle } = useFetch(`/categories?[filters][categories][title]`);
-
-    const [currentSubCategory, setCurrentSubCategory] = useState("the shop");
-    const [pendingSubCategory, setPendingSubCategory] = useState("the shop");
-    const [styleConfig, setStyleConfig] = useState({
-        titleColor: "#FFF",
-        arrowColor: "invert(0)",
-    });
-    const [isDefaultStyle, setIsDefaultStyle] = useState(true);
-    const [animateTitle, setAnimateTitle] = useState(false);
     const videoRef = useRef(null);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    // Helper function to update styles based on the category
-    const updateStyleConfig = (subCategory) => {
-        const styleMap = {
-            "new collection": { titleColor: "#222", arrowColor: "invert(1)", isDefault: false },
-            "outerwear": { titleColor: "#222", arrowColor: "invert(1)", isDefault: false },
-            default: { titleColor: "#FFF", arrowColor: "invert(0)", isDefault: true },
-        };
-        const newStyle = styleMap[subCategory] || styleMap.default;
-        setStyleConfig(newStyle);
-        setIsDefaultStyle(newStyle.isDefault);
-    };
-
-    const triggerTitleAnimation = (newSubCategory) => {
-        setPendingSubCategory(newSubCategory);
-        updateStyleConfig(newSubCategory); // Apply style config immediately when animation starts
-        setAnimateTitle(true); // Start animation
-
-        setTimeout(() => {
-            setAnimateTitle(false); // End animation
-            setCurrentSubCategory(newSubCategory); // Update the displayed title
-        }, 500);
-    };
-
-    const handleCategoryClick = (categoryId) => {
-        navigate(`/products/${categoryId}`);
-    };
-
-    const handleVisibleSubCategoryChange = (visibleSubCategory) => {
-        if (visibleSubCategory !== currentSubCategory) {
-            triggerTitleAnimation(visibleSubCategory);
-        }
-    };
 
     if (loading) return <div>Loading...</div>;
     if (error || !heroVideo || heroVideo.length === 0) return <div>Error loading video...</div>;
@@ -68,6 +23,10 @@ const CategoryHero = () => {
             videoRef.current.pause();
         }
     };
+
+    const handleCategoryClick = (gender) => {
+        navigate(`/products/${gender}`);
+    }
 
     return (
         <>
@@ -93,23 +52,20 @@ const CategoryHero = () => {
                     )}
                 </div>
                 <div className="txt-content-overlay">
-                    <div className="title" style={{ color: styleConfig.titleColor }}>
+                    <div className="title">
                         <h5>explore:</h5>
-                        <h2 className={animateTitle ? "animate" : ""}>
-                            {animateTitle ? pendingSubCategory : currentSubCategory}
-                        </h2>
+                        <h2>the shop</h2>
                     </div>
                     <div className="btn-container">
                         {categoryTitle?.map((category) => (
                             <div 
-                                className={`btn ${isDefaultStyle ? "default-hover" : "custom-hover"}`} 
+                                className="btn"
                                 onClick={() => handleCategoryClick(category.attributes.title)} 
                                 key={category.id}
                             >
                                 <span>shop {category.attributes.title}s</span>
                                 <div className="arrow-icon">
                                     <img 
-                                        style={{ filter: styleConfig.arrowColor }}
                                         src={`${process.env.PUBLIC_URL}/images/arrow.png`} 
                                         alt="" 
                                     />
@@ -119,7 +75,6 @@ const CategoryHero = () => {
                     </div>
                 </div>
             </section>
-            <SubCatBanners onVisibleSubCategoryChange={handleVisibleSubCategoryChange} />
         </>
     );
 };

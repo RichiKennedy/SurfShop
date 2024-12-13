@@ -1,6 +1,6 @@
 .hero-wrapper {
     width: 100%;
-    height: calc(100vh - 47px);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,12 +18,13 @@
         }
     }
     .txt-content-overlay {
-        position: fixed;
+        position: absolute;
         left: 0;
         bottom: 0;
         margin: 20px;
         
         .title {
+            color: #fff;
             display: flex;
             flex-direction: column;
             text-transform: uppercase;
@@ -32,22 +33,6 @@
                 
                 h5 {
                     font-weight: 500;
-                }
-                h2.animate {
-                
-                    position: relative;
-                    animation: slideInFromTop 0.5s ease forwards;
-                    opacity: 0;
-                }
-                @keyframes slideInFromTop {
-                    0% {
-                        top: -60px;
-                        opacity: 0;
-                    }
-                    100% {
-                        top: 0;
-                        opacity: 1;
-                    }
                 }
             }
             
@@ -58,6 +43,7 @@
                 transition: .3s ease;
 
                 .btn {
+                    background-color: #fff;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -87,34 +73,6 @@
                         }
                     }
                 }
-                /* Default Style for .btn */
-.btn.default-hover {
-    background-color: #FFF;
-    color: #222;
-}
-
-/* Custom Style for .btn */
-.btn.custom-hover {
-    background-color: #222;
-    color: #FFF;
-}
-
-/* Default hover effect */
-.btn.default-hover:hover {
-    background-color: #222;
-    color: rgba(255, 255, 255, 1);
-}
-
-/* Custom hover effect */
-.btn.custom-hover:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: #222;
-}
-
-/* Arrow icon hover effect */
-.btn:hover .arrow-icon {
-    filter: invert(1);
-}
             }
     }
 }

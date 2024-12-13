@@ -17,7 +17,7 @@ import SingleProduct from "./pages/Product/SingleProduct";
 import Products from "./pages/Products/Products";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 import './app.scss';
 import { CheckoutProvider, useCheckoutContext } from "./Context/checkoutContext";
 
@@ -35,7 +35,7 @@ const Layout = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
