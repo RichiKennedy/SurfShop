@@ -20,9 +20,7 @@ const Home = () => {
       {/* <Slider /> */}
       <CategoryHero />
       <SubCatBanners />
-      <FeaturedProducts type='new collection' />
-      <FeaturedProducts type='t-shirts' />
-      <FeaturedProducts type='outerwear' />
+      <FeaturedProducts />
       {/* <CategoryGrid /> */}
     </motion.div>
   )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SubCatBanner.scss";
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../../Hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 const SubCatBanner = ({ type }) => {

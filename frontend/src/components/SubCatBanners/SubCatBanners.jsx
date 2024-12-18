@@ -1,13 +1,16 @@
 import React from "react";
-import SubCatBanner from "../SubCatBanner/SubCatBanner";
-
+import './SubCatBanners.scss'
+import SubCatBanner from "./SubCatBanner/SubCatBanner";
 
 const SubCatBanners = () => {
+  const categoryTypes = ['new collection', 'accessories'];
+
     return (
-        <div className="subcat-banner-section">
-            <SubCatBanner type="new collection" />
-            <SubCatBanner type="accessories" />
-        </div>
+        <section className="subcat-banner-section">
+            {categoryTypes.map((type) => (
+                <SubCatBanner key={type} type={type} />
+            ))}
+        </section>
     );
 };
 
