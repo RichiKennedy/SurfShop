@@ -4,8 +4,7 @@ import Card from '../../Card/Card';
 import useFetch from '../../../Hooks/useFetch'; 
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
-import { Link, useNavigate } from 'react-router-dom';
-import { useFilterContext } from '../../../Context/filterContext';
+import { useNavigate } from 'react-router-dom';
 
 const buildProductQuery = (type, recommendedCat, gender, selectedCategoryTemp) => {
   if (type === 'recommended') {
@@ -17,7 +16,6 @@ const buildProductQuery = (type, recommendedCat, gender, selectedCategoryTemp) =
 };
 
 const FeaturedProduct = ({ type, recommendedCat, gender }) => {
-  const { selectedCategory, setSelectedCategory, selectedMetaCategory, setSelectedMetaCategory, selectedSubCat, setSelectedSubCat } = useFilterContext();
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [products, setProducts] = useState([]);
@@ -30,6 +28,7 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
   const { data: productData, loading } = useFetch(`/products?populate=*${productQuery}`);
   const { data: categories } = useFetch(`/categories?[filters][categories][title]`);
   const { data: metaCategoryData } = useFetch(`/meta-categories?filters[sub_categories][title][$eq]=${type}`);
+  console.log('metaCategoryData', metaCategoryData)
 
   useEffect(() => {
     if (!loading && productData) {
@@ -38,21 +37,6 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
       setIsLoading(false);
     }
   }, [productData, loading]);
-
-  useEffect(() => {
-    if (selectedCategory && selectedMetaCategory && selectedSubCat) {
-      navigate(`/products/${selectedCategory}/${selectedMetaCategory}/${selectedSubCat}`);
-    }
-  }, [navigate, selectedCategory, selectedMetaCategory, selectedSubCat]);
-
-  const handleViewAllClick = () => {
-    setSelectedCategory(selectedCategoryTemp);
-    setSelectedSubCat(type);
-
-    if (metaCategoryData?.[0]?.attributes?.title) {
-      setSelectedMetaCategory(metaCategoryData[0].attributes.title);
-    }
-  };
 
   const handleScroll = () => {
     const container = containerRef.current;
@@ -72,6 +56,29 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
     }
   };
 
+  const handleViewAllClick = () => {
+    if (!metaCategoryData || metaCategoryData.length === 0) {
+      console.error('Meta category data is missing:', metaCategoryData);
+      return;
+    }
+  
+    const metaCategory = metaCategoryData?.[0]?.attributes?.title;
+  
+    if (!metaCategory) {
+      console.error('Meta category title is missing:', metaCategoryData[0]);
+      return;
+    }
+  
+    console.log('Navigating to:', {
+      category: selectedCategoryTemp,
+      metaCategory,
+      type,
+    });
+  
+    navigate(`/products/${selectedCategoryTemp}/${metaCategory}/${type}`);
+  };
+  
+
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -86,7 +93,7 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
   return (
     <div className="featured-product">
       <div className="title-wrapper">
-        <h2 className="title">{type}</h2>
+        <h4 className="title">exlore our {type} collection</h4>
         {type !== 'recommended' && categories && (
           <ul>
             {categories.map((cat) => (
@@ -112,9 +119,9 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
             products.map((item) => <Card item={item} key={item?.id} />)
           )}
           {type !== 'recommended' && (
-            <Link className="view-all" onClick={handleViewAllClick}>
+            <div className="view-all" onClick={handleViewAllClick}>
               <h1>View All</h1>
-            </Link>
+            </div>
           )}
         </div>
 

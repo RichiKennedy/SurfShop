@@ -79,23 +79,25 @@ const Navbar = () => {
             }}>
         <div className='nav-wrapper'>
           <section className='left'>
-            {data?.map((category) => 
-              <ul className='item' key={category.id}>
-              <li
-              className='link' 
-              onClick={() => handleCategoryClick(category.attributes.title)}> 
-              {category.attributes.title} 
-              </li>
-          </ul>
-            )}
+              {data?.map((category) => 
+                <ul className='item' key={category.id}>
+                <li
+                className='link' 
+                onClick={() => handleCategoryClick(category.attributes.title)}> 
+                {category.attributes.title} 
+                </li>
+            </ul>
+              )}
           </section>
           <section className='center'>
-            <Link 
-            className='link' 
-            to="/"
-            onClick={closeCategoryPopUpMenu}> 
-            The Shop 
-            </Link>
+            <h4>
+              <Link 
+              className='link' 
+              to="/"
+              onClick={closeCategoryPopUpMenu}> 
+                The Shop 
+              </Link>
+            </h4>
           </section>
           <section className='right'>
           <span className='link' onClick={handleAccountClick}>

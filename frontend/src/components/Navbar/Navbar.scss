@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     position: sticky;
-    height: 50px;
     top: 0;
     left: 0;
     z-index: 12;
@@ -12,35 +11,40 @@
     border-bottom: 1px solid #555;
 
     .nav-wrapper {
-        padding: 10px;
+        padding: 12px 20px;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
      
 
-        .item {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-        }
-
+        
         .left {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: large;
+            text-transform: uppercase;
+            gap: 15px;
             width: 33.3%;
         }
         .center {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            letter-spacing: 2px;
             width: 33.3%;
+            
+            h4 {
+                font-size: 30px;
+                font-weight: 400;
+                letter-spacing: 0.05em;
+            }
+            
+            .item {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
         }
         .right {
             display: flex;
