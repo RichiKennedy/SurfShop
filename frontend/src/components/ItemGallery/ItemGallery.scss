@@ -6,13 +6,14 @@
     width: 100%;
    
 
-    .image-card {
+    .image-card.products-page {
         width: 25%;
-        min-height: 80vh;
+        min-height: 900px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         border-left: 1px solid #555; 
+        border-bottom: 1px solid #555;
         border-top: none;
         position: relative;
 

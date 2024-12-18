@@ -22,6 +22,7 @@
         left: 0;
         bottom: 0;
         margin: 20px;
+        width: calc(50% - 40px);
         
         .title {
             color: #fff;
@@ -47,7 +48,7 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    width: 350px;
+                    width: 50%;
                     height: 50px;
                     padding: 15px;
                     transition: .3s ease;

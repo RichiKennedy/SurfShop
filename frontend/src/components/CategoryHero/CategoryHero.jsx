@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CategoryHero.scss';
 import useFetch from '../../Hooks/useFetch';
-import SubCatBanners from '../SubCatBanners/SubCatBanners';
 
 const CategoryHero = () => {
     const { data: heroVideo, loading, error } = useFetch('/contents?populate=*');

@@ -5,11 +5,16 @@ import './Home.scss'
 import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts'
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
 import SubCatBanners from '../../components/SubCatBanners/SubCatBanners';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  },[])
+    if (location.pathname === '/') {
+      window.scrollTo(0, 0);
+    }
+  },[location.pathname])
   
   return (
     <motion.div className='home'
