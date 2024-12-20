@@ -95,9 +95,9 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
       <div className="title-wrapper">
         <h4 className="title">exlore our {type} collection</h4>
         {type !== 'recommended' && categories && (
-          <ul>
+          <div className='button-wrapper'>
             {categories.map((cat) => (
-              <li
+              <span
                 key={cat.attributes.title}
                 onClick={() => setSelectedCategoryTemp(cat.attributes.title)}
                 style={{
@@ -105,9 +105,9 @@ const FeaturedProduct = ({ type, recommendedCat, gender }) => {
                 }}
               >
                 {cat.attributes.title}
-              </li>
+              </span>
             ))}
-          </ul>
+          </div>
         )}
       </div>
 

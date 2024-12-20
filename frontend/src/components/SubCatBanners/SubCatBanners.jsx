@@ -3,7 +3,7 @@ import './SubCatBanners.scss'
 import SubCatBanner from "./SubCatBanner/SubCatBanner";
 
 const SubCatBanners = () => {
-  const categoryTypes = ['new collection', 'accessories'];
+  const categoryTypes = ['new collection', 'outerwear'];
 
     return (
         <section className="subcat-banner-section">

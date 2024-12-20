@@ -6,6 +6,7 @@ import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts
 import CategoryHero from '../../components/CategoryHero/CategoryHero'
 import SubCatBanners from '../../components/SubCatBanners/SubCatBanners';
 import { useLocation } from 'react-router-dom';
+import SingleBannerAdvertisement from '../../components/SingleBannerAdvertisement/SingleBannerAdvertisement';
 
 const Home = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ const Home = () => {
       {/* <Slider /> */}
       <CategoryHero />
       <SubCatBanners />
+      <SingleBannerAdvertisement type={'accessories'}/>
       <FeaturedProducts />
       {/* <CategoryGrid /> */}
     </motion.div>
