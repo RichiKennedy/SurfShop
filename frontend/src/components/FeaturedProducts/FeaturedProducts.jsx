@@ -3,7 +3,7 @@ import './FeaturedProducts.scss';
 import FeaturedProduct from './FeaturedProduct/FeaturedProduct';
 
 const FeaturedProducts = () => {
-  const productTypes = ['pants'];
+  const productTypes = ['pants', 'denim'];
 
   return (
     <section className="featured-products">
