@@ -52,8 +52,8 @@ const CategoryHero = () => {
                 </div>
                 <div className="txt-content-overlay">
                     <div className="title">
-                        <h5>explore:</h5>
-                        <h2>the shop</h2>
+                        <h4>explore:</h4>
+                        <h4>the shop</h4>
                     </div>
                     <div className="btn-container">
                         {categoryTitle?.map((category) => (
@@ -62,13 +62,7 @@ const CategoryHero = () => {
                                 onClick={() => handleCategoryClick(category.attributes.title)} 
                                 key={category.id}
                             >
-                                <span>shop {category.attributes.title}s</span>
-                                <div className="arrow-icon">
-                                    <img 
-                                        src={`${process.env.PUBLIC_URL}/images/arrow.png`} 
-                                        alt="" 
-                                    />
-                                </div>
+                                <span>{category.attributes.title}</span>
                             </div>
                         ))}
                     </div>
