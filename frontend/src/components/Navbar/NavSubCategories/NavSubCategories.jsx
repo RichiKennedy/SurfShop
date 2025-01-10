@@ -7,8 +7,11 @@ import { useFilterContext } from '../../../Context/filterContext';
 
 const NavSubCategories = () => {
   const { popUpMenuCategory, setPopUpMenuCategory } = useFilterContext();
+  const [newCollectionImage, setNewCollectionImage] = useState('');
   const featuredDisplay = 'new collection';
 
+  const { data: categories } = useFetch(`/categories?[filters][categories][title]`);
+console.log('categories', categories)
   const { data: metaCategories } = useFetch(
     `/meta-categories?populate[sub_categories][filters][categories][title][$eq]=${popUpMenuCategory}`
   );  
@@ -17,8 +20,7 @@ const NavSubCategories = () => {
     `/sub-categories?populate=*&filters[title][$eq]=${featuredDisplay}`
   );
 
-  const [newCollectionImage, setNewCollectionImage] = useState('');
-
+console.log('popUpMenuCategory', popUpMenuCategory)
   useEffect(() => {
     if (newCollection?.[0]?.attributes?.image?.data) {
       const imageData = newCollection[0].attributes.image.data;
@@ -33,6 +35,10 @@ const NavSubCategories = () => {
       setNewCollectionImage(`${process.env.REACT_APP_UPLOAD_URL}${selectedImage}`);
     }
   }, [newCollection, popUpMenuCategory]);
+
+  const handleCategoryClick = (gender) => {
+    setPopUpMenuCategory(gender);
+  }
 
   const navigate = useNavigate();
 
@@ -61,6 +67,19 @@ console.log('metaCategories', metaCategories)
       ></div>
       <div className="subCatMenu">
         <div className="menu-content-wrapper">
+          <div className="category-menu">
+            <div className="menu">
+              <div className="gender">
+                {categories?.map((gender) => (
+                  <h4 
+                  style={{textDecoration: gender.attributes.title === popUpMenuCategory ? 'line-through' : 'none'}}
+                  key={gender.id}
+                  onClick={() => handleCategoryClick(gender?.attributes.title)}>
+                    {gender?.attributes.title}
+                  </h4>
+                ))}
+              </div>
+            </div>
           <nav className="nav-wrapper">
             <div className="nav-menu">
               {metaCategories?.map((metaCat) => (
@@ -80,6 +99,7 @@ console.log('metaCategories', metaCategories)
               ))}
             </div>
           </nav>
+            </div>
 
           <div className="card-wrapper">
             <div className="card">
@@ -99,8 +119,8 @@ console.log('metaCategories', metaCategories)
               </div>
             </div>
           </div>
-
         </div>
+
       </div>
     </motion.div>
   );

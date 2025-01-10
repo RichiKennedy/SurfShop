@@ -8,7 +8,6 @@ import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useCartContext } from '../../Context/cartContext';
-import useFetch from '../../Hooks/useFetch';
 import NavSubCategories from './NavSubCategories/NavSubCategories';
 import { useFilterContext } from '../../Context/filterContext';
 import { useAuthContext } from '../../Context/authContext';
@@ -26,7 +25,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const products = useSelector(state => state.cart.products)
-  const {data} = useFetch(`/categories?[filters][categories][title]`);
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 1) {
@@ -42,10 +40,6 @@ const Navbar = () => {
     }
     window.addEventListener('scroll', changeColor)
   }, [])
-
-  const handleCategoryClick = (categoryId) => {
-    setPopUpMenuCategory(categoryId);
-  }
 
   useEffect(() => {
     if (location.pathname !== '/account' && location.pathname !== '/login') {
@@ -79,15 +73,12 @@ const Navbar = () => {
             }}>
         <div className='nav-wrapper'>
           <section className='left'>
-              {data?.map((category) => 
-                <ul className='item' key={category.id}>
                 <li
                 className='link' 
-                onClick={() => handleCategoryClick(category.attributes.title)}> 
-                {category.attributes.title} 
+                onClick={() => setPopUpMenuCategory('men')}> 
+                click
                 </li>
-            </ul>
-              )}
+
           </section>
           <section className='center'>
             <h4>
